@@ -1,4 +1,4 @@
-import { MongoClient, ObjectId } from "https://deno.land/x/mongo@v0.9.1/mod.ts";
+import { MongoClient } from "https://deno.land/x/mongo@v0.26.0/mod.ts";
 import { WebSocket } from "https://deno.land/std/ws/mod.ts";
 
 const client = new MongoClient();
@@ -9,8 +9,6 @@ client.connectWithOptions({
   hosts: ["localhost:27017"],
   directConnection: true,
 });
-
-type MessageSchema = Message & { _id: ObjectId };
 
 type Message = {
   roomId: string;

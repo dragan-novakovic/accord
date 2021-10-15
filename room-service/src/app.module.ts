@@ -13,6 +13,7 @@ import { ChannelEntity } from "./channel/channel.entity";
 import { RoomsModule } from "./rooms/rooms.module";
 import { ChannelModule } from "./channel/channel.module";
 import { MessageModule } from "./message/message.module";
+import { UserService } from "./user/user.service";
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { MessageModule } from "./message/message.module";
       synchronize: true,
     }),
   ],
+  providers: [UserService],
 })
 export class AppModule {
   constructor(private connection: Connection) {}

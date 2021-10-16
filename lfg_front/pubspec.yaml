@@ -1,8 +1,5 @@
 name: lfg_front
 description: A new Flutter project.
-
-# The following line prevents the package from being accidentally published to
-# pub.dev using `pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
@@ -24,7 +21,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.3
-  oauth2: ^1.6.1
+  http: ^0.13.0
+  json_annotation: ^4.0.0
 
 dev_dependencies:
   flutter_test:

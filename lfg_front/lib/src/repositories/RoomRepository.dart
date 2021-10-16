@@ -5,10 +5,11 @@ import 'package:meta/meta.dart';
 import '../models/RoomModel.dart';
 
 class RoomRepository {
-  final RoomService weatherApiClient;
+  final RoomService roomService;
 
-  RoomRepository({@required this.weatherApiClient})
-      : assert(weatherApiClient != null);
+  RoomRepository({@required this.roomService}) : assert(roomService != null);
 
-  Future<Room> getWeather(String city) async {}
+  Future<List<Room>> getRooms() async {
+    return roomService.getRooms();
+  }
 }

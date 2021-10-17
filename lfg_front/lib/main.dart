@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:lfg_front/src/pages/login.dart';
 import 'package:lfg_front/src/pages/room.dart';
+import 'package:get_it/get_it.dart';
+
+// This is our global ServiceLocator
+GetIt getIt = GetIt.instance;
 
 void main() {
-  runApp(MyApp());
+  // getIt.registerSingleton<AppModel>(AppModelImplementation(),
+  //     signalsReady: true);
+  runApp(LFG());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class LFG extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

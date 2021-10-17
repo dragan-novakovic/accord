@@ -19,4 +19,4 @@ class RoomBloc {
   }
 }
 
-final bloc = RoomBloc();
+final roomBloc = RoomBloc();

@@ -28,10 +28,10 @@ pub struct InsertableUser {
 }
 
 impl InsertableUser {
-    pub fn from_user(user: User) -> InsertableUser {
-        InsertableUser {
-            username: user.username,
-            password: user.password,
-        }
-    }
+    // pub fn from_user(user: User) -> InsertableUser {
+    //     InsertableUser {
+    //         username: user.username,
+    //         password: user.password,
+    //     }
+    // }
 }

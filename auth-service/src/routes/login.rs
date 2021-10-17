@@ -1,12 +1,9 @@
-use std::convert::TryInto;
-
 use crate::models::{
     shared::Claims,
     users::{InsertableUser, User},
 };
 use bson::Bson;
 use bytes::Buf;
-use futures::{StreamExt, TryStreamExt};
 use hyper::{header, http, Body, Request, Response, StatusCode};
 use jsonwebtoken::{encode, Algorithm, EncodingKey, Header};
 use mongodb::{
@@ -25,10 +22,14 @@ pub async fn login(req: Request<Body>, db: Database) -> Result<Response<Body>, h
     // 1. look for profile
     let user_cursor = users_collection
         .find_one(Some(doc! {"username": data.username.unwrap()}), None)
-        .await
-        .unwrap();
+        .await;
 
-    let user_bson = user_cursor.unwrap();
+    let user_bson = match user_cursor {
+        Ok(user) => user.unwrap(),
+        Err(_) => Bson::Null,
+    };
+
+    // send failed
 
     let user: User = from_bson(user_bson).unwrap();
 

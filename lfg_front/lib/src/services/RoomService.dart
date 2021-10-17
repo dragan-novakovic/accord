@@ -6,9 +6,9 @@ class RoomService {
   Future<List<Room>> getRooms() async {
     // return API().get('/rooms');
     return [
-      Room("A", [Channel("Ch: 01")]),
-      Room("B", [Channel("Ch: 02")]),
-      Room("C", [Channel("Ch: 03")])
+      Room("A room", [Channel("Ch: 01")]),
+      Room("B room", [Channel("Ch: 02")]),
+      Room("C room", [Channel("Ch: 03")])
     ];
   }
 }

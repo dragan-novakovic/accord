@@ -1,9 +1,12 @@
+use std::convert::TryInto;
+
 use crate::models::{
     shared::Claims,
     users::{InsertableUser, User},
 };
 use bson::Bson;
 use bytes::Buf;
+use futures::{StreamExt, TryStreamExt};
 use hyper::{header, http, Body, Request, Response, StatusCode};
 use jsonwebtoken::{encode, Algorithm, EncodingKey, Header};
 use mongodb::{
@@ -16,18 +19,18 @@ static AUTH_SECRET: &'static [u8] = b"some_secret_key";
 pub async fn login(req: Request<Body>, db: Database) -> Result<Response<Body>, http::Error> {
     let whole_body = hyper::body::aggregate(req).await.unwrap();
 
-    let data: InsertableUser = serde_json::from_slice(whole_body.bytes()).unwrap();
+    let data: InsertableUser = serde_json::from_reader(whole_body.reader()).unwrap();
     let users_collection = db.collection("users");
 
     // 1. look for profile
-    let user_cursor: Bson = users_collection
+    let user_cursor = users_collection
         .find_one(Some(doc! {"username": data.username.unwrap()}), None)
         .await
-        .unwrap()
-        .unwrap()
-        .into();
+        .unwrap();
 
-    let user: User = from_bson(user_cursor).unwrap();
+    let user_bson = user_cursor.unwrap();
+
+    let user: User = from_bson(user_bson).unwrap();
 
     // 2. check if passwords match
     if user.password == data.password {

@@ -10,7 +10,7 @@ use mongodb::{
 pub async fn register(req: Request<Body>, db: Database) -> Result<Response<Body>, http::Error> {
     let whole_body = hyper::body::aggregate(req).await.unwrap();
 
-    let data: serde_json::Value = serde_json::from_slice(whole_body.bytes()).unwrap();
+    let data: serde_json::Value = serde_json::from_reader(whole_body.reader()).unwrap();
     let users_collection = db.collection("users");
 
     let new_user_id = match bson::to_bson(&data) {

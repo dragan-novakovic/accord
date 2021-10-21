@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using InventoryService.Models;
 using InventoryService.Services;
+using InventoryService.Interfaces;
 using System.Collections.Generic;
 
 namespace InventoryService.Controllers
@@ -9,8 +10,8 @@ namespace InventoryService.Controllers
     [ApiController]
     public class InventoryController : Controller
     {
-        private readonly InventoriesServices _service;
-        public InventoryController(InventoriesServices services)
+        private readonly IInventoryServices _service;
+        public InventoryController(IInventoryServices services)
         {
             _service = services;
         }

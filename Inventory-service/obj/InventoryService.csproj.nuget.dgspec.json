@@ -1,31 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dragan\\Desktop\\auth\\Inventory-service\\InventoryService.csproj": {}
+    "/Users/dragan/Desktop/auth/Inventory-service/InventoryService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dragan\\Desktop\\auth\\Inventory-service\\InventoryService.csproj": {
+    "/Users/dragan/Desktop/auth/Inventory-service/InventoryService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dragan\\Desktop\\auth\\Inventory-service\\InventoryService.csproj",
+        "projectUniqueName": "/Users/dragan/Desktop/auth/Inventory-service/InventoryService.csproj",
         "projectName": "InventoryService",
-        "projectPath": "C:\\Users\\Dragan\\Desktop\\auth\\Inventory-service\\InventoryService.csproj",
-        "packagesPath": "C:\\Users\\Dragan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dragan\\Desktop\\auth\\Inventory-service\\obj\\",
+        "projectPath": "/Users/dragan/Desktop/auth/Inventory-service/InventoryService.csproj",
+        "packagesPath": "/Users/dragan/.nuget/packages/",
+        "outputPath": "/Users/dragan/Desktop/auth/Inventory-service/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Dragan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/dragan/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -72,7 +69,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
         }
       }
     }

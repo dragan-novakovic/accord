@@ -16,7 +16,7 @@ namespace InventoryService.Services
         {
             _inventoryItems = new Dictionary<string, InventoryItems>();
         }
-        public InventoryItems AddInventoryItems(InventoryItems items)
+        override public InventoryItems AddInventoryItems(InventoryItems items)
         {
             _inventoryItems.Add(items.ItemName, items);
 
@@ -24,7 +24,7 @@ namespace InventoryService.Services
         }
 
 
-        public Dictionary<string, InventoryItems> GetInventoryItems()
+        override public Dictionary<string, InventoryItems> GetInventoryItems()
         {
 
             return _inventoryItems;

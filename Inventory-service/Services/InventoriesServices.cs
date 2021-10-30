@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using InventoryService.Interfaces;
 using InventoryService.Models;
 
@@ -9,25 +6,41 @@ namespace InventoryService.Services
 {
     public class InventoriesServices: IInventoryServices
     {
-        private readonly Dictionary<string, InventoryItems> _inventoryItems;
+        private readonly UserInventory _userInventory;
+        private readonly InventoryContext _context;
 
 
-        public InventoriesServices()
+        public InventoriesServices(InventoryContext context)
         {
-            _inventoryItems = new Dictionary<string, InventoryItems>();
-        }
-        override public InventoryItems AddInventoryItems(InventoryItems items)
-        {
-            _inventoryItems.Add(items.ItemName, items);
-
-            return items;
+            _userInventory = new UserInventory();
+            _context = context;
         }
 
-
-        override public Dictionary<string, InventoryItems> GetInventoryItems()
+        override public UserInventory AddExp(uint amount)
         {
+            return _userInventory;
+        }
 
-            return _inventoryItems;
+        public override UserInventory CreateUserInventory(int id)
+        {
+            UserInventory userInventory = new UserInventory()
+            {
+                Exp = 0,
+                PositiveRating = 0,
+                NegativeRating = 0,
+                Id = id
+            };
+
+            _context.Add(userInventory);
+            _context.SaveChanges();
+
+
+            return userInventory;
+        }
+
+        public override UserInventory GetUserInventory(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

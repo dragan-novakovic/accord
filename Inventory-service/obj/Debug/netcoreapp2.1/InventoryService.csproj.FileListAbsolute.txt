@@ -33,3 +33,4 @@ C:/Users/Dragan/Desktop/auth/Inventory-service/obj/Debug/netcoreapp2.1/Inventory
 /Users/dragan/Desktop/auth/Inventory-service/obj/Debug/netcoreapp2.1/InventoryService.dll
 /Users/dragan/Desktop/auth/Inventory-service/obj/Debug/netcoreapp2.1/InventoryService.pdb
 /Users/dragan/Desktop/auth/Inventory-service/obj/Debug/netcoreapp2.1/InventoryService.genruntimeconfig.cache
+/Users/dragan/Desktop/auth/Inventory-service/obj/Debug/netcoreapp2.1/InventoryService.csproj.AssemblyReference.cache

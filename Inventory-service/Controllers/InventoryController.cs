@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using InventoryService.Models;
-using InventoryService.Services;
 using InventoryService.Interfaces;
-using System.Collections.Generic;
 
 namespace InventoryService.Controllers
 {
-    [Route("v1/")]
+    [Route("v1/[controller]")]
     [ApiController]
     public class InventoryController : Controller
     {
@@ -17,10 +15,36 @@ namespace InventoryService.Controllers
         }
 
         [HttpPost]
-        [Route("AddInventoryItems")]
-        public ActionResult<InventoryItems> AddInventoryItems(InventoryItems items)
+        [Route("create")]
+        public ActionResult<string> CreateUserInventory(int id)
         {
-            InventoryItems inventoryItems = _service.AddInventoryItems(items);
+           // UserInventory userInventory = _service.CreateUserInventory(id);
+
+           // if (userInventory == null)
+          //  {
+          //      return NotFound();
+         //   }
+            return "HI";
+        }
+
+        [HttpPost]
+        [Route("AddExp")]
+        public ActionResult<UserInventory> AddExp(uint amount)
+        {
+            UserInventory userInventory = _service.AddExp(amount);
+
+            if (userInventory == null)
+            {
+                return NotFound();
+            }
+            return userInventory;
+        }
+
+        [HttpPost]
+        [Route("AddRating")]
+        public ActionResult<UserInventory> AddRating(int rating)
+        {
+            UserInventory inventoryItems = null;
 
             if (inventoryItems == null)
             {
@@ -29,20 +53,20 @@ namespace InventoryService.Controllers
             return inventoryItems;
         }
 
-        [HttpGet]
-        [Route("GetInventoryItems")]
-        public ActionResult<Dictionary<string, InventoryItems>> GetInventoryItems()
+        [HttpPost]
+        [Route("inventory")]
+        public ActionResult<UserInventory> GetUserInventory(int id)
         {
 
-            var inventoryItems = _service.GetInventoryItems();
+            var userInventory = _service.GetUserInventory(id);
 
-            if (inventoryItems.Count == 0)
+            if (userInventory == null)
             {
                 return NotFound();
             }
 
 
-            return inventoryItems;
+            return userInventory;
         }
     }
 }

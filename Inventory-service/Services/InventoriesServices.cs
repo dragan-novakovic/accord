@@ -16,9 +16,12 @@ namespace InventoryService.Services
             _context = context;
         }
 
-        override public UserInventory AddExp(uint amount)
+        override public UserInventory AddExp(UserInventory reqBody)
         {
-            return _userInventory;
+            UserInventory userInventory = _context.Find<UserInventory>(reqBody.Id);
+
+            userInventory.Exp += reqBody.Exp;
+            return userInventory;
         }
 
         public override UserInventory CreateUserInventory(int id)
@@ -31,6 +34,7 @@ namespace InventoryService.Services
                 Id = id
             };
 
+            // handle Error?
             _context.Add(userInventory);
             _context.SaveChanges();
 
@@ -39,6 +43,11 @@ namespace InventoryService.Services
         }
 
         public override UserInventory GetUserInventory(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal override UserInventory AddRating(UserInventory body)
         {
             throw new NotImplementedException();
         }

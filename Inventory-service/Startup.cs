@@ -25,9 +25,10 @@ namespace InventoryService
         public void ConfigureServices(IServiceCollection services)
 
         {
+            services.AddTransient<IInventoryServices, InventoriesServices>();
             services.AddDbContext<InventoryContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSingleton<IInventoryServices, InventoriesServices>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

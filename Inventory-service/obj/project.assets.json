@@ -11975,28 +11975,31 @@
     ]
   },
   "packageFolders": {
-    "/Users/dragan/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\Dragan\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/dragan/Desktop/auth/Inventory-service/InventoryService.csproj",
+      "projectUniqueName": "C:\\Users\\Dragan\\Desktop\\auth\\Inventory-service\\InventoryService.csproj",
       "projectName": "InventoryService",
-      "projectPath": "/Users/dragan/Desktop/auth/Inventory-service/InventoryService.csproj",
-      "packagesPath": "/Users/dragan/.nuget/packages/",
-      "outputPath": "/Users/dragan/Desktop/auth/Inventory-service/obj/",
+      "projectPath": "C:\\Users\\Dragan\\Desktop\\auth\\Inventory-service\\InventoryService.csproj",
+      "packagesPath": "C:\\Users\\Dragan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dragan\\Desktop\\auth\\Inventory-service\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/dragan/.config/NuGet/NuGet.Config"
+        "C:\\Users\\Dragan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -12051,7 +12054,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

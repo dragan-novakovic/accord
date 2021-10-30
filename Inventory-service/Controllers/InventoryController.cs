@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using InventoryService.Models;
 using InventoryService.Interfaces;
+using System;
 
 namespace InventoryService.Controllers
 {
@@ -16,22 +17,22 @@ namespace InventoryService.Controllers
 
         [HttpPost]
         [Route("create")]
-        public ActionResult<string> CreateUserInventory(int id)
+        public ActionResult<UserInventory> CreateUserInventory([FromBody] UserInventory requestBody)
         {
-           // UserInventory userInventory = _service.CreateUserInventory(id);
+            UserInventory userInventory = _service.CreateUserInventory(requestBody.Id);
 
-           // if (userInventory == null)
-          //  {
-          //      return NotFound();
-         //   }
-            return "HI";
+            if (userInventory == null)
+            {
+                return NotFound();
+            }
+            return userInventory;
         }
 
         [HttpPost]
         [Route("AddExp")]
-        public ActionResult<UserInventory> AddExp(uint amount)
+        public ActionResult<UserInventory> AddExp([FromBody] UserInventory requestBody)
         {
-            UserInventory userInventory = _service.AddExp(amount);
+            UserInventory userInventory = _service.AddExp(requestBody);
 
             if (userInventory == null)
             {
@@ -42,9 +43,10 @@ namespace InventoryService.Controllers
 
         [HttpPost]
         [Route("AddRating")]
-        public ActionResult<UserInventory> AddRating(int rating)
+        public ActionResult<UserInventory> AddRating([FromBody] UserInventory requestBody)
+
         {
-            UserInventory inventoryItems = null;
+            UserInventory inventoryItems = _service.AddRating(requestBody);
 
             if (inventoryItems == null)
             {
@@ -55,10 +57,10 @@ namespace InventoryService.Controllers
 
         [HttpPost]
         [Route("inventory")]
-        public ActionResult<UserInventory> GetUserInventory(int id)
+        public ActionResult<UserInventory> GetUserInventory([FromBody] UserInventory reqBody)
         {
 
-            var userInventory = _service.GetUserInventory(id);
+            var userInventory = _service.GetUserInventory(reqBody.Id);
 
             if (userInventory == null)
             {
@@ -70,3 +72,5 @@ namespace InventoryService.Controllers
         }
     }
 }
+
+  

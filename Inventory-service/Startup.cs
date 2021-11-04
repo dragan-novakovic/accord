@@ -27,7 +27,7 @@ namespace InventoryService
         {
             services.AddTransient<IInventoryServices, InventoriesServices>();
             services.AddDbContext<InventoryContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddControllers().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
            
         }
 
@@ -44,7 +44,11 @@ namespace InventoryService
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }

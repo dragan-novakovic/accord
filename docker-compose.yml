@@ -1,9 +1,21 @@
 version: "3.7"
 
-# services for auth mongodb
-# services for rooms postgres
-
 services:
+  #AUTH
+  auth:
+    container_name: auth
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    volumes:
+      - ./auth-service:/auth-service
+    ports:
+      - 3000:3000
+    environment:
+      USER: Dragan
+    working_dir: /auth-service
+    command: sh -c "cargo install cargo-watch && cargo-watch -x run"
+
   #MONGO
   mongodb:
     image: mongo:latest
@@ -17,8 +29,10 @@ services:
       - 27017:27017
     volumes:
       - ./mongodb/mongo-init.js:/docker-entrypoint-initdb.d/init.js:ro
+
   # POSTGRES
   postgres:
+    container_name: postgres
     restart: always
     build: postgres
     ports:

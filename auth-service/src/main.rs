@@ -13,7 +13,7 @@ mod routes;
 
 #[tokio::main]
 async fn main() {
-    let addr = SocketAddr::from(([0, 0, 0, 0], 3001));
+    let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
     let mut client_options = ClientOptions::parse("mongodb://localhost:27017")
         .await
         .unwrap();

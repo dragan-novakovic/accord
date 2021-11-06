@@ -31,20 +31,44 @@ done
 #validate DBs name
 function validateDBs()
 {
-validDbs=("mongo","postgres")
+echo $@
+validDbs=("mongo" "postgres")
 for ser in $@
 do
+toBrake=0
  for valid in ${validDbs[@]}
  do 
-  if [ $ser != $valid ]
+  if [ $ser == $valid ]
   then
-  echo Invalid db Name!
-  exit 1
+  toBrake=1
   fi
  done
+
+
+if (( $toBrake == 0 ))
+then
+echo Invalid db Name! $ser
+exit 1
+fi
 done
 
 echo docker-compose up $@ -d
+}
+
+function addToServicePipeline()
+{
+ for (( j=$sIndex+1; j<=$#; j++ ))
+  do
+    serviceArgs=("${serviceArgs[@]}" "${!j}")
+  done
+}
+
+function addToDBPipeline()
+{
+ for (( j=$dbIndex+1; j<=$#; j++ ))
+  do
+    dbArgs=("${dbArgs[@]}" "${!j}")
+  done
 }
 
 if (( $# > 1 ))
@@ -63,7 +87,8 @@ then
 
 #echo $sIndex
 #echo $dbIndex
-
+if [ $sIndex -gt 0 ] && [ $dbIndex -gt 0 ]
+then
  if [ $sIndex -lt $dbIndex ]
  then 
   for (( j=1; j<=$#; j++ ))
@@ -77,10 +102,17 @@ then
     fi
   done
  fi
-
-
 validateServices ${serviceArgs[@]}
 validateDBs ${dbArgs[@]}
+elif [ $sIndex -gt 0 ]
+then 
+addToServicePipeline $@
+validateServices ${serviceArgs[@]}
+elif [ $dbIndex -gt 0 ]
+then 
+addToDBPipeline $@
+validateDBs ${dbArgs[@]}
+fi
 else
  echo Please provide input parameters!
 fi

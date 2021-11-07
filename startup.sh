@@ -20,7 +20,7 @@ do
   echo Invalid service Name!
   exit 1
    else
-    echo docker-compose run --rm $@
+    command docker-compose run --rm $@
   fi
  done
 done
@@ -31,7 +31,6 @@ done
 #validate DBs name
 function validateDBs()
 {
-echo $@
 validDbs=("mongo" "postgres")
 for ser in $@
 do
@@ -52,7 +51,7 @@ exit 1
 fi
 done
 
-echo docker-compose up $@ -d
+command docker-compose up $@ -d
 }
 
 function addToServicePipeline()

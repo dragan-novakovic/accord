@@ -14,7 +14,6 @@ services:
     environment:
       USER: Dragan
     working_dir: /auth-service
-    command: sh -c "cargo run"
 
   #MONGO
   mongo:

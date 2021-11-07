@@ -20,7 +20,7 @@ do
   echo Invalid service Name!
   exit 1
    else
-    command docker-compose run --rm $@
+    command docker-compose --service-ports run $@
   fi
  done
 done

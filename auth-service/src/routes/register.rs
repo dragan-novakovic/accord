@@ -7,6 +7,13 @@ use mongodb::{
     Database,
 };
 
+/*
+{
+ "username": String
+ "password": String
+}
+
+ */
 pub async fn register(req: Request<Body>, db: Database) -> Result<Response<Body>, http::Error> {
     let whole_body = hyper::body::aggregate(req).await.unwrap();
 

@@ -15,9 +15,11 @@ mod routes;
 async fn main() {
     let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
     //TODO Add ENVs for docker, local, prod
-    let mut client_options = ClientOptions::parse("mongodb://admin:admin@mongo:27017")
-        .await
-        .unwrap();
+
+    let mut client_options: ClientOptions =
+        ClientOptions::parse("mongodb://admin:admin@mongo:27017")
+            .await
+            .unwrap();
 
     client_options.app_name = Some("AUTH-SERVICE".to_string());
 

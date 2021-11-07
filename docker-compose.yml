@@ -1,8 +1,5 @@
 version: "3.7"
 
-# startDB's script
-# start service
-
 services:
   #AUTH
   auth:
@@ -17,10 +14,10 @@ services:
     environment:
       USER: Dragan
     working_dir: /auth-service
-    command: sh -c "cargo install cargo-watch && cargo-watch -x run"
+    command: sh -c "cargo run"
 
   #MONGO
-  mongodb:
+  mongo:
     image: mongo:latest
     container_name: mongodb
     restart: always

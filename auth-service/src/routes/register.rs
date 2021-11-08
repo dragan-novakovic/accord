@@ -1,4 +1,7 @@
-use crate::models::users::User;
+use crate::{
+    models::{errors::RegisterError, users::User},
+    utils::builderHelper::ResBuilder,
+};
 use bson::Bson;
 use bytes::Buf;
 use hyper::{header, http, Body, Request, Response, StatusCode};
@@ -28,21 +31,19 @@ pub async fn register(req: Request<Body>, db: Database) -> Result<Response<Body>
             Bson::Document(user_doc) => match users_collection.insert_one(user_doc, None).await {
                 Ok(result) => Some(result.inserted_id.as_object_id().unwrap().clone()),
                 Err(err) => {
-                    println!("{:?}", err);
-                    return Response::builder()
-                        .status(500)
-                        .body(Body::from("Failed to insert to DB"));
-                    None
+                    eprintln!("Error {:?}", err);
+                    return ResBuilder(500, "DbError".to_owned());
                 }
             },
             _ => None,
         },
         Err(err) => {
-            println!("{:?}", err);
+            eprintln!("Error convectiong to bson {:?}", err);
             None
         }
     };
 
+    // Handle Errors reading from DB
     let new_user_cursor: Bson = users_collection
         .find_one(Some(doc! {"_id": new_user_id.unwrap()}), None)
         .await

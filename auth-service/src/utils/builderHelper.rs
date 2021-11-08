@@ -1,5 +1,5 @@
-use hyper::{header, http, Body, Request, Response, StatusCode};
+use hyper::{http, Body, Response, StatusCode};
 
-pub fn ResBuilder(status: i32, body: String) -> Builder {
-    Response::builder().status(status).body(body)
+pub fn ResBuilder(status: StatusCode, body: String) -> Result<Response<Body>, http: Error> {
+    Response::builder().status(status).body(Body::from(body))
 }

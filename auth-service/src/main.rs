@@ -21,10 +21,12 @@ async fn main() {
             .await
             .unwrap();
 
+    // Setting up database name
     client_options.app_name = Some("AUTH-SERVICE".to_string());
 
     // Get a handle to the deployment.
-    let client = Client::with_options(client_options).unwrap();
+    let client = Client::with_options(client_options)
+        .expect("Unable to create Deployment with specified Client Options");
 
     // Get a handle to a database.
     let db = client.database("AUTH-SERVICE");

@@ -10,6 +10,7 @@ extern crate serde_json;
 
 mod models;
 mod routes;
+mod utils;
 
 #[tokio::main]
 async fn main() {

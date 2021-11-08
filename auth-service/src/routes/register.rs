@@ -14,9 +14,13 @@ use mongodb::{
 }
  */
 pub async fn register(req: Request<Body>, db: Database) -> Result<Response<Body>, http::Error> {
-    let whole_body = hyper::body::aggregate(req).await.unwrap();
+    // Handle Error
+    let whole_body = hyper::body::aggregate(req)
+        .await
+        .expect("Error aggregating body");
 
-    let data: serde_json::Value = serde_json::from_reader(whole_body.reader()).unwrap();
+    let data: serde_json::Value =
+        serde_json::from_reader(whole_body.reader()).expect("Failed parsing the body");
     let users_collection = db.collection("users");
 
     let new_user_id = match bson::to_bson(&data) {
@@ -25,6 +29,9 @@ pub async fn register(req: Request<Body>, db: Database) -> Result<Response<Body>
                 Ok(result) => Some(result.inserted_id.as_object_id().unwrap().clone()),
                 Err(err) => {
                     println!("{:?}", err);
+                    return Response::builder()
+                        .status(500)
+                        .body(Body::from("Failed to insert to DB"));
                     None
                 }
             },
@@ -50,5 +57,6 @@ pub async fn register(req: Request<Body>, db: Database) -> Result<Response<Body>
         .header(header::CONTENT_TYPE, "application/json")
         .header(header::LOCATION, "/login")
         .body(Body::from(serde_json::to_string(&new_user).unwrap()))?;
+
     Ok(response)
 }

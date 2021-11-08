@@ -18,6 +18,8 @@ pub async fn router(req: Request<Body>, db: Database) -> Result<Response<Body>, 
             .status(200)
             .header("Content-Type", "aplication/json")
             .body(Body::from("{\"status\": \"OK\"}")),
-        _ => Ok(Response::new(Body::from("Wrong Route go to /register"))),
+        _ => Response::builder()
+            .status(404)
+            .body(Body::from("Not Found")),
     }
 }

@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dragan\\Desktop\\auth\\Inventory-service\\InventoryService.csproj": {}
+    "/Users/dragan/Desktop/accord/Inventory-service/InventoryService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dragan\\Desktop\\auth\\Inventory-service\\InventoryService.csproj": {
+    "/Users/dragan/Desktop/accord/Inventory-service/InventoryService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dragan\\Desktop\\auth\\Inventory-service\\InventoryService.csproj",
+        "projectUniqueName": "/Users/dragan/Desktop/accord/Inventory-service/InventoryService.csproj",
         "projectName": "InventoryService",
-        "projectPath": "C:\\Users\\Dragan\\Desktop\\auth\\Inventory-service\\InventoryService.csproj",
-        "packagesPath": "C:\\Users\\Dragan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dragan\\Desktop\\auth\\Inventory-service\\obj\\",
+        "projectPath": "/Users/dragan/Desktop/accord/Inventory-service/InventoryService.csproj",
+        "packagesPath": "/Users/dragan/.nuget/packages/",
+        "outputPath": "/Users/dragan/Desktop/accord/Inventory-service/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Dragan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/dragan/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -50,7 +44,7 @@
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[2.1.2, )"
+              "version": "[3.1.18, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL.Design": {
               "target": "Package",
@@ -67,6 +61,20 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.osx-x64",
+              "version": "[3.1.21, 3.1.21]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -75,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.100/RuntimeIdentifierGraph.json"
         }
       }
     }

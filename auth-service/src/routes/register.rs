@@ -16,6 +16,8 @@ use mongodb::{
  "password": String
 }
  */
+
+//! Use better pattern
 pub async fn register(req: Request<Body>, db: Database) -> Result<Response<Body>, http::Error> {
     // Handle Error
     let whole_body = hyper::body::aggregate(req)
@@ -51,7 +53,7 @@ pub async fn register(req: Request<Body>, db: Database) -> Result<Response<Body>
         .unwrap()
         .into();
 
-    let new_user: User = from_bson(new_user_cursor).unwrap();
+    let new_user: User = from_bson(new_user_cursor).expect("Unable to parse from BSON");
 
     let response = Response::builder()
         .status(StatusCode::CREATED)

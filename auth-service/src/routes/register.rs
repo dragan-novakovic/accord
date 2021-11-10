@@ -1,6 +1,6 @@
 use crate::{
     models::{errors::RegisterError, users::User},
-    utils::builderHelper::ResBuilder,
+    utils::builder_helper::res_builder,
 };
 use bson::Bson;
 use bytes::Buf;
@@ -32,7 +32,7 @@ pub async fn register(req: Request<Body>, db: Database) -> Result<Response<Body>
                 Ok(result) => Some(result.inserted_id.as_object_id().unwrap().clone()),
                 Err(err) => {
                     eprintln!("Error {:?}", err);
-                    return ResBuilder(500, "DbError".to_owned());
+                    return res_builder(StatusCode::SERVICE_UNAVAILABLE, "DbError".to_owned());
                 }
             },
             _ => None,

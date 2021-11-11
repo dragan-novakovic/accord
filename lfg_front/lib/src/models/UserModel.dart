@@ -8,3 +8,10 @@ class User {
   final List<Room> roomList;
   final List<Channel> channelList;
 }
+
+class LoginUser {
+  LoginUser(this.id, this.username, this.token);
+  final String id;
+  final String username;
+  final String token;
+}

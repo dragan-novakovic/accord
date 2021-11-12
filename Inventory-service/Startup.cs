@@ -28,24 +28,17 @@ namespace InventoryService
             services.AddTransient<IInventoryServices, InventoriesServices>();
             services.AddDbContext<InventoryContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
-            }
-
+            app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseEndpoints(endpoints => {
+            app.UseEndpoints(endpoints =>
+            {
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });

@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using InventoryService.Services;
 using InventoryService.Interfaces;
 using InventoryService.Models;
+using InventoryService.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventoryService
@@ -27,8 +26,6 @@ namespace InventoryService
         {
             services.AddTransient<IInventoryServices, InventoriesServices>();
             services.AddDbContext<InventoryContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddControllers().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,8 +36,8 @@ namespace InventoryService
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                //  endpoints.MapDefaultControllerRoute();
+                endpoints.MapGet("/healthz", () => new HealthController());
             });
         }
     }

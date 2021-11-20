@@ -36,8 +36,8 @@ namespace InventoryService
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
-                //  endpoints.MapDefaultControllerRoute();
-                endpoints.MapGet("/healthz", () => new HealthController());
+                endpoints.MapHealthChecks(pattern: "/healtz");
+                endpoints.MapControllerRoute(name: "default", pattern: "{Controller=Home}/{action=Index}/{id?}");
             });
         }
     }

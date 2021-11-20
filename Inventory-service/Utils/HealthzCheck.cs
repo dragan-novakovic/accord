@@ -11,15 +11,13 @@ namespace InventoryService.Utils
     [ApiController]
     public class HealthController : IHealthCheck
     {
-        public HealthController()
-        {
-        }
+        public HealthController() { }
 
         public Task<HealthCheckResult> CheckHealthAsync(
        HealthCheckContext context,
        CancellationToken cancellationToken = default(CancellationToken))
         {
-            var healthCheckResultHealthy = true;
+            bool healthCheckResultHealthy = true;
 
             if (healthCheckResultHealthy)
             {

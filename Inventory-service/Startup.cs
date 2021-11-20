@@ -24,6 +24,8 @@ namespace InventoryService
         public void ConfigureServices(IServiceCollection services)
 
         {
+            services.AddControllers();
+            services.AddHealthChecks();
             services.AddTransient<IInventoryServices, InventoriesServices>();
             services.AddDbContext<InventoryContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
         }

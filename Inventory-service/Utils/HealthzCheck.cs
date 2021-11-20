@@ -36,7 +36,12 @@ namespace InventoryService.Utils
         [HttpGet]
         public String HealthCheck()
         {
-            return "Hello";
+            return @"Hello
+            To-do:
+            1. services propper health check
+            2. Db health check
+            3. Readines and Liveness probe
+            ";
         }
 
     }

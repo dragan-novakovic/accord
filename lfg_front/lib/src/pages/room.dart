@@ -19,7 +19,7 @@ class _RoomsPageState extends State<RoomsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Row(children: [RoomList(), Center(child: Text('Select Room'))]),
+        child: Row(children: [RoomList(), showRoom(null)]),
       ),
     );
   }
@@ -47,7 +47,27 @@ class RoomList extends StatelessWidget {
 }
 
 Widget getRooms(List<Room> rooms) {
-  return Column(
-      children:
-          rooms.map((room) => Container(child: Text(room.name))).toList());
+  return Container(
+    child: Column(
+        children: rooms
+            .map((room) => Container(
+                padding: EdgeInsets.only(left: 10.0, top: 20.0),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.grey,
+                    ),
+                    Text(room.name),
+                  ],
+                )))
+            .toList()),
+  );
+}
+
+Widget showRoom(String selected) {
+  if (selected != null) {
+    return Text(selected);
+  }
+
+  return Text("Select Room");
 }

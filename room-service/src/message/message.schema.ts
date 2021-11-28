@@ -7,8 +7,6 @@ export class Message extends Document {
   message: string;
   @Prop()
   username: string;
-  @Prop()
-  roomId: string;
 }
 // roomID - cascade delete?
 export const MessageSchema = SchemaFactory.createForClass(Message);

@@ -4,12 +4,10 @@ Room
 
 - id
 - channels
-- users
 
 Channel
 
 - id
-- users
 - messages
 
 Message
@@ -21,3 +19,4 @@ User
 
 - id
 - rooms
+- channels

@@ -20,14 +20,14 @@ import { UsersEntity } from "./user/users.entity";
   imports: [
     RoomsModule,
     ChannelModule,
-    MessageModule,
+    // MessageModule,
     // GraphQLModule.forRoot({
     //   autoSchemaFile: join(process.cwd(), "src/schema.gql"),
     //   sortSchema: true,
     // }),
-    MongooseModule.forRoot(
-      "mongodb://admin:admin@localhost:27017/CHAT-SERVICE"
-    ),
+    // MongooseModule.forRoot(
+    //   "mongodb://admin:admin@localhost:27017/CHAT-SERVICE"
+    // ),
     TypeOrmModule.forRoot({
       type: "postgres",
       host: "localhost",

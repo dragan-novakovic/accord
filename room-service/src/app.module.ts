@@ -14,6 +14,7 @@ import { RoomsModule } from "./rooms/rooms.module";
 import { ChannelModule } from "./channel/channel.module";
 import { MessageModule } from "./message/message.module";
 import { UserService } from "./user/user.service";
+import { UsersEntity } from "./user/users.entity";
 
 @Module({
   imports: [
@@ -34,7 +35,7 @@ import { UserService } from "./user/user.service";
       username: "docker",
       password: "docker",
       database: "ROOM-SERVICE",
-      entities: [RoomEntity, ChannelEntity],
+      entities: [RoomEntity, ChannelEntity, UsersEntity],
       synchronize: true,
     }),
   ],

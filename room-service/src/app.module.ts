@@ -11,10 +11,14 @@ import { Connection } from "typeorm";
 import { RoomsModule } from "./rooms/rooms.module";
 import { ChannelModule } from "./channel/channel.module";
 import { MessageModule } from "./message/message.module";
+import { UserModule } from "./user/users.module";
+
+// Service
 import { UserService } from "./user/user.service";
 
 @Module({
   imports: [
+    UserModule,
     RoomsModule,
     ChannelModule,
     // MessageModule,

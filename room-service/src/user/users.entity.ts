@@ -4,7 +4,7 @@ import { Entity, OneToMany, Column, PrimaryColumn } from "typeorm";
 @Entity({ name: "users" })
 export class UsersEntity {
   @PrimaryColumn()
-  guid: string;
+  id: string;
 
   @OneToMany((type) => RoomEntity, (room) => room.id, {
     eager: true,

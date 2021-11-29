@@ -6,15 +6,12 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { Connection } from "typeorm";
 
 // Entites
-import { RoomEntity } from "./rooms/rooms.entity";
-import { ChannelEntity } from "./channel/channel.entity";
 
 // Modules
 import { RoomsModule } from "./rooms/rooms.module";
 import { ChannelModule } from "./channel/channel.module";
 import { MessageModule } from "./message/message.module";
 import { UserService } from "./user/user.service";
-import { UsersEntity } from "./user/users.entity";
 
 @Module({
   imports: [
@@ -28,16 +25,7 @@ import { UsersEntity } from "./user/users.entity";
     // MongooseModule.forRoot(
     //   "mongodb://admin:admin@localhost:27017/CHAT-SERVICE"
     // ),
-    TypeOrmModule.forRoot({
-      type: "postgres",
-      host: "localhost",
-      port: 5555,
-      username: "docker",
-      password: "docker",
-      database: "ROOM-SERVICE",
-      entities: [RoomEntity, ChannelEntity, UsersEntity],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(),
   ],
   providers: [UserService],
 })

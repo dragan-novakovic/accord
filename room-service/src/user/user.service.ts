@@ -21,7 +21,7 @@ export class UserService {
   }
 
   create(user: CreateUserDto): Promise<IUser> {
-    const newUser = this.userRepository.create(user);
+    const newUser = this.userRepository.create({ ...user, rooms: [] });
     return this.userRepository.save(newUser);
   }
 }

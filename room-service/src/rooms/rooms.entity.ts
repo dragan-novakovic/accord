@@ -1,12 +1,5 @@
 import { UsersEntity } from "src/user/users.entity";
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  OneToMany,
-  ManyToOne,
-  ManyToMany,
-} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { ChannelEntity } from "../channel/channel.entity";
 
 @Entity({ name: "rooms" })

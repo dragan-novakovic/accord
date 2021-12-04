@@ -16,9 +16,12 @@
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.4.4",
+    "@grpc/proto-loader": "^0.6.7",
     "@nestjs/common": "^8.2.3",
     "@nestjs/core": "^8.2.3",
     "@nestjs/graphql": "^9.1.2",
+    "@nestjs/microservices": "^8.2.3",
     "@nestjs/mongoose": "^9.0.1",
     "@nestjs/platform-express": "^8.2.3",
     "@nestjs/typeorm": "^8.0.2",

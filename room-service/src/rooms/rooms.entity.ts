@@ -10,6 +10,6 @@ export class RoomEntity {
   @Column()
   name: string;
 
-  @OneToMany(() => ChannelEntity, (channel) => channel.room, { eager: true })
+  @OneToMany(() => ChannelEntity, (channel) => channel.room)
   channels: ChannelEntity[];
 }

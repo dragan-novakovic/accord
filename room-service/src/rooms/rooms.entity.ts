@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { UsersEntity } from "src/user/users.entity";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToOne,
+} from "typeorm";
 import { ChannelEntity } from "../channel/channel.entity";
 
 @Entity({ name: "rooms" })
@@ -8,9 +15,4 @@ export class RoomEntity {
 
   @Column()
   name: string;
-
-  @OneToMany((type) => ChannelEntity, (channel) => channel.room, {
-    eager: true,
-  })
-  channels: ChannelEntity[];
 }

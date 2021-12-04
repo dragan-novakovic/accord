@@ -21,10 +21,10 @@ class CreateRoomDto {
 export class RoomsController {
   constructor(private roomsService: RoomsService) {}
 
-  // @Get()
-  // findAll(@Query() query: QueryRoom): Promise<IRoom[]> {
-  //   return this.roomsService.findAll();
-  // }
+  @Get()
+  findAll(): Promise<IRoom[]> {
+    return this.roomsService.findAll();
+  }
 
   @Get(":id")
   findOne(@Param("id") id: string): Promise<IRoom> {

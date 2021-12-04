@@ -17,20 +17,20 @@ import { IRoom } from "./interfaces/rooms.interface";
 export class RoomsController {
   constructor(private roomsService: RoomsService) {}
 
-  @Get()
-  findAll(@Query() query: QueryRoom): Promise<IRoom[]> {
-    return this.roomsService.findAll();
-  }
+  // @Get()
+  // findAll(@Query() query: QueryRoom): Promise<IRoom[]> {
+  //   return this.roomsService.findAll();
+  // }
 
-  @Get(":id")
-  findOne(@Param("id") id: string): Promise<IRoom> {
-    return this.roomsService.findOne(id);
-  }
+  // @Get(":id")
+  // findOne(@Param("id") id: string): Promise<IRoom> {
+  //   return this.roomsService.findOne(id);
+  // }
 
-  @Post()
-  create(@Body() createRoomDto: CreateRoomDto): Promise<IRoom> {
-    return this.roomsService.create(createRoomDto);
-  }
+  // @Post()
+  // create(@Body() createRoomDto: CreateRoomDto): Promise<IRoom> {
+  //   return this.roomsService.create(createRoomDto);
+  // }
 
   @Put(":id")
   update(

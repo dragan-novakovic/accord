@@ -6,9 +6,9 @@ export class ChannelEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @ManyToOne((type) => RoomEntity, (room) => room.channels)
-  room: RoomEntity;
-
   @Column()
   name: string;
+
+  @ManyToOne(() => RoomEntity, (room) => room.channels)
+  room: RoomEntity;
 }

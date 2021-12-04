@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   ManyToOne,
+  ManyToMany,
 } from "typeorm";
 import { ChannelEntity } from "../channel/channel.entity";
 
@@ -15,4 +16,7 @@ export class RoomEntity {
 
   @Column()
   name: string;
+
+  @OneToMany(() => ChannelEntity, (channel) => channel.room)
+  channels: ChannelEntity[];
 }

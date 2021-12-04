@@ -9,6 +9,6 @@ export class ChannelEntity {
   @Column()
   name: string;
 
-  @ManyToOne(() => RoomEntity, (room) => room.channels)
+  @ManyToOne(() => RoomEntity, (room) => room.channels, { eager: true })
   room: RoomEntity;
 }

@@ -21,11 +21,6 @@ import { UserService } from "./user/user.service";
     UserModule,
     RoomsModule,
     ChannelModule,
-    // MessageModule,
-    // GraphQLModule.forRoot({
-    //   autoSchemaFile: join(process.cwd(), "src/schema.gql"),
-    //   sortSchema: true,
-    // }),
     // MongooseModule.forRoot(
     //   "mongodb://admin:admin@localhost:27017/CHAT-SERVICE"
     // ),

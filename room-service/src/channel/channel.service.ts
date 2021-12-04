@@ -25,14 +25,14 @@ export class ChannelService {
   }
 
   async create(channel: CreateChannelDto): Promise<ChannelEntity> {
-    const { room, ...channelDto } = channel;
+    const { roomId, ...channelDto } = channel;
 
     // room: string -> room: Room
-    const Room = await this.roomRepository.findOne(room);
+    const roomEntity = await this.roomRepository.findOne(roomId);
 
     const newChannel = this.channelRepository.create({
       ...channelDto,
-      room: Room,
+      room: roomEntity,
     });
     return this.channelRepository.save(newChannel);
   }

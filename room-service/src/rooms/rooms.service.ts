@@ -22,7 +22,7 @@ export class RoomsService {
   }
 
   create(room: CreateRoomDto): Promise<IRoom> {
-    const newRoom = this.roomsRepository.create(room);
+    const newRoom = this.roomsRepository.create({ ...room, channels: [] });
     return this.roomsRepository.save(newRoom);
   }
 

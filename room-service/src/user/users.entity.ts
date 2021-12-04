@@ -6,7 +6,7 @@ export class UsersEntity {
   @PrimaryColumn()
   id: string;
 
-  @ManyToMany(() => RoomEntity)
+  @ManyToMany(() => RoomEntity, { eager: true })
   @JoinTable()
   rooms: RoomEntity[];
 }

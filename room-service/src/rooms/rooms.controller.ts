@@ -10,17 +10,21 @@ import {
 } from "@nestjs/common";
 import { RoomsService } from "./rooms.service";
 
-import { CreateRoomDto, QueryRoom } from "./dto";
+//import { CreateRoomDto } from "./dto/index";
 import { IRoom } from "./interfaces/rooms.interface";
+
+class CreateRoomDto {
+  name: string;
+}
 
 @Controller("rooms")
 export class RoomsController {
   constructor(private roomsService: RoomsService) {}
 
-  @Get()
-  findAll(@Query() query: QueryRoom): Promise<IRoom[]> {
-    return this.roomsService.findAll();
-  }
+  // @Get()
+  // findAll(@Query() query: QueryRoom): Promise<IRoom[]> {
+  //   return this.roomsService.findAll();
+  // }
 
   @Get(":id")
   findOne(@Param("id") id: string): Promise<IRoom> {

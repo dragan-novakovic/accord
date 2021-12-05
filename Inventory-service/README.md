@@ -1,6 +1,5 @@
 ﻿vs je komplikovan...
 
-
 User inventory
 
 - experience
@@ -8,9 +7,13 @@ User inventory
 - level
 - rating
 
-
 # metode
+
 - setPost, addExp
 - metrika?
 - exp/x
 - +1 / - 1
+
+## User Story
+
+- To-Do

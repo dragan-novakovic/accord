@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using InventoryService.Services;
 using InventoryService.Interfaces;
 using InventoryService.Models;
-using InventoryService.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventoryService

@@ -4,7 +4,7 @@ using InventoryService.Models;
 
 namespace InventoryService.Services
 {
-    public class InventoriesServices: IInventoryServices
+    public class InventoriesServices : IInventoryServices
     {
         private readonly UserInventory _userInventory;
         private readonly InventoryContext _context;
@@ -20,7 +20,11 @@ namespace InventoryService.Services
         {
             UserInventory userInventory = _context.Find<UserInventory>(reqBody.Id);
 
-            userInventory.Exp += reqBody.Exp;
+            userInventory.Exp = userInventory.Exp + reqBody.Exp;
+
+            _context.Update(userInventory);
+            _context.SaveChanges();
+
             return userInventory;
         }
 

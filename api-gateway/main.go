@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -13,6 +14,11 @@ var r = mux.NewRouter()
 
 func main() {
 	r.HandleFunc("/", HomeLander)
+
+	r.HandleFunc("/api/health", func(w http.ResponseWriter, r *http.Request) {
+		// an example API handler
+		json.NewEncoder(w).Encode(map[string]bool{"ok": true})
+	})
 
 	var authRouter = r.PathPrefix("/auth").Subrouter()
 	authRouter.HandleFunc("/{requestType}", authBeacon)

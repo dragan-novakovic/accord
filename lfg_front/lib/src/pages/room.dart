@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lfg_front/src/bloc/RoomBloc.dart';
 import 'package:lfg_front/src/models/RoomModel.dart';
+import 'package:lfg_front/src/pages/channel.dart';
 
 class RoomsPage extends StatefulWidget {
   const RoomsPage({Key key}) : super(key: key);
@@ -52,13 +53,19 @@ Widget getRooms(List<Room> rooms) {
         children: rooms
             .map((room) => Container(
                 padding: EdgeInsets.only(left: 10.0, top: 20.0),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.grey,
-                    ),
-                    Text(room.name),
-                  ],
+                child: InkWell(
+                  onTap: () {},
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CircleAvatar(
+                          backgroundColor: Colors.grey,
+                        ),
+                      ),
+                      Text(room.name),
+                    ],
+                  ),
                 )))
             .toList()),
   );
@@ -69,5 +76,6 @@ Widget showRoom(String selected) {
     return Text(selected);
   }
 
-  return Text("Select Room");
+  return ChannelView();
+  // return Text("Select Room");
 }

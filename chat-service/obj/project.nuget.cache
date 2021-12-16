@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "WWTONMNLQDFqKaR0dYTi5IjfQ5cklj/lVGi7woltFWoMN3paXqRfHdeMbW2OeDF93qYizI2wvdWUc66rCysVDA==",
+  "dgSpecHash": "GwlRF3B5vPR85G+buvcODsyY82JqH7zjeR8lYRRgBfELbdn48debGGWq5+sUaMDEXl9fAp/Gpgzk59ccKe1Lkg==",
   "success": true,
   "projectFilePath": "/Users/dragan/Desktop/accord/chat-service/chat-service.csproj",
   "expectedPackageFiles": [
+    "/Users/dragan/.nuget/packages/microsoft.aspnet.signalr/2.4.2/microsoft.aspnet.signalr.2.4.2.nupkg.sha512",
     "/Users/dragan/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "/Users/dragan/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
     "/Users/dragan/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",

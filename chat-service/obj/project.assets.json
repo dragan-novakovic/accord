@@ -2,6 +2,9 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "Microsoft.AspNet.SignalR/2.4.2": {
+        "type": "package"
+      },
       "Microsoft.Extensions.ApiDescription.Server/3.0.0": {
         "type": "package",
         "build": {
@@ -76,6 +79,18 @@
     }
   },
   "libraries": {
+    "Microsoft.AspNet.SignalR/2.4.2": {
+      "sha512": "8NAm5wmNP+NkqnKqFKWcj7F2JMaQSsqDq5Nx3LnaMmJgHsHYiCx3hAXzXo+047AcJCtYyAvVRUyjWS4NIpEn2A==",
+      "type": "package",
+      "path": "microsoft.aspnet.signalr/2.4.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "microsoft.aspnet.signalr.2.4.2.nupkg.sha512",
+        "microsoft.aspnet.signalr.nuspec",
+        "packageIcon.png"
+      ]
+    },
     "Microsoft.Extensions.ApiDescription.Server/3.0.0": {
       "sha512": "LH4OE/76F6sOCslif7+Xh3fS/wUUrE5ryeXAMcoCnuwOQGT5Smw0p57IgDh/pHgHaGz/e+AmEQb7pRgb++wt0w==",
       "type": "package",
@@ -204,6 +219,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Microsoft.AspNet.SignalR >= 2.4.2",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
@@ -245,6 +261,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Microsoft.AspNet.SignalR": {
+            "target": "Package",
+            "version": "[2.4.2, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.2.3, )"

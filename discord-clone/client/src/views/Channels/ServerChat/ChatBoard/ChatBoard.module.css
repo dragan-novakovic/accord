@@ -1,0 +1,20 @@
+.chatContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.messagesWrapper {
+  background-color: #36393f;
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+.scrollerWrapper {
+  height: auto;
+  overflow: hidden;
+  display: flex;
+  flex: 1 1 auto;
+}

@@ -3,12 +3,12 @@
 </script>
 
 <script lang="ts">
-    import {HubConnectionBuilder} from '@microsoft/signalr';
+    import {HubConnectionBuilder, HttpTransportType} from '@microsoft/signalr';
 import { onMount } from 'svelte';
 
 
 let connection = new HubConnectionBuilder()
-    .withUrl("http://localhost:5207/chat", {withCredentials: false})
+    .withUrl("http://localhost:5207/chat", {withCredentials: false, skipNegotiation: true, transport: HttpTransportType.WebSockets})
     .build();
 
 let serverData = null;

@@ -23,6 +23,7 @@ connection.on("send", data => {
 });
 
 connection.on('receive', data => {
+    console.log("Receiving", data)
     serverData = data;
 })
 

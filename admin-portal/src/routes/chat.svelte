@@ -24,7 +24,7 @@ connection.on("send", data => {
 
 connection.on('receive', data => {
     console.log("Receiving", data)
-    serverData = data;
+    serverData = serverData ? serverData + data : data;
 })
 
     let msg = null;

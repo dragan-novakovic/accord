@@ -1,4 +1,4 @@
-import 'package:lfg_front/src/models/UserModel.dart';
+import 'package:accord_front/src/models/UserModel.dart';
 
 class UserRepository {
   Future<LoginUser> loginUser() async {

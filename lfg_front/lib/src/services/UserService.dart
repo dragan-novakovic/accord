@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:lfg_front/src/models/UserModel.dart';
-import 'package:lfg_front/src/repositories/UserRepository.dart';
+import 'package:accord_front/src/models/UserModel.dart';
+import 'package:accord_front/src/repositories/UserRepository.dart';
 import 'package:meta/meta.dart';
 
 class UserService {

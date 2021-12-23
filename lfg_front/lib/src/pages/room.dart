@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:lfg_front/src/bloc/RoomBloc.dart';
-import 'package:lfg_front/src/models/RoomModel.dart';
-import 'package:lfg_front/src/pages/channel.dart';
+import 'package:fluent_ui/fluent_ui.dart';
+import 'package:accord_front/src/bloc/RoomBloc.dart';
+import 'package:accord_front/src/models/RoomModel.dart';
+// import 'package:accord_front/src/pages/channel.dart';
 
 class RoomsPage extends StatefulWidget {
   const RoomsPage({Key key}) : super(key: key);
@@ -18,15 +18,20 @@ class _RoomsPageState extends State<RoomsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Row(children: [RoomList(), showRoom(null)]),
+    return ScaffoldPage(
+      content: Container(
+        child: Row(children: [RoomList()]),
       ),
     );
   }
 }
 
-class RoomList extends StatelessWidget {
+class RoomList extends StatefulWidget {
+  @override
+  State<RoomList> createState() => _RoomListState();
+}
+
+class _RoomListState extends State<RoomList> {
   @override
   Widget build(BuildContext context) {
     roomBloc.fetchAllRooms();
@@ -35,47 +40,52 @@ class RoomList extends StatelessWidget {
         stream: roomBloc.allRooms,
         builder: (context, AsyncSnapshot<List<Room>> snapshot) {
           if (snapshot.hasData) {
-            return getRooms(snapshot.data);
+            return RoomItems(rooms: snapshot.data);
           }
 
           if (snapshot.hasError) {
             return Text(snapshot.error.toString());
           }
 
-          return Center(child: CircularProgressIndicator());
+          return Center(child: ProgressRing());
         });
   }
 }
 
-Widget getRooms(List<Room> rooms) {
-  return Container(
-    child: Column(
-        children: rooms
-            .map((room) => Container(
-                padding: EdgeInsets.only(left: 10.0, top: 20.0),
-                child: InkWell(
-                  onTap: () {},
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CircleAvatar(
-                          backgroundColor: Colors.grey,
-                        ),
-                      ),
-                      Text(room.name),
-                    ],
-                  ),
-                )))
-            .toList()),
-  );
+class RoomItems extends StatefulWidget {
+  final List<Room> rooms;
+
+  const RoomItems({Key key, @required this.rooms}) : super(key: key);
+
+  @override
+  State<RoomItems> createState() => _RoomItemsState();
 }
 
-Widget showRoom(String selected) {
-  if (selected != null) {
-    return Text(selected);
-  }
+class _RoomItemsState extends State<RoomItems> {
+  int index = 0;
 
-  return ChannelView();
-  // return Text("Select Room");
+  @override
+  Widget build(BuildContext build) {
+    return NavigationView(
+      appBar: NavigationAppBar(
+        title: Text('Nice App Title :)'),
+        actions: Row(children: []),
+        automaticallyImplyLeading: true,
+      ),
+      pane: NavigationPane(
+        selected: index,
+        items: this.widget.rooms.map((room) {
+          return PaneItem(
+            icon: Icon(FluentIcons.inbox),
+            title: Text(room.name),
+            infoBadge: InfoBadge(
+              source: Text('9'),
+            ),
+          );
+        }).toList(),
+        onChanged: (i) => setState(() => index = i),
+        displayMode: PaneDisplayMode.auto,
+      ),
+    );
+  }
 }

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:lfg_front/src/services/RoomService.dart';
+import 'package:accord_front/src/services/RoomService.dart';
 import 'package:meta/meta.dart';
 
 import '../models/RoomModel.dart';

@@ -1,7 +1,7 @@
-import 'package:lfg_front/src/models/RoomModel.dart';
-import 'package:lfg_front/src/models/UserModel.dart';
-import 'package:lfg_front/src/repositories/UserRepository.dart';
-import 'package:lfg_front/src/services/UserService.dart';
+import 'package:accord_front/src/models/RoomModel.dart';
+import 'package:accord_front/src/models/UserModel.dart';
+import 'package:accord_front/src/repositories/UserRepository.dart';
+import 'package:accord_front/src/services/UserService.dart';
 import 'package:rxdart/rxdart.dart';
 
 class UserBloc {

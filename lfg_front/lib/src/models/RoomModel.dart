@@ -1,4 +1,4 @@
-import 'package:lfg_front/src/models/ChannelModel.dart';
+import 'package:accord_front/src/models/ChannelModel.dart';
 
 class Room {
   Room(this.name, this.channelList);

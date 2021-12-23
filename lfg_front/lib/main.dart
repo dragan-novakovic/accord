@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lfg_front/src/pages/room.dart';
 import 'package:get_it/get_it.dart';
 
@@ -14,12 +14,16 @@ void main() {
 class LFG extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return FluentApp(
       title: 'Accord',
       theme: ThemeData(
-        primarySwatch: Colors.grey,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          scaffoldBackgroundColor: Colors.white,
+          accentColor: Colors.blue,
+          iconTheme: const IconThemeData(size: 24)),
+      darkTheme: ThemeData(
+          scaffoldBackgroundColor: Colors.black,
+          accentColor: Colors.blue,
+          iconTheme: const IconThemeData(size: 24)),
       home: RoomsPage(),
     );
   }

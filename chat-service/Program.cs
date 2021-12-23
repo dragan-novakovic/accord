@@ -1,17 +1,23 @@
 using SignalRChat.Hubs;
+using MongoDB.Driver;
+
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+IConfiguration CONFIG = builder.Configuration;
+
+Console.Write(CONFIG);
 
 
-var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddSignalR();
+builder.Services.AddSingleton<IMongoClient>(s => new MongoClient(CONFIG.GetConnectionString("MongoDb")));
 
 
-var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+WebApplication app = builder.Build();
+
 
 //app.UseAuthorization();
 app.MapControllers();

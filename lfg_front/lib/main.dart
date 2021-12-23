@@ -24,7 +24,9 @@ class LFG extends StatelessWidget {
           scaffoldBackgroundColor: Colors.black,
           accentColor: Colors.blue,
           iconTheme: const IconThemeData(size: 24)),
-      home: RoomsPage(),
+      home: NavigationView(
+        appBar: NavigationAppBar(title: Text("Fluent Design App Bar")),
+      ),
     );
   }
 }

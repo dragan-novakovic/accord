@@ -1,7 +1,8 @@
+import 'package:accord_front/src/models/ChannelModel.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:accord_front/src/bloc/RoomBloc.dart';
 import 'package:accord_front/src/models/RoomModel.dart';
-// import 'package:accord_front/src/pages/channel.dart';
+import 'package:accord_front/src/pages/channel.dart';
 
 class RoomsPage extends StatefulWidget {
   const RoomsPage({Key key}) : super(key: key);
@@ -19,9 +20,7 @@ class _RoomsPageState extends State<RoomsPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
-      content: Container(
-        child: Row(children: [RoomList()]),
-      ),
+      content: RoomList(),
     );
   }
 }
@@ -46,7 +45,6 @@ class _RoomListState extends State<RoomList> {
           if (snapshot.hasError) {
             return Text(snapshot.error.toString());
           }
-
           return Center(child: ProgressRing());
         });
   }
@@ -67,25 +65,34 @@ class _RoomItemsState extends State<RoomItems> {
   @override
   Widget build(BuildContext build) {
     return NavigationView(
-      appBar: NavigationAppBar(
-        title: Text('Nice App Title :)'),
-        actions: Row(children: []),
-        automaticallyImplyLeading: true,
-      ),
+      // appBar: NavigationAppBar(
+      //   title: Text('Nice App Title :)'),
+      //   actions: Row(children: []),
+      //   automaticallyImplyLeading: true,
+      // ),
       pane: NavigationPane(
+        size: NavigationPaneSize(openWidth: 200),
         selected: index,
-        items: this.widget.rooms.map((room) {
-          return PaneItem(
-            icon: Icon(FluentIcons.inbox),
-            title: Text(room.name),
-            infoBadge: InfoBadge(
-              source: Text('9'),
-            ),
-          );
-        }).toList(),
+        items: getPaneItems(this.widget.rooms),
         onChanged: (i) => setState(() => index = i),
         displayMode: PaneDisplayMode.auto,
       ),
+      content: ScaffoldPage(
+        content: ChannelView(),
+      ),
     );
   }
+}
+
+List<NavigationPaneItem> getPaneItems(List<Room> rooms) {
+  return rooms
+      .map((room) => PaneItem(
+            icon: Icon(FluentIcons.more),
+            title: Text(room.name),
+            infoBadge: const InfoBadge(
+              source: Text('9'),
+            ),
+          ))
+      .toList()
+      .cast<NavigationPaneItem>();
 }

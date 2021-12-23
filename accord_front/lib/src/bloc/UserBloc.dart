@@ -1,4 +1,4 @@
-import 'package:accord_front/src/models/RoomModel.dart';
+// import 'package:accord_front/src/models/RoomModel.dart';
 import 'package:accord_front/src/models/UserModel.dart';
 import 'package:accord_front/src/repositories/UserRepository.dart';
 import 'package:accord_front/src/services/UserService.dart';

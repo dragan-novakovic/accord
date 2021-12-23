@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:accord_front/src/pages/chatView.dart';
 
 class ChannelView extends StatefulWidget {

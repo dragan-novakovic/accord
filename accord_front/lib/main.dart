@@ -27,10 +27,6 @@ class _LFGState extends State<LFG> {
           scaffoldBackgroundColor: Colors.white,
           accentColor: Colors.blue,
           iconTheme: const IconThemeData(size: 24)),
-      // darkTheme: ThemeData(
-      //     scaffoldBackgroundColor: Colors.black,
-      //     accentColor: Colors.blue,
-      //     iconTheme: const IconThemeData(size: 24)),
       home: RoomsPage(),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:accord_front/src/models/ChannelModel.dart';
 import 'package:accord_front/src/models/RoomModel.dart';
-import 'package:accord_front/src/utils/ApiService.dart';
+// import 'package:accord_front/src/utils/ApiService.dart';
 
 class RoomService {
   Future<List<Room>> getRooms() async {

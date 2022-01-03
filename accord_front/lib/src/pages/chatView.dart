@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 
 class ChatView extends StatefulWidget {
   const ChatView({Key key}) : super(key: key);
@@ -8,15 +8,24 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> {
+//  final _textController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-        children: [
-          Text("Avatar ||| Text Box"),
-          Text("MessageBar ( input  + enter")
-        ],
+        children: [Text("NavBar"), Text("Boubless"), renderInputBox()],
       ),
     );
   }
+}
+
+// fix this
+Widget renderInputBox() {
+  return Expanded(
+    child: TextBox(
+      header: 'Message',
+      placeholder: 'Type your message here',
+    ),
+  );
 }

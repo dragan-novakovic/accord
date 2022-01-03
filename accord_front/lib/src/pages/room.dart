@@ -1,4 +1,3 @@
-import 'package:accord_front/src/models/ChannelModel.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:accord_front/src/bloc/RoomBloc.dart';
 import 'package:accord_front/src/models/RoomModel.dart';
@@ -87,7 +86,7 @@ class _RoomItemsState extends State<RoomItems> {
 List<NavigationPaneItem> getPaneItems(List<Room> rooms) {
   return rooms
       .map((room) => PaneItem(
-            icon: Icon(FluentIcons.more),
+            icon: Icon(FluentIcons.caret_right),
             title: Text(room.name),
             infoBadge: const InfoBadge(
               source: Text('9'),

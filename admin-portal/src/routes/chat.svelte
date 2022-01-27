@@ -29,7 +29,7 @@ connection.on('receive', data => {
 
     let msg = null;
 
-connection.start()
+connection.start().catch((err) => console.log("Meh can't start"));
 </script>
 
 <svelte:head>

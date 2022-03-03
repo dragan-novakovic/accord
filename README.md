@@ -1,15 +1,15 @@
 #Microservices for Discord-type app
 
-# Front
+# Front (Flutter Cross-Platform)
 
-# Api-Gateway
+# Api-Gateway (Go)
 
-# Auth
+# Auth (Rust)
 
-# Inventory
+# Inventory (C#)
 
-# Room
+# Room (Node.js)
 
-# Chat
+# Chat (C#)
 
-# Admin Portal
+# Admin Portal (Svelte)

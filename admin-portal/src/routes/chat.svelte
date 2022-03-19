@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-    import {HubConnectionBuilder, HttpTransportType} from '@microsoft/signalr';
+import {HubConnectionBuilder, HttpTransportType} from '@microsoft/signalr';
 import { onMount } from 'svelte';
 
 
@@ -12,24 +12,33 @@ let connection = new HubConnectionBuilder()
     .build();
 
 let serverData = null;
-onMount(() => {
+let msg = null;
 
+
+
+onMount(() => {
 connection.start().catch(() => console.log("I KNOW"));
-    })
+})
 
 	
 connection.on("send", data => {
     console.log(data);
 });
-
 connection.on('receive', data => {
     console.log("Receiving", data)
     serverData = serverData ? serverData + data : data;
 })
 
-    let msg = null;
 
-connection.start().catch((err) => console.log("Meh can't start"));
+connection.start().catch((err) => console.log("Meh can't start", err));
+
+
+const sendMessage = () => {
+console.log(msg);
+connection.invoke("send", msg)
+
+}
+
 </script>
 
 <svelte:head>
@@ -40,7 +49,7 @@ connection.start().catch((err) => console.log("Meh can't start"));
     <h1>Chat Tester</h1>
         <textarea value={serverData} />
         <input placeholder="Type Message" value={msg} on:change={(event) => msg = (event.currentTarget.value)}/>
-        <button on:click={() => {console.log(msg);connection.invoke("send", msg)}}>Send it</button>
+        <button on:click={sendMessage}>Send it</button>
 </section>
 
 <style>

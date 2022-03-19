@@ -5,7 +5,8 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 IConfiguration CONFIG = builder.Configuration;
 
-Console.Write(CONFIG);
+System.Diagnostics.Debug.WriteLine($"{CONFIG}");
+System.Diagnostics.Debug.WriteLine("HIIJIFJEIJFIEJIEJEIJFIEFJIJFI");
 
 
 

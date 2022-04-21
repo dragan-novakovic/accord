@@ -14,17 +14,19 @@ class _ChatViewState extends State<ChatView> {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-        children: [Text("NavBar"), Text("Boubless"), renderInputBox()],
+        //mainAxisSize: MainAxisSize.max,
+        children: [Text("NavBar"), Text("Boubless"), renderInputBox(context)],
       ),
     );
   }
 }
 
-// fix this
-Widget renderInputBox() {
-  return Expanded(
+Widget renderInputBox(context) {
+  return Container(
+    height: 50.0,
+    width: 1200,
     child: TextBox(
-      header: 'Message',
+      header: 'Send',
       placeholder: 'Type your message here',
     ),
   );

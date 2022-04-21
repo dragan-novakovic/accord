@@ -25,7 +25,7 @@ dependencies:
   json_annotation: ^4.0.0
   rxdart: ^0.27.2
   get_it: ^7.2.0
-  fluent_ui: ^3.5.2
+  fluent_ui: ^3.10.3
   signalr_netcore: ^1.2.3+1
 
 dev_dependencies:

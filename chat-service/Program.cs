@@ -3,10 +3,12 @@ using MongoDB.Driver;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-IConfiguration CONFIG = builder.Configuration;
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
-System.Diagnostics.Debug.WriteLine($"{CONFIG}");
-System.Diagnostics.Debug.WriteLine("HIIJIFJEIJFIEJIEJEIJFIEFJIJFI");
+IConfigurationRoot CONFIG = builder.Configuration.AddJsonFile("appsettings.json").Build();
+
+Console.WriteLine($"{CONFIG.GetConnectionString("MongoDb").ToString()}");
 
 
 

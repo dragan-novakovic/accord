@@ -11,14 +11,13 @@ db.createUser({
   ],
 });
 
-db.messages.insert({
-  username: "admin",
-  roomId: "xxx",
-  message: "First Message",
-});
+db.messages.drop();
 
-db.messages.insert({
-  username: "admin2",
-  roomId: "xxx",
-  message: "Second Message",
-});
+db.messages.insertMany([
+  {
+    username: "admin",
+    roomId: "xxx",
+    message: "First Message",
+  },
+  { username: "admin2", roomId: "xxx", message: "Second Message" },
+]);

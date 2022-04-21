@@ -1,11 +1,14 @@
 using MongoDB.Driver;
+using MongoDB.Bson;
 
 public class MessageService
 {
-    private readonly IMongoCollection<Message>? messages;
+    private readonly IMongoCollection<BsonDocument>? messages;
     public MessageService(IMongoClient mongoClient)
     {
-        IMongoDatabase database = mongoClient.GetDatabase("DatabaseName");
-        messages = database.GetCollection<Message>("messages");
+        IMongoDatabase db = mongoClient.GetDatabase("DatabaseName");
+        messages = db.GetCollection<BsonDocument>("messages");
+
+        Console.WriteLine("A", messages);
     }
 }

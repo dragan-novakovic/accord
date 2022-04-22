@@ -8,7 +8,6 @@ builder.Logging.AddConsole();
 
 IConfigurationRoot CONFIG = builder.Configuration.AddJsonFile("appsettings.json").Build();
 
-Console.WriteLine($"{CONFIG.GetConnectionString("MongoDb").ToString()}");
 
 
 

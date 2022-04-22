@@ -1,6 +1,4 @@
 using MongoDB.Driver;
-using MongoDB.Bson;
-using Microsoft.Extensions.Options;
 
 public class MessageService : IMessageService
 {
@@ -20,8 +18,8 @@ public class MessageService : IMessageService
     // public async Task<Book?> GetAsync(string id) =>
     //     await _booksCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-    // public async Task CreateAsync(Book newBook) =>
-    //     await _booksCollection.InsertOneAsync(newBook);
+    override public async Task CreateAsync(MessageModel newMessage) =>
+        await _messagesCollection.InsertOneAsync(newMessage);
 
     // public async Task UpdateAsync(string id, Book updatedBook) =>
     //     await _booksCollection.ReplaceOneAsync(x => x.Id == id, updatedBook);

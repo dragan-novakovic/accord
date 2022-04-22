@@ -20,8 +20,9 @@ namespace SignalRChat.Hubs
         public async Task Send(string message)
         {
             await Clients.All.SendAsync("receive", message);
-            var messagesList = await _messageService.GetAsync();
-            Console.WriteLine("2", messagesList[0].ToString(), "HMM");
+            var Poruka = new MessageModel("nzm", "sss", "qqqq");
+            var messagesList = _messageService.CreateAsync(Poruka);
+            Console.WriteLine("2", messagesList.ToString(), "HMM");
         }
     }
 }

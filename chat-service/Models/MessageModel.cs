@@ -1,9 +1,15 @@
-public class Message
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+public class MessageModel
 {
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? Id { get; set; }
 
-    public string UserId { get; set; } = "";
-    public string MessageContent { get; set; } = "";
-    public DateTime createdAt { get; set; }
-    public DateTime updatedAt { get; set; }
 
+    [BsonElement("message")]
+    public string messageContent { get; set; } = null!;
+    public string roomId { get; set; } = null!;
+    public string username { get; set; } = null!;
 }

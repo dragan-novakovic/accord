@@ -16,6 +16,7 @@ Console.WriteLine($"{CONFIG.GetConnectionString("MongoDb").ToString()}");
 builder.Services.AddControllers();
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<IMongoClient>(s => new MongoClient(CONFIG.GetConnectionString("MongoDb")));
+builder.Services.AddTransient<IMessageService, MessageService>();
 
 
 

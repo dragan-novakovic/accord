@@ -11,7 +11,7 @@ edition = "2018"
 
 [dependencies]
 hyper = { version = "0.14", features = ["full"] }
-tokio = { version = "1.16", features = ["full"] }
+tokio = { version = "1.17", features = ["full"] }
 bytes = "1.1"
 futures = "0.3"
 lazy_static = "1.4.0"
@@ -21,4 +21,4 @@ serde_derive = "1.0"
 mongodb = { version = "2.0", default-features = true, features = ["bson-uuid-0_8", "bson-chrono-0_4"] }
 bson = "2.0"
 # find replacment or fork?
-jsonwebtoken = "7"
+jsonwebtoken = "8"

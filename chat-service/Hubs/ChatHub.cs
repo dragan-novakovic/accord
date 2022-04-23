@@ -14,15 +14,14 @@ namespace SignalRChat.Hubs
         public async Task SendMessage(string user, string message)
         {
             await Clients.All.SendAsync("ReceiveMessage", user, message);
-            Console.WriteLine("OJ");
         }
 
         public async Task Send(string message)
         {
+
+            MessageModel msg = new MessageModel(message, "CHAT SERVER 1", "DOTNET");
+            await _messageService.CreateAsync(msg);
             await Clients.All.SendAsync("receive", message);
-            var Poruka = new MessageModel("nzm", "sss", "qqqq");
-            var messagesList = _messageService.CreateAsync(Poruka);
-            Console.WriteLine("2", messagesList.ToString(), "HMM");
         }
     }
 }

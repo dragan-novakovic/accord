@@ -19,4 +19,14 @@ public class MessageModel
     public string messageContent { get; set; } = null!;
     public string roomId { get; set; } = null!;
     public string username { get; set; } = null!;
+
+
+    public override string ToString()
+    {
+        return $@"
+    Message: {this.messageContent},
+    RoomId: {this.roomId},
+    Username: {this.username}
+    ";
+    }
 }

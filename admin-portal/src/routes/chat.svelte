@@ -11,21 +11,22 @@ let connection = new HubConnectionBuilder()
     .withUrl("http://localhost:5207/chat", {withCredentials: false, skipNegotiation: true, transport: HttpTransportType.WebSockets})
     .build();
 
+// Prebaci u state-managment
 let serverData = null;
 let msg = null;
 
 
 
 onMount(() => {
-connection.start().catch(() => console.log("I KNOW"));
+connection.start().catch((e) => console.log("On Mount Err", e));
 })
 
 	
 connection.on("send", data => {
-    console.log(data);
+    console.log("Zasto zoves send?", data);
 });
 connection.on('receive', data => {
-    console.log("Receiving", data)
+    console.log("Podaci sa servera", data)
     serverData = serverData ? serverData + data : data;
 })
 
@@ -34,7 +35,6 @@ connection.start().catch((err) => console.log("Meh can't start", err));
 
 
 const sendMessage = () => {
-console.log(msg);
 connection.invoke("send", msg)
 
 }

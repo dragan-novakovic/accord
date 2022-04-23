@@ -1,3 +1,4 @@
+import 'package:accord_front/src/pages/FriendsView.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:accord_front/src/pages/chatView.dart';
 
@@ -18,7 +19,15 @@ class _ChannelViewState extends State<ChannelView> {
         // commandBar:
       ),
       content: Row(
-        children: [renderChannels(), ChatView()],
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          renderChannels(),
+          Flexible(
+            child: ChatView(),
+            fit: FlexFit.tight,
+          ),
+          FriendsView()
+        ],
       ),
     );
   }

@@ -17,8 +17,10 @@ func main() {
 
 	app.Post("/api/login", func(ctx *fiber.Ctx) error {
 
-		var reqBody = ctx.BodyParser(&User)
-		return ctx.SendString("QO")
+		var user = new(User)
+
+		var reqBody = ctx.BodyParser(&user)
+		return ctx.SendString(reqBody.Error())
 	})
 
 	// middleware auth

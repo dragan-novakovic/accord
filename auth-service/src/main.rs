@@ -2,7 +2,6 @@
 extern crate serde_derive;
 use hyper::service::{make_service_fn, service_fn};
 use hyper::Server;
-use mongodb::{options::ClientOptions, Client};
 use std::convert::Infallible;
 use std::net::SocketAddr;
 extern crate serde;
@@ -12,31 +11,34 @@ mod models;
 mod routes;
 mod utils;
 
+use utils::context::Context;
+use utils::database::Database;
+use utils::logger::Logger;
+use utils::settings::Settings;
+
 #[tokio::main]
 async fn main() {
-    let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
-    //TODO Add ENVs for docker, local, prod
+    let settings = match Settings::new() {
+        Ok(value) => value,
+        Err(err) => panic!("Failed to setup configuration. Error: {}", err),
+    };
 
-    let mut client_options: ClientOptions =
-        ClientOptions::parse("mongodb://admin:admin@mongo:27017")
-            .await
-            .unwrap();
+    let addr = SocketAddr::from(([127, 0, 0, 1], settings.server.port));
 
-    // Setting up database name
-    client_options.app_name = Some("AUTH-SERVICE".to_string());
+    Logger::setup(&settings);
 
-    // Get a handle to the deployment.
-    let client = Client::with_options(client_options)
-        .expect("Unable to create Deployment with specified Client Options");
+    let db = match Database::setup(&settings).await {
+        Ok(value) => value,
+        Err(_) => panic!("Failed to setup database connection"),
+    };
 
-    // Get a handle to a database.
-    let db = client.database("AUTH-SERVICE");
+    let _context = Context::new(settings.clone());
 
     let make_svc = make_service_fn(|_conn| {
         let db = db.clone();
         async {
             Ok::<_, Infallible>(service_fn(move |req| {
-                routes::router::router(req, db.to_owned())
+                routes::router::router(req, db.conn.to_owned())
             }))
         }
     });

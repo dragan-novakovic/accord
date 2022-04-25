@@ -1,0 +1,21 @@
+{
+  "environment": "development",
+
+  "server": {
+    "address": "127.0.0.1",
+    "port": 3000
+  },
+
+  "logger": {
+    "level": "debug"
+  },
+
+  "database": {
+    "uri": "mongodb://admin:admin@localhost:27017",
+    "name": "AUTH-SERVICE"
+  },
+
+  "auth": {
+    "secret": "secret"
+  }
+}

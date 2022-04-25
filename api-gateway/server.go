@@ -6,14 +6,29 @@ func main() {
 	app := fiber.New()
 
 	// Create a new endpoint
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello World!")
+	app.Static("/", "./public")
+
+	//users
+
+	type User struct {
+		username string
+		password string
+	}
+
+	app.Post("/api/login", func(ctx *fiber.Ctx) error {
+
+		var reqBody = ctx.BodyParser(&User)
+		return ctx.SendString("QO")
 	})
 
-	//login
+	// middleware auth
+	app.Use("/api/rooms", func(ctx *fiber.Ctx) error {
+		ctx.Set("X-Custom-Header", "X")
+		return ctx.Next()
+	})
 
 	//room
-	app.Get("/rooms", func(ctx *fiber.Ctx) error {
+	app.Get("/api/rooms", func(ctx *fiber.Ctx) error {
 
 		return ctx.SendString("HI")
 	})

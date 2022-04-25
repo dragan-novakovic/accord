@@ -17,7 +17,7 @@ use mongodb::{
 }
  */
 
-//! Use better pattern
+/// Use better pattern
 pub async fn register(req: Request<Body>, db: Database) -> Result<Response<Body>, http::Error> {
     // Handle Error
     let whole_body = hyper::body::aggregate(req)

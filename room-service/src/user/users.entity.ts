@@ -1,9 +1,15 @@
 import { RoomEntity } from "src/rooms/rooms.entity";
-import { Entity, Column, PrimaryColumn, ManyToMany, JoinTable } from "typeorm";
+import {
+  Entity,
+  Property,
+  PrimaryKey,
+  ManyToMany,
+  JoinTable,
+} from "@mikro-orm/core";
 
 @Entity({ name: "users" })
 export class UsersEntity {
-  @PrimaryColumn()
+  @PrimaryKey()
   id: string;
 
   @ManyToMany(() => RoomEntity, { eager: true })

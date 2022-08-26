@@ -16,25 +16,28 @@
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
-    "@grpc/grpc-js": "^1.6.7",
-    "@grpc/proto-loader": "^0.6.9",
-    "@nestjs/common": "^8.4.4",
-    "@nestjs/core": "^8.4.4",
-    "@nestjs/microservices": "^8.4.4",
-    "@nestjs/mongoose": "^9.0.3",
-    "@nestjs/platform-express": "^8.4.4",
-    "@nestjs/typeorm": "^8.0.3",
-    "mongoose": "^6.3.1",
+    "@grpc/grpc-js": "^1.6.10",
+    "@grpc/proto-loader": "^0.7.2",
+    "@mikro-orm/core": "^5.3.1",
+    "@mikro-orm/nestjs": "^5.1.1",
+    "@mikro-orm/postgresql": "^5.3.1",
+    "@nestjs/common": "^9.0.11",
+    "@nestjs/core": "^9.0.11",
+    "@nestjs/microservices": "^9.0.11",
+    "@nestjs/mongoose": "^9.2.0",
+    "@nestjs/platform-express": "^9.0.11",
+    "@nestjs/typeorm": "^9.0.1",
+    "mongoose": "^6.5.3",
     "mysql": "^2.18.1",
-    "pg": "^8.7.3",
+    "pg": "^8.8.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.5.5",
-    "typeorm": "^0.2.45"
+    "rxjs": "^7.5.6",
+    "typeorm": "^0.3.8"
   },
   "devDependencies": {
-    "@nestjs/cli": "^8.2.5",
-    "@nestjs/schematics": "^8.0.10",
+    "@nestjs/cli": "^9.1.1",
+    "@nestjs/schematics": "^9.0.1",
     "@types/express": "^4.17.13",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^17.0.25",
@@ -43,9 +46,9 @@
     "eslint": "8.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
-    "ts-loader": "^9.2.8",
-    "ts-node": "^10.7.0",
+    "ts-loader": "^9.3.1",
+    "ts-node": "^10.9.1",
     "tsconfig-paths": "^3.14.1",
-    "typescript": "^4.6.3"
+    "typescript": "^4.8.2"
   }
 }

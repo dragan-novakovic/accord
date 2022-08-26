@@ -1,7 +1,6 @@
 import { Module } from "@nestjs/common";
-import { MongooseModule } from "@nestjs/mongoose";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { Connection } from "typeorm";
+//import { MongooseModule } from "@nestjs/mongoose";
+import { MikroOrmModule } from "@mikro-orm/nestjs";
 
 // Entites
 
@@ -16,19 +15,25 @@ import { UserService } from "./user/user.service";
 
 @Module({
   imports: [
+    MikroOrmModule.forRoot({
+      type: "postgresql",
+      host: "localhost",
+      port: 5555,
+      user: "docker",
+      password: "docker",
+      dbName: "ROOM-SERVICE",
+      entities: ["dist/**/*.entity{.ts,.js}"],
+    }),
     UserModule,
     RoomsModule,
     ChannelModule,
     // MongooseModule.forRoot(
     //   "mongodb://admin:admin@localhost:27017/CHAT-SERVICE"
     // ),
-    TypeOrmModule.forRoot(),
   ],
   providers: [UserService],
 })
-export class AppModule {
-  constructor(private connection: Connection) {}
-}
+export class AppModule {}
 
 //TODO
 //3. Connect to sockets

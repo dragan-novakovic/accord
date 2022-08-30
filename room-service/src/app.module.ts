@@ -1,6 +1,4 @@
 import { Module } from "@nestjs/common";
-//import { MongooseModule } from "@nestjs/mongoose";
-import { MikroOrmModule } from "@mikro-orm/nestjs";
 
 // Entites
 
@@ -11,27 +9,11 @@ import { MessageModule } from "./message/message.module";
 import { UserModule } from "./user/users.module";
 
 // Service
-import { UserService } from "./user/user.service";
+import { UserRepository } from "./user/users.repository";
 
 @Module({
-  imports: [
-    MikroOrmModule.forRoot({
-      type: "postgresql",
-      host: "localhost",
-      port: 5555,
-      user: "docker",
-      password: "docker",
-      dbName: "ROOM-SERVICE",
-      entities: ["dist/**/*.entity{.ts,.js}"],
-    }),
-    UserModule,
-    RoomsModule,
-    ChannelModule,
-    // MongooseModule.forRoot(
-    //   "mongodb://admin:admin@localhost:27017/CHAT-SERVICE"
-    // ),
-  ],
-  providers: [UserService],
+  imports: [UserModule],
+  providers: [UserRepository],
 })
 export class AppModule {}
 

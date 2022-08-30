@@ -16,31 +16,31 @@ import { IChannel } from "./interfaces/channel.interface";
 export class ChannelController {
   constructor(private channelService: ChannelService) {}
 
-  @Get()
-  findAll(): Promise<IChannel[]> {
-    return this.channelService.findAll();
-  }
+  // @Get()
+  // findAll(): Promise<IChannel[]> {
+  //   return this.channelService.findAll();
+  // }
 
-  @Get(":id")
-  findOne(@Param("id") id: string): Promise<IChannel> {
-    return this.channelService.findOne(id);
-  }
+  // @Get(":id")
+  // findOne(@Param("id") id: string): Promise<IChannel> {
+  //   return this.channelService.findOne(id);
+  // }
 
-  @Post()
-  create(@Body() createRoomDto: CreateChannelDto): Promise<IChannel> {
-    return this.channelService.create(createRoomDto);
-  }
+  // @Post()
+  // create(@Body() createRoomDto: CreateChannelDto): Promise<IChannel> {
+  //   return this.channelService.create(createRoomDto);
+  // }
 
-  @Put(":id")
-  update(
-    @Param("id") id: string,
-    @Body() updateRoomDto: IChannel
-  ): Promise<IChannel> {
-    return this.channelService.update(updateRoomDto);
-  }
+  // @Put(":id")
+  // update(
+  //   @Param("id") id: string,
+  //   @Body() updateRoomDto: IChannel
+  // ): Promise<IChannel> {
+  //   return this.channelService.update(updateRoomDto);
+  // }
 
-  @Delete(":id")
-  remove(@Param("id") id: string): Promise<void> {
-    return this.channelService.remove(id);
-  }
+  // @Delete(":id")
+  // remove(@Param("id") id: string): Promise<void> {
+  //   return this.channelService.remove(id);
+  // }
 }

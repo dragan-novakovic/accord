@@ -7,8 +7,13 @@ import { UserService } from "./user.service";
 export class UserController {
   constructor(private userService: UserService) {}
 
+  @Get()
+  getUsers(): Promise<IUser[]> {
+    return this.userService.findAll();
+  }
+
   @Get(":id")
-  getMessages(@Param("id") id: string): Promise<IUser> {
+  getUser(@Param("id") id: string): Promise<IUser> {
     return this.userService.findOne(id);
   }
 

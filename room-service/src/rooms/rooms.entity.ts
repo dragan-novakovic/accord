@@ -1,15 +1,20 @@
-import { UsersEntity } from "src/user/users.entity";
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import {
+  Entity,
+  Property,
+  OneToMany,
+  PrimaryKey,
+  Collection,
+} from "@mikro-orm/core";
 import { ChannelEntity } from "../channel/channel.entity";
 
-@Entity({ name: "rooms" })
+@Entity({ tableName: "rooms" })
 export class RoomEntity {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+  @PrimaryKey()
+  id!: string;
 
-  @Column()
+  @Property()
   name: string;
 
   @OneToMany(() => ChannelEntity, (channel) => channel.room)
-  channels: ChannelEntity[];
+  channels = new Collection<ChannelEntity>(this);
 }

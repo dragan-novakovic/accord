@@ -1,14 +1,20 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import {
+  Entity,
+  Property,
+  ManyToOne,
+  PrimaryKey,
+  Collection,
+} from "@mikro-orm/core";
 import { RoomEntity } from "../rooms/rooms.entity";
 
-@Entity({ name: "channels" })
+@Entity({ tableName: "channels" })
 export class ChannelEntity {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryKey()
   id: string;
 
-  @Column()
+  @Property()
   name: string;
 
-  @ManyToOne(() => RoomEntity, (room) => room.channels)
+  @ManyToOne(() => RoomEntity)
   room: RoomEntity;
 }

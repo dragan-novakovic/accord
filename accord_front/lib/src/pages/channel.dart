@@ -36,17 +36,34 @@ class _ChannelViewState extends State<ChannelView> {
 renderChannels() {
   return Container(
     decoration: BoxDecoration(
-      color: Color(0xff7c94b6),
+      color: Colors.grey[30],
     ),
     child: Column(
       children: [
-        Text("Channel 1"),
-        Text("Channel 2"),
-        Text("Channel 3"),
-        Text("Channel 4"),
-        Text("Channel 5"),
-        Text("Channel 6"),
-        Text("Channel 7")
+        renderChannel("Kanal 1"),
+        renderChannel("Kanal 2"),
+        renderChannel("Kanal 3"),
+        renderChannel("Kanal 4"),
+      ],
+    ),
+  );
+}
+
+Widget renderChannel(String text) {
+  return Container(
+    child: Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(
+            FluentIcons.message,
+            size: 10,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Text(text),
+        )
       ],
     ),
   );

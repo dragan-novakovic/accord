@@ -4,13 +4,13 @@ services:
     image: 'postgres:latest'
   redis:
     image: 'redis:latest'
-  nginx:
-    restart: always
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./nginx
-    ports:
-      - '3050:80'
+  # nginx:
+  #   restart: always
+  #   build:
+  #     dockerfile: Dockerfile.dev
+  #     context: ./nginx
+  #   ports:
+  #     - '3050:80'
   client:
     build:
       dockerfile: Dockerfile.dev
@@ -38,13 +38,13 @@ services:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - JWT_SECRET='zawarudo'
-  redis-server:
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./redis-server
-    environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-    volumes:
-      - /usr/app/node_modules
-      - ./redis-server:/usr/app
+  # redis-server:
+  #   build:
+  #     dockerfile: Dockerfile.dev
+  #     context: ./redis-server
+  #   environment:
+  #     - REDIS_HOST=redis
+  #     - REDIS_PORT=6379
+  #   volumes:
+  #     - /usr/app/node_modules
+  #     - ./redis-server:/usr/app

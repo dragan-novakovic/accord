@@ -13,11 +13,56 @@ class _FriendsViewState extends State<FriendsView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.blue),
+      decoration: BoxDecoration(color: Colors.grey[30]),
       child: Column(
-        //mainAxisSize: MainAxisSize.max,
-        children: [Text("NavBar"), Text("Boubless")],
-      ),
+          //mainAxisSize: MainAxisSize.max,
+          children: [
+            Text(
+              "Online - 2",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 10, 20, 20),
+              child: Row(children: [
+                CircleAvatar(
+                    backgroundImage:
+                        NetworkImage("https://ui-avatars.com/api/?name=John"),
+                    backgroundColor: Colors.transparent),
+                Text("John Doe")
+              ]),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 10, 20, 20),
+              child: Row(children: [
+                CircleAvatar(
+                    backgroundImage:
+                        NetworkImage("https://ui-avatars.com/api/?name=John"),
+                    backgroundColor: Colors.transparent),
+                Text("John Doe")
+              ]),
+            ),
+            Text(
+              "Offline",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 10, 20, 20),
+              child: Row(children: [
+                CircleAvatar(
+                    backgroundImage:
+                        NetworkImage("https://ui-avatars.com/api/?name=John"),
+                    backgroundColor: Colors.transparent),
+                Text("John Doe")
+              ]),
+            ),
+            Row(children: [
+              CircleAvatar(
+                  backgroundImage:
+                      NetworkImage("https://ui-avatars.com/api/?name=John"),
+                  backgroundColor: Colors.transparent),
+              Text("John Doe")
+            ])
+          ]),
     );
   }
 }

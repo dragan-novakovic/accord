@@ -54,16 +54,16 @@ class _ChatViewState extends State<ChatView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.green),
+      decoration: BoxDecoration(color: Colors.grey[10]),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text("NavBar"),
+          //  Text("Refreshing"),
           SingleChildScrollView(
             child: ConstrainedBox(
               child: renderBubbles(serverData),
-              constraints: BoxConstraints(maxHeight: 200.0),
+              constraints: BoxConstraints(maxHeight: double.infinity),
             ),
           ),
           renderInputBox(context)

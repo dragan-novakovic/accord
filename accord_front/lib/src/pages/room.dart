@@ -64,13 +64,18 @@ class _RoomItemsState extends State<RoomItems> {
   @override
   Widget build(BuildContext build) {
     return NavigationView(
-      // appBar: NavigationAppBar(
-      //   title: Text('Nice App Title :)'),
-      //   actions: Row(children: []),
-      //   automaticallyImplyLeading: true,
-      // ),
+      appBar: NavigationAppBar(
+        title: Text('ACCORD'),
+        actions: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+          Icon(FluentIcons.account_browser),
+          Icon(FluentIcons.add_bookmark),
+          Icon(FluentIcons.airplane),
+          Icon(FluentIcons.account_browser),
+        ]),
+        automaticallyImplyLeading: true,
+      ),
       pane: NavigationPane(
-        size: NavigationPaneSize(openWidth: 200),
+        size: NavigationPaneSize(openWidth: 180),
         selected: index,
         items: getPaneItems(this.widget.rooms),
         onChanged: (i) => setState(() => index = i),

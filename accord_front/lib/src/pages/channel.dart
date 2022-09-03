@@ -15,7 +15,7 @@ class _ChannelViewState extends State<ChannelView> {
     return ScaffoldPage(
       header: PageHeader(
         title: Text("Room A"),
-        leading: Text("The Icon"),
+        // leading: Text("IDK"),
         // commandBar:
       ),
       content: Row(
@@ -61,7 +61,7 @@ Widget renderChannel(String text) {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(12.0),
           child: Text(text),
         )
       ],

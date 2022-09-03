@@ -91,39 +91,42 @@ class _ChatViewState extends State<ChatView> {
 
   Widget renderBubbles(List<Map<String, String>> data) {
     List<Widget> babbles = data.map((el) {
-      return Row(
-        mainAxisAlignment: el["username"][6] == "1"
-            ? MainAxisAlignment.end
-            : MainAxisAlignment.start,
-        children: el["username"][6] == "2"
-            ? [
-                CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        "https://ui-avatars.com/api/?name=John+${el["username"][6]}"),
-                    backgroundColor: Colors.transparent),
-                Container(
-                    margin: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: EdgeInsets.all(20.0),
-                    child: Text(el["msg"])),
-              ]
-            : [
-                Container(
-                    margin: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: EdgeInsets.all(20.0),
-                    child: Text(el["msg"])),
-                CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        "https://ui-avatars.com/api/?name=John+${el["username"][6]}"),
-                    backgroundColor: Colors.transparent),
-              ],
+      return Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Row(
+          mainAxisAlignment: el["username"][6] == "1"
+              ? MainAxisAlignment.end
+              : MainAxisAlignment.start,
+          children: el["username"][6] == "2"
+              ? [
+                  CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          "https://ui-avatars.com/api/?name=John+${el["username"][6]}"),
+                      backgroundColor: Colors.transparent),
+                  Container(
+                      margin: EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: EdgeInsets.all(20.0),
+                      child: Text(el["msg"])),
+                ]
+              : [
+                  Container(
+                      margin: EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: EdgeInsets.all(20.0),
+                      child: Text(el["msg"])),
+                  CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          "https://ui-avatars.com/api/?name=John+${el["username"][6]}"),
+                      backgroundColor: Colors.transparent),
+                ],
+        ),
       );
     }).toList();
 

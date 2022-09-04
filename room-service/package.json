@@ -13,7 +13,7 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "seed": "ts-node"
+    "seed": "ts-node data/seed/index.ts"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.6.10",

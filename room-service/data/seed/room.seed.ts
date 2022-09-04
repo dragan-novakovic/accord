@@ -1,5 +1,5 @@
 export const rooms = [
-  { name: "First Party" },
-  { name: "AAD Club" },
-  { name: "CI/CD Spam" },
+  { id: 1, name: "First Party" },
+  { id: 2, name: "AAD Club" },
+  { id: 3, name: "CI/CD Spam" },
 ];

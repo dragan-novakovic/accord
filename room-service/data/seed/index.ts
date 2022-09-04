@@ -3,8 +3,22 @@ export { channels } from "./channel.seed";
 export { users } from "./user.seed";
 
 import { query } from "../../src/dbAccess/index";
+import { rooms } from "./room.seed";
+import { users } from "./user.seed";
 
-export default function seeder() {}
+export default function seeder() {
+  // insert users
+  users.forEach(async (user) => {
+    await query(`INSERT INTO users (id) VALUES ($1)`, [user.id]);
+  });
+
+  rooms.forEach(async (room) => {
+    await query(`INSERT INTO rooms (id, name) VALUES ($1, $2)`, [
+      room.id,
+      room.name,
+    ]);
+  });
+}
 
 async function migrations() {
   // create all needed tables
@@ -38,4 +52,5 @@ async function migrations() {
   );
 }
 
-migrations().then((x) => console.log(x));
+//migrations().then((x) => console.log(x));
+seeder();

@@ -7,30 +7,27 @@ import { CreateChannelDto } from "./dto";
 
 @Injectable()
 export class ChannelService {
-  // constructor(
-  //   private channelRepository: Repository<ChannelEntity>,
-  //   private roomRepository: Repository<RoomEntity>
-  // ) {}
-  // findAll(): Promise<IChannel[]> {
-  //   return this.channelRepository.find();
-  // }
-  // findOne(id: string): Promise<IChannel> {
-  //   return this.channelRepository.findOne(id);
-  // }
-  // async create(channel: CreateChannelDto): Promise<ChannelEntity> {
-  //   const { roomId, ...channelDto } = channel;
-  //   // room: string -> room: Room
-  //   const roomEntity = await this.roomRepository.findOne(roomId);
-  //   const newChannel = this.channelRepository.create({
-  //     ...channelDto,
-  //     room: roomEntity,
-  //   });
-  //   return this.channelRepository.save(newChannel);
-  // }
-  // update(room: IChannel): Promise<IChannel> {
-  //   return this.channelRepository.save(room);
-  // }
-  // async remove(id: string): Promise<void> {
-  //   await this.channelRepository.delete(id);
-  // }
+  constructor(private channelRepository: any, private roomRepository: any) {}
+  findAll(): Promise<IChannel[]> {
+    return this.channelRepository.find();
+  }
+  findOne(id: string): Promise<IChannel> {
+    return this.channelRepository.findOne(id);
+  }
+  async create(channel: CreateChannelDto): Promise<ChannelEntity> {
+    const { roomId, ...channelDto } = channel;
+    // room: string -> room: Room
+    const roomEntity = await this.roomRepository.findOne(roomId);
+    const newChannel = this.channelRepository.create({
+      ...channelDto,
+      room: roomEntity,
+    });
+    return this.channelRepository.save(newChannel);
+  }
+  update(room: IChannel): Promise<IChannel> {
+    return this.channelRepository.save(room);
+  }
+  async remove(id: string): Promise<void> {
+    await this.channelRepository.delete(id);
+  }
 }

@@ -8,18 +8,18 @@ import { CreateRoomDto } from "./dto";
 export class RoomsService {
   constructor(private roomsRepository: any) {}
 
-  // findAll(): Promise<IRoom[]> {
-  //   return this.roomsRepository.find();
-  // }
+  findAll(): Promise<IRoom[]> {
+    return this.roomsRepository.find();
+  }
 
-  // findOne(id: string): Promise<IRoom> {
-  //   return this.roomsRepository.findOne(id);
-  // }
+  findOne(id: string): Promise<IRoom> {
+    return this.roomsRepository.findOne(id);
+  }
 
-  // create(room: CreateRoomDto): Promise<IRoom> {
-  //   const newRoom = this.roomsRepository.create({ ...room, channels: [] });
-  //   return this.roomsRepository.save(newRoom);
-  // }
+  create(room: CreateRoomDto): Promise<IRoom> {
+    const newRoom = this.roomsRepository.create({ ...room });
+    return this.roomsRepository.save(newRoom);
+  }
 
   // update(room: IRoom): Promise<IRoom> {
   //   return this.roomsRepository.save(room);

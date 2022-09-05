@@ -5,8 +5,8 @@ import { RoomEntity } from "./rooms.entity";
 
 @Module({
   imports: [],
-  providers: [],
-  controllers: [],
+  providers: [RoomsService],
+  controllers: [RoomsController],
   exports: [],
 })
 export class RoomsModule {}

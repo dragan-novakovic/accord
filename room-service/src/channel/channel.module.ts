@@ -4,10 +4,11 @@ import { ChannelService } from "./channel.service";
 import { ChannelController } from "./channel.controller";
 import { ChannelEntity } from "./channel.entity";
 import { RoomEntity } from "../rooms/rooms.entity";
+import { ChannelRepository } from "./channel.repository";
 
 @Module({
   imports: [],
-  providers: [ChannelService],
+  providers: [ChannelRepository, ChannelService],
   controllers: [ChannelController],
   exports: [],
 })

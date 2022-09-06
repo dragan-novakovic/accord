@@ -1,25 +1,32 @@
 import { Injectable } from "@nestjs/common";
 
-import { RoomEntity } from "./rooms.entity";
+import { ChannelEntity } from "./channel.entity";
 import { query } from "../dbAccess/index";
 
 @Injectable()
-export class RoomsRepository {
+export class ChannelRepository {
   constructor() {}
 
   async findAll() {
-    const response = await query(`SELECT * FROM rooms`, []);
+    const response = await query(
+      `SELECT * FROM rooms, channels 
+     LEFT JOIN rooms
+     ON rooms.id === channels.roomid
+`,
+      []
+    );
 
     return response.rows;
   }
 
   async findOne(id: string) {
+    // add channel
     const response = await query(`SELECT * FROM rooms WHERE id=$id`, [id]);
 
-    return response.rows as unknown as RoomEntity;
+    return response.rows as unknown as ChannelEntity;
   }
 
-  async create(room: RoomEntity) {
+  async create(room: ChannelEntity) {
     const response = await query(
       `INSERT INTO room(id, name)
      VALUES ($1, $2)
@@ -28,6 +35,6 @@ export class RoomsRepository {
       [room.id, room.name]
     );
 
-    return response.rows as unknown as RoomEntity;
+    return response.rows as unknown as ChannelEntity;
   }
 }

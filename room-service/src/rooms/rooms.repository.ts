@@ -14,7 +14,7 @@ export class RoomsRepository {
   }
 
   async findOne(id: string) {
-    const response = await query(`SELECT * FROM rooms WHERE id=$id`, [id]);
+    const response = await query(`SELECT * FROM rooms WHERE id=$1`, [id]);
 
     return response.rows as unknown as RoomEntity;
   }

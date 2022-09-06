@@ -3,20 +3,28 @@ export { channels } from "./channel.seed";
 export { users } from "./user.seed";
 
 import { query } from "../../src/dbAccess/index";
+import { channels } from "./channel.seed";
 import { rooms } from "./room.seed";
 import { users } from "./user.seed";
 
 export default function seeder() {
   // insert users
-  users.forEach(async (user) => {
-    await query(`INSERT INTO users (id) VALUES ($1)`, [user.id]);
-  });
+  // users.forEach(async (user) => {
+  //   await query(`INSERT INTO users (id) VALUES ($1)`, [user.id]);
+  // });
 
-  rooms.forEach(async (room) => {
-    await query(`INSERT INTO rooms (id, name) VALUES ($1, $2)`, [
-      room.id,
-      room.name,
-    ]);
+  // rooms.forEach(async (room) => {
+  //   await query(`INSERT INTO rooms (id, name) VALUES ($1, $2)`, [
+  //     room.id,
+  //     room.name,
+  //   ]);
+  // });
+
+  channels.forEach(async (channel, i) => {
+    await query(
+      `INSERT INTO channels (id, name, room_id) VALUES ($1, $2, $3)`,
+      [i, channel.name, i % 2 === 0 ? rooms[0].id : rooms[1].id]
+    );
   });
 }
 

@@ -12,7 +12,7 @@ import { UserModule } from "./user/users.module";
 import { UserRepository } from "./user/users.repository";
 
 @Module({
-  imports: [UserModule],
+  imports: [UserModule, RoomsModule, ChannelModule],
   providers: [UserRepository],
 })
 export class AppModule {}

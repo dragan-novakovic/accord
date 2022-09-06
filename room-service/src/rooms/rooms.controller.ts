@@ -9,8 +9,7 @@ import {
   Put,
 } from "@nestjs/common";
 import { RoomsService } from "./rooms.service";
-
-//import { CreateRoomDto } from "./dto/index";
+import { RoomEntity } from "./rooms.entity";
 import { IRoom } from "./interfaces/rooms.interface";
 
 class CreateRoomDto {
@@ -21,20 +20,20 @@ class CreateRoomDto {
 export class RoomsController {
   constructor(private roomsService: RoomsService) {}
 
-  // @Get()
-  // findAll(): Promise<IRoom[]> {
-  //   return this.roomsService.findAll();
-  // }
+  @Get()
+  findAll(): Promise<IRoom[]> {
+    return this.roomsService.findAll();
+  }
 
-  // @Get(":id")
-  // findOne(@Param("id") id: string): Promise<IRoom> {
-  //   return this.roomsService.findOne(id);
-  // }
+  @Get(":id")
+  findOne(@Param("id") id: string): Promise<IRoom> {
+    return this.roomsService.findOne(id);
+  }
 
-  // @Post()
-  // create(@Body() createRoomDto: CreateRoomDto): Promise<IRoom> {
-  //   return this.roomsService.create(createRoomDto);
-  // }
+  @Post()
+  create(@Body() createRoomDto: RoomEntity): Promise<IRoom> {
+    return this.roomsService.create(createRoomDto);
+  }
 
   // @Put(":id")
   // update(

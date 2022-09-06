@@ -4,30 +4,24 @@ import { IChannel } from "./interfaces/channel.interface";
 import { ChannelEntity } from "./channel.entity";
 import { RoomEntity } from "../rooms/rooms.entity";
 import { CreateChannelDto } from "./dto";
+import { ChannelRepository } from "./channel.repository";
 
 @Injectable()
 export class ChannelService {
-  constructor(private channelRepository: any, private roomRepository: any) {}
+  constructor(private channelRepository: ChannelRepository) {}
   findAll(): Promise<IChannel[]> {
-    return this.channelRepository.find();
+    return this.channelRepository.findAll();
   }
   findOne(id: string): Promise<IChannel> {
     return this.channelRepository.findOne(id);
   }
-  async create(channel: CreateChannelDto): Promise<ChannelEntity> {
-    const { roomId, ...channelDto } = channel;
-    // room: string -> room: Room
-    const roomEntity = await this.roomRepository.findOne(roomId);
-    const newChannel = this.channelRepository.create({
-      ...channelDto,
-      room: roomEntity,
-    });
-    return this.channelRepository.save(newChannel);
+  async create(channel: ChannelEntity): Promise<ChannelEntity> {
+    return this.channelRepository.create(channel);
   }
-  update(room: IChannel): Promise<IChannel> {
-    return this.channelRepository.save(room);
-  }
-  async remove(id: string): Promise<void> {
-    await this.channelRepository.delete(id);
-  }
+  // update(room: IChannel): Promise<IChannel> {
+  //   return this.channelRepository.save(room);
+  // }
+  // async remove(id: string): Promise<void> {
+  //   await this.channelRepository.delete(id);
+  // }
 }

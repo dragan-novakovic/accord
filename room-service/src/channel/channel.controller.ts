@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
 } from "@nestjs/common";
+import { ChannelEntity } from "./channel.entity";
 import { ChannelService } from "./channel.service";
 
 import { CreateChannelDto } from "./dto";
@@ -16,20 +17,20 @@ import { IChannel } from "./interfaces/channel.interface";
 export class ChannelController {
   constructor(private channelService: ChannelService) {}
 
-  // @Get()
-  // findAll(): Promise<IChannel[]> {
-  //   return this.channelService.findAll();
-  // }
+  @Get()
+  findAll(): Promise<IChannel[]> {
+    return this.channelService.findAll();
+  }
 
-  // @Get(":id")
-  // findOne(@Param("id") id: string): Promise<IChannel> {
-  //   return this.channelService.findOne(id);
-  // }
+  @Get(":id")
+  findOne(@Param("id") id: string): Promise<IChannel> {
+    return this.channelService.findOne(id);
+  }
 
-  // @Post()
-  // create(@Body() createRoomDto: CreateChannelDto): Promise<IChannel> {
-  //   return this.channelService.create(createRoomDto);
-  // }
+  @Post()
+  create(@Body() createRoomDto: ChannelEntity): Promise<IChannel> {
+    return this.channelService.create(createRoomDto);
+  }
 
   // @Put(":id")
   // update(

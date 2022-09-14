@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-
+import { MongooseModule } from '@nestjs/mongoose';
 // Entites
 
 // Modules
@@ -12,7 +12,7 @@ import { UserModule } from "./user/users.module";
 import { UserRepository } from "./user/users.repository";
 
 @Module({
-  imports: [UserModule, RoomsModule, ChannelModule],
+  imports: [UserModule, RoomsModule, ChannelModule, MongooseModule.forRoot('mongodb://localhost/CHAT-SERVICE'), MessageModule], 
   providers: [UserRepository],
 })
 export class AppModule {}

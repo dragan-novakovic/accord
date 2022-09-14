@@ -35,16 +35,8 @@ export class RoomsController {
     return this.roomsService.create(createRoomDto);
   }
 
-  // @Put(":id")
-  // update(
-  //   @Param("id") id: string,
-  //   @Body() updateRoomDto: IRoom
-  // ): Promise<IRoom> {
-  //   return this.roomsService.update(updateRoomDto);
-  // }
-
-  // @Delete(":id")
-  // remove(@Param("id") id: string): Promise<void> {
-  //   return this.roomsService.remove(id);
-  // }
+  @Delete(":id")
+  remove(@Param("id") id: string): Promise<void> {
+    return this.roomsService.remove(id);
+  }
 }

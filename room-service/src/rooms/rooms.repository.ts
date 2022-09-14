@@ -30,4 +30,12 @@ export class RoomsRepository {
 
     return response.rows as unknown as RoomEntity;
   }
+
+  async delete(id: string) {
+  const response = await query(`
+  DELETE FROM rooms
+  WHERE id=$1
+`,[id])
+
+}
 }

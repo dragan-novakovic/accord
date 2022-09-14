@@ -1,5 +1,18 @@
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
+
+export type MessageDocument = Message & Document;
+
+@Schema()
 export class Message {
-  message: string;
-  username: string;
+  @Prop()
+  name: string;
+
+ @Prop()
+  age: number;
+
+ @Prop()
+  breed: string;
 }
-// roomID - cascade delete?
+
+export const MessageSchema = SchemaFactory.createForClass(Message);

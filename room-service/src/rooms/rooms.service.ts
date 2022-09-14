@@ -25,7 +25,7 @@ export class RoomsService {
   //   return this.roomsRepository.save(room);
   // }
 
-  // async remove(id: string): Promise<void> {
-  //   await this.roomsRepository.delete(id);
-  // }
+  async remove(id: string): Promise<void> {
+    await this.roomsRepository.delete(id);
+  }
 }

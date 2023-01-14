@@ -2,7 +2,7 @@ using MongoDB.Driver;
 
 public class MessageService : IMessageService
 {
-    private IMongoDatabase _db;
+    private readonly IMongoDatabase _db;
     private readonly IMongoCollection<MessageModel> _messagesCollection;
 
     public MessageService(IMongoClient mongoClient)

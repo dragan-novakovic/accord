@@ -4,10 +4,10 @@ using MongoDB.Bson.Serialization.Attributes;
 public class MessageModel
 {
 
-    public MessageModel(string MessageContent, string RoomId, string Username)
+    public MessageModel(string MessageContent, string ChannelId, string Username)
     {
         messageContent = MessageContent;
-        roomId = RoomId;
+        channelId = ChannelId;
         username = Username;
     }
     [BsonId]
@@ -17,7 +17,7 @@ public class MessageModel
 
     [BsonElement("message")]
     public string messageContent { get; set; } = null!;
-    public string roomId { get; set; } = null!;
+    public string channelId { get; set; } = null!;
     public string username { get; set; } = null!;
 
 
@@ -25,7 +25,7 @@ public class MessageModel
     {
         return $@"
     Message: {this.messageContent},
-    RoomId: {this.roomId},
+    RoomId: {this.channelId},
     Username: {this.username}
     ";
     }

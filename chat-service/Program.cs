@@ -23,7 +23,7 @@ builder.Services.AddSingleton<IMongoClient>(s =>
     }
     catch (System.Exception e)
     {
-        Console.WriteLine("ERRRR", e.ToString());
+        Console.WriteLine($"ERRRR, {e}");
         throw;
     }
 

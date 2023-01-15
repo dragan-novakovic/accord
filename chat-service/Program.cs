@@ -50,7 +50,7 @@ switch (CONFIG.GetValue<String>("useDB"))
                     {
                         var firestore = new FirestoreDbBuilder
                         {
-                            ProjectId = "test", //projectId,
+                            ProjectId = CONFIG.GetConnectionString("Firebase"),
                             EmulatorDetection = Google.Api.Gax.EmulatorDetection.EmulatorOrProduction
                         }
     .Build();

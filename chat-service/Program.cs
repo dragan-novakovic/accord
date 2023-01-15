@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Google.Cloud.Firestore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +43,28 @@ switch (CONFIG.GetValue<String>("useDB"))
         }
     case "Firebase":
         {
+            builder.Services.AddSingleton(s =>
+                {
+
+                    try
+                    {
+                        var firestore = new FirestoreDbBuilder
+                        {
+                            ProjectId = "test", //projectId,
+                            EmulatorDetection = Google.Api.Gax.EmulatorDetection.EmulatorOrProduction
+                        }
+    .Build();
+                        return firestore;
+                    }
+                    catch (System.Exception e)
+                    {
+                        Console.WriteLine($"ERRRR, {e}");
+                        throw;
+                    }
+
+                }
+                        );
+
             Console.WriteLine("To-do");
             break;
         }

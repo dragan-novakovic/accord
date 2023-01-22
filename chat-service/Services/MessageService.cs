@@ -1,16 +1,21 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Google.Cloud.Firestore;
 using MongoDB.Driver;
 
 public class MessageService : IMessageService
 {
-    private readonly IMongoDatabase _db;
+    private readonly _db;
     private readonly IMongoCollection<MessageModel> _messagesCollection;
 
     public MessageService(IMongoClient mongoClient)
     {
-        _db = mongoClient.GetDatabase("CHAT-SERVICE");
-        _messagesCollection = _db.GetCollection<MessageModel>("messages");
+        _db = mongoClient;
+        // _db = mongoClient.GetDatabase("CHAT-SERVICE");
+        // _messagesCollection = _db.GetCollection<MessageModel>("messages");
+    }
+
+    public MessageService(FirestoreDb firebaseClient)
+    {
+        _db = firebaseClient;
     }
 
 

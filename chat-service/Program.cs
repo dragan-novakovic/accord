@@ -1,10 +1,5 @@
 using SignalRChat.Hubs;
 using MongoDB.Driver;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
-using System;
 using Google.Cloud.Firestore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -13,8 +8,6 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
 IConfigurationRoot CONFIG = builder.Configuration.AddJsonFile("appsettings.json").Build();
-
-
 
 
 // Add services to the container.
@@ -67,7 +60,10 @@ switch (CONFIG.GetValue<String>("useDB"))
 
             Console.WriteLine("To-do");
             break;
-        }
+        };
+    default:
+        Console.WriteLine("No DB connection provided!");
+        break;
 
 }
 

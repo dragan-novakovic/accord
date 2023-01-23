@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-public class MessageModel
+public class MessageModel : BaseNewMessage
 {
 
     public MessageModel(string MessageContent, string ChannelId, string Username)

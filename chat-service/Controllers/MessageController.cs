@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -14,9 +12,9 @@ public class MessageController : ControllerBase
         _messageService = messageService;
     }
 
-    [HttpGet]
-    public async Task<List<MessageModel>> GetAllMessages()
-    {
-        return await _messageService.GetAsync();
-    }
+    // [HttpGet]
+    // public async Task<List<MessageModel>> GetAllMessages()
+    // {
+    //     //  return await _messageService.GetAsync();
+    // }
 }

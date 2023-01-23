@@ -1,4 +1,4 @@
-public class BaseMessage
+public class BaseNewMessage
 {
 
     public string UserId { get; set; } = "";

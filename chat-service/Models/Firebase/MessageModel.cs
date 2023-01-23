@@ -1,16 +1,30 @@
 
 using Google.Cloud.Firestore;
-/// <summary>
-/// Record class that represents a message .
-/// </summary>
-[FirestoreData]
-public record Message(
-    [property: FirestoreProperty] string Name,
-    [property: FirestoreProperty] string State
-)
+
+
+
+public class FirebaseMessage : BaseNewMessage
 {
-    /// <summary>
-    /// The Google APIs require a default, parameterless constructor to work.
-    /// </summary>
-    public Message() : this("", "") { }
+
+    public string message { get; set; }
+    public string userId { get; set; }
+    public string receiverId { get; set; }
+    public FirebaseMessage(string _userId, string _reveiverId, string _message)
+    {
+        userId = _userId;
+        receiverId = _reveiverId;
+        message = _message;
+    }
+
+
+    public Dictionary<string, object> convertToDictonary()
+    {
+        return new Dictionary<string, object>
+{
+    { "First", "Ada" },
+    { "Last", "Lovelace" },
+    { "Born", 1815 }
+};
+    }
+
 }

@@ -17,7 +17,7 @@ public class MessageService : IMessageService
     public MessageService(FirestoreDb firebaseClient)
     {
         _db_firebase = firebaseClient;
-        //_messageRepository = new MessageRepository(_db_mongodb);
+        _messageRepository = new Firebase_MessageRepository(_db_firebase);
     }
 
     override public async Task CreateAsync(BaseNewMessage newMessage)

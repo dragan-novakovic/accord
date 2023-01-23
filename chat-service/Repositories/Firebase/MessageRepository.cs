@@ -13,6 +13,12 @@ public class Firebase_MessageRepository : MessageRepository
         _messagesCollection = _db.Collection("messages");
     }
 
-    public override async Task CreateAsync(BaseNewMessage newMessage) { await Task.Delay(2); }
+    public override async Task CreateAsync(BaseNewMessage newMessage)
+    {
+        FirebaseMessage message = new FirebaseMessage(newMessage.UserId, newMessage.ReceiverId, newMessage.MessageContent);
+
+
+        await _messagesCollection.AddAsync(message.convertToDictonary());
+    }
 
 }

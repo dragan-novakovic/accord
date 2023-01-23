@@ -21,9 +21,9 @@ public class FirebaseMessage : BaseNewMessage
     {
         return new Dictionary<string, object>
 {
-    { "First", "Ada" },
-    { "Last", "Lovelace" },
-    { "Born", 1815 }
+    { "fromId", this.userId },
+    { "toId", this.receiverId },
+    { "content", this.message }
 };
     }
 

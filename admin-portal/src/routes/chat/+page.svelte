@@ -47,12 +47,26 @@ connection.invoke("send", msg)
 
 <section>
     <h1>Chat Tester</h1>
-        <textarea value={serverData} />
+        <textarea value={serverData} class='big-box' disabled/>
         <input placeholder="Type Message" value={msg} on:change={(event) => msg = (event.currentTarget.value)}/>
         <button on:click={sendMessage}>Send it</button>
 </section>
 
 <style>
+    .big-box {
+    width: 100%;
+    min-height: 50%;
+    padding-bottom: 50px;
+    margin-bottom: 100px;
+    }
+
+
+    input {
+    width: 60%;
+    padding-bottom: 35px;
+    margin-bottom: 30px;
+    }
+
 	section {
 		display: flex;
 		flex-direction: column;

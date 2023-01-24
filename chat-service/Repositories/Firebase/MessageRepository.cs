@@ -21,4 +21,8 @@ public class Firebase_MessageRepository : MessageRepository
         await _messagesCollection.AddAsync(message.convertToDictonary());
     }
 
+    public override Task<List<BaseMessage>> GetAsync()
+    {
+        throw new NotImplementedException();
+    }
 }

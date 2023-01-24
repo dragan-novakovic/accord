@@ -22,16 +22,12 @@ public class MessageService : IMessageService
 
     override public async Task CreateAsync(BaseNewMessage newMessage)
     {
-        if (_db_mongodb is not null)
-        {
-            await _messageRepository.CreateAsync(new BaseNewMessage());
-        }
+        await _messageRepository.CreateAsync(newMessage);
 
-        if (_db_firebase is not null)
-        {
+    }
+    override public async Task<BaseMessage> GetAsync()
+    {
+        List<BaseMessage> messages = _messageRepository.GetAsync();
 
-
-
-        }
     }
 }

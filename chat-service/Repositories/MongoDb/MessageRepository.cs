@@ -12,5 +12,9 @@ public class Mongodb_MessageRepository : MessageRepository
     }
 
     public override async Task CreateAsync(BaseNewMessage newMessage) { await Task.Delay(2); }
+    public override Task<List<BaseMessage>> GetAsync()
+    {
+        throw new NotImplementedException();
+    }
 
 }

@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:signalr_netcore/signalr_client.dart';
 
 class ChatView extends StatefulWidget {
-  const ChatView({Key key}) : super(key: key);
+  const ChatView({Key? key}) : super(key: key);
 
   @override
   _ChatViewState createState() => _ChatViewState();
@@ -11,7 +11,7 @@ class ChatView extends StatefulWidget {
 class _ChatViewState extends State<ChatView> {
   TextEditingController _textController = TextEditingController();
   final String serverURL = "http://localhost:5207/chat";
-  HubConnection hubConnection;
+  late HubConnection hubConnection;
   List<Map<String, String>> serverData = [
     {
       "username": "Tester1",
@@ -83,7 +83,10 @@ class _ChatViewState extends State<ChatView> {
       print('Connection close ${error.toString()}');
     });
     hubConnection.on("receive", (arguments) {
-      arguments.forEach((element) {
+
+      List<String>? args = arguments?.map((e) => e.toString()).toList();
+
+      args?.forEach((element) {
         serverData.add({"username": "Tester1", "msg": element});
       });
     });
@@ -94,14 +97,14 @@ class _ChatViewState extends State<ChatView> {
       return Padding(
         padding: const EdgeInsets.all(12.0),
         child: Row(
-          mainAxisAlignment: el["username"][6] == "1"
+          mainAxisAlignment: el["username"]?[6] == "1"
               ? MainAxisAlignment.end
               : MainAxisAlignment.start,
-          children: el["username"][6] == "2"
+          children: el["username"]?[6] == "2"
               ? [
                   CircleAvatar(
                       backgroundImage: NetworkImage(
-                          "https://ui-avatars.com/api/?name=John+${el["username"][6]}"),
+                          "https://ui-avatars.com/api/?name=John+${el["username"]?[6]}"),
                       backgroundColor: Colors.transparent),
                   Container(
                       margin: EdgeInsets.all(10.0),
@@ -110,7 +113,7 @@ class _ChatViewState extends State<ChatView> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       padding: EdgeInsets.all(20.0),
-                      child: Text(el["msg"])),
+                      child: Text(el["msg"]!)),
                 ]
               : [
                   Container(
@@ -120,10 +123,10 @@ class _ChatViewState extends State<ChatView> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       padding: EdgeInsets.all(20.0),
-                      child: Text(el["msg"])),
+                      child: Text(el["msg"]!)),
                   CircleAvatar(
                       backgroundImage: NetworkImage(
-                          "https://ui-avatars.com/api/?name=John+${el["username"][6]}"),
+                          "https://ui-avatars.com/api/?name=John+${el["username"]?[6]}"),
                       backgroundColor: Colors.transparent),
                 ],
         ),
@@ -158,7 +161,6 @@ class _ChatViewState extends State<ChatView> {
           child: Icon(FluentIcons.add_to),
           onPressed: () {},
         ),
-        header: "Send Message",
         placeholder: 'Type your message here...',
       ),
     );

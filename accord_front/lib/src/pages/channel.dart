@@ -3,7 +3,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:accord_front/src/pages/chatView.dart';
 
 class ChannelView extends StatefulWidget {
-  const ChannelView({Key key}) : super(key: key);
+  const ChannelView({Key? key}) : super(key: key);
 
   @override
   _ChannelViewState createState() => _ChannelViewState();

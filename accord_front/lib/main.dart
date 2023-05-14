@@ -6,8 +6,6 @@ import 'package:get_it/get_it.dart';
 GetIt getIt = GetIt.instance;
 
 void main() {
-  // getIt.registerSingleton<AppModel>(AppModelImplementation(),
-  //     signalsReady: true);
   runApp(LFG());
 }
 
@@ -17,16 +15,15 @@ class LFG extends StatefulWidget {
 }
 
 class _LFGState extends State<LFG> {
-  int index = 0;
-
   @override
   Widget build(BuildContext context) {
     return FluentApp(
       title: 'Accord',
-      theme: ThemeData(
+      theme: FluentThemeData(
           scaffoldBackgroundColor: Colors.white,
           accentColor: Colors.blue,
           iconTheme: const IconThemeData(size: 24)),
+          debugShowCheckedModeBanner: false,
       home: RoomsPage(),
     );
   }

@@ -1,14 +1,11 @@
 import 'dart:async';
 import 'package:accord_front/src/models/UserModel.dart';
 import 'package:accord_front/src/repositories/UserRepository.dart';
-import 'package:meta/meta.dart';
 
 class UserService {
   final UserRepository userRepository;
 
-  UserService({@required this.userRepository}) : assert(userRepository != null);
+  UserService({required this.userRepository});
 
-  Future<LoginUser> loginUser() async {
-    return userRepository.loginUser();
-  }
+  Future<LoginUser> loginUser() async => userRepository.loginUser();
 }

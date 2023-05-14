@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
 class FriendsView extends StatefulWidget {
-  const FriendsView({Key key}) : super(key: key);
+  const FriendsView({Key? key}) : super(key: key);
 
   @override
   _FriendsViewState createState() => _FriendsViewState();

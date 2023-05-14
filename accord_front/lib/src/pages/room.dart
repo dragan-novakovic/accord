@@ -80,9 +80,6 @@ class _RoomItemsState extends State<RoomItems> {
         onChanged: (i) => setState(() => index = i),
         displayMode: PaneDisplayMode.auto,
       ),
-      // content: ScaffoldPage(
-      //  // content: ChannelView(),
-      // ),
     );
   }
 }
@@ -90,7 +87,7 @@ class _RoomItemsState extends State<RoomItems> {
 List<NavigationPaneItem> getPaneItems(List<Room> rooms) {
   return rooms
       .map((room) => PaneItem(
-            body: Container(child: Text("XX"),),
+            body: ChannelView(),
             icon: Icon(FluentIcons.caret_right),
             title: Text(room.name),
             infoBadge: const InfoBadge(

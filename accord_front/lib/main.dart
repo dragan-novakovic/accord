@@ -23,7 +23,7 @@ class _LFGState extends State<LFG> {
           scaffoldBackgroundColor: Colors.white,
           accentColor: Colors.blue,
           iconTheme: const IconThemeData(size: 24)),
-          debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       home: RoomsPage(),
     );
   }

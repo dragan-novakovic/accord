@@ -13,7 +13,7 @@ namespace SignalRChat.Hubs
         }
         public async Task SendMessage(string user, string receiver, string message)
         {
-            MessageModel msg = new MessageModel(message, "CHAT SERVER 1", "DOTNET");
+            MessageModel msg = new(message, "CHAT SERVER 1", "DOTNET");
             await _messageService.CreateAsync(msg);
             await Clients.All.SendAsync("receive", message);
         }

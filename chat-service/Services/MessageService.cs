@@ -25,9 +25,9 @@ public class MessageService : IMessageService
         await _messageRepository.CreateAsync(newMessage);
 
     }
-    override public async Task<BaseMessage> GetAsync()
+    override public async Task<List<BaseMessage>> GetAsync()
     {
-        List<BaseMessage> messages = _messageRepository.GetAsync();
-
+        List<BaseMessage> messages = await _messageRepository.GetAsync();
+        return messages;
     }
 }

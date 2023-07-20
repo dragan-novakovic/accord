@@ -1,3 +1,4 @@
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 public class Mongodb_MessageRepository : MessageRepository
@@ -12,9 +13,10 @@ public class Mongodb_MessageRepository : MessageRepository
     }
 
     public override async Task CreateAsync(BaseNewMessage newMessage) { await Task.Delay(2); }
-    public override Task<List<BaseMessage>> GetAsync()
+    public override async Task<List<BaseMessage>> GetAsync()
     {
-        throw new NotImplementedException();
+        List<BaseMessage> messages = await _messagesCollection.Find(new BsonDocument()).ToListAsync();
+        return messages;
     }
 
 }

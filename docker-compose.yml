@@ -2,35 +2,35 @@ version: "3.7"
 
 services:
   #AUTH
-  auth:
-    container_name: auth
-    build:
-      context: ./auth-service
-      dockerfile: Dockerfile
-    volumes:
-      - ./auth-service:/auth-service
-    ports:
-      - 3000:3000
-    environment:
-      USER: Dragan
-    working_dir: /auth-service
+  # auth:
+  #   container_name: auth
+  #   build:
+  #     context: ./auth-service
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./auth-service:/auth-service
+  #   ports:
+  #     - 3000:3000
+  #   environment:
+  #     USER: Dragan
+  #   working_dir: /auth-service
 
-  chat:
-    container_name: chat
-    build:
-      context: ./chat-service
-      dockerfile: Dockerfile
-    ports:
-      - 5207:5207
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80;
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=C:\https\aspnetapp.pfx
-    volumes:
-      - ~/.aspnet/https:/https:ro
-    depends_on:
-      - mongo
+  # chat:
+  #   container_name: chat
+  #   build:
+  #     context: ./chat-service
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 5207:5207
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_URLS=https://+:443;http://+:80;
+  #     - ASPNETCORE_Kestrel__Certificates__Default__Password=
+  #     - ASPNETCORE_Kestrel__Certificates__Default__Path=C:\https\aspnetapp.pfx
+  #   volumes:
+  #     - ~/.aspnet/https:/https:ro
+  #   depends_on:
+  #     - mongo
   #MONGO
   mongo:
     image: mongo:4.4
@@ -46,13 +46,13 @@ services:
       - ./mongodb/mongo-init.js:/docker-entrypoint-initdb.d/init.js:ro
 
   # POSTGRES
-  postgres:
-    container_name: postgres
-    restart: always
-    build: postgres
-    ports:
-      - 5555:5432
-    environment:
-      POSTGRES_PASSWORD: docker
-      POSTGRES_USER: docker
-      POSTGRES_DB: ROOM-SERVICE
+  # postgres:
+  #   container_name: postgres
+  #   restart: always
+  #   build: postgres
+  #   ports:
+  #     - 5555:5432
+  #   environment:
+  #     POSTGRES_PASSWORD: docker
+  #     POSTGRES_USER: docker
+  #     POSTGRES_DB: ROOM-SERVICE

@@ -12,9 +12,9 @@ public class MessageController : ControllerBase
         _messageService = messageService;
     }
 
-    // [HttpGet]
-    // public async Task<List<MessageModel>> GetAllMessages()
-    // {
-    //     //  return await _messageService.GetAsync();
-    // }
+    [HttpGet]
+    public async Task<List<MessageModel>> GetAllMessages()
+    {
+        return await _messageService.GetAsync();
+    }
 }

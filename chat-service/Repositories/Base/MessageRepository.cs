@@ -1,7 +1,6 @@
 
-public abstract class MessageRepository
+public abstract class MessageRepository<T>
 {
     public abstract Task CreateAsync(BaseNewMessage newMessage);
-    public abstract Task<List<BaseMessage>> GetAsync();
-
+    public abstract Task<List<T>> GetAsync();
 }

@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-public class Mongodb_MessageRepository : MessageRepository
+public class Mongodb_MessageRepository : MessageRepository<MessageModel>
 {
     private readonly IMongoDatabase _db;
     private readonly IMongoCollection<MessageModel> _messagesCollection;
@@ -13,9 +13,9 @@ public class Mongodb_MessageRepository : MessageRepository
     }
 
     public override async Task CreateAsync(BaseNewMessage newMessage) { await Task.Delay(2); }
-    public override async Task<List<BaseMessage>> GetAsync()
+    public override async Task<List<MessageModel>> GetAsync()
     {
-        List<BaseMessage> messages = await _messagesCollection.Find(new BsonDocument()).ToListAsync();
+        List<MessageModel> messages = await _messagesCollection.Find(new BsonDocument()).ToListAsync();
         return messages;
     }
 

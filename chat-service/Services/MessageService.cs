@@ -6,7 +6,7 @@ public class MessageService : IMessageService
     //figure something better
     private readonly IMongoClient? _db_mongodb;
     private readonly FirestoreDb? _db_firebase;
-    private readonly MessageRepository _messageRepository;
+    private readonly MessageRepository<MessageModel> _messageRepository;
 
     public MessageService(IMongoClient mongoClient)
     {
@@ -14,20 +14,22 @@ public class MessageService : IMessageService
         _messageRepository = new Mongodb_MessageRepository(_db_mongodb);
     }
 
-    public MessageService(FirestoreDb firebaseClient)
-    {
-        _db_firebase = firebaseClient;
-        _messageRepository = new Firebase_MessageRepository(_db_firebase);
-    }
+    // public MessageService(FirestoreDb firebaseClient)
+    // {
+    //     _db_firebase = firebaseClient;
+    //     _messageRepository = new Firebase_MessageRepository(_db_firebase);
+    // }
 
     override public async Task CreateAsync(BaseNewMessage newMessage)
     {
+
         await _messageRepository.CreateAsync(newMessage);
 
+
     }
-    override public async Task<List<BaseMessage>> GetAsync()
+    override public async Task<List<MessageModel>> GetAsync()
     {
-        List<BaseMessage> messages = await _messageRepository.GetAsync();
+        List<MessageModel> messages = await _messageRepository.GetAsync();
         return messages;
     }
 }

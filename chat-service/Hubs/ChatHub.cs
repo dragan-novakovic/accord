@@ -11,11 +11,25 @@ namespace SignalRChat.Hubs
 
             _messageService = messageService;
         }
-        public async Task SendMessage(string user, string receiver, string message)
+        public async Task SendMessage(string userId, string receiverId, string messageContent, string? roomId)
         {
-            MessageModel msg = new(message, "CHAT SERVER 1", "DOTNET");
+            if (roomId != null)
+            {
+
+                MessageModel msg = new(userId, receiverId, messageContent, roomId);
+                await Clients.All.SendAsync();
+            }
+            else
+            {
+                MessageModel msg = new(userId, receiverId, messageContent, roomId);
+
+            }
+
+        }
+
+        public async Task SaveMessage(string user, string receiver, string message)
+        {
             await _messageService.CreateAsync(msg);
-            await Clients.All.SendAsync("receive", message);
         }
     }
 }

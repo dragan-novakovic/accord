@@ -4,11 +4,12 @@ using MongoDB.Bson.Serialization.Attributes;
 public class MessageModel : BaseNewMessage
 {
 
-    public MessageModel(string MessageContent, string ChannelId, string Username)
+    public MessageModel(string UserId, string ReceiverId, string MessageContent, string? RoomId)
     {
-        messageContent = MessageContent;
-        channelId = ChannelId;
-        username = Username;
+        this.UserId = UserId;
+        this.ReceiverId = ReceiverId;
+        this.MessageContent = MessageContent;
+        this.RoomId = RoomId;
     }
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
@@ -16,17 +17,16 @@ public class MessageModel : BaseNewMessage
 
 
     [BsonElement("message")]
-    public string messageContent { get; set; } = null!;
-    public string channelId { get; set; } = null!;
-    public string username { get; set; } = null!;
+    public string? RoomId { get; set; }
+    public DateTime MessageCreated { get; set; }
 
 
     public override string ToString()
     {
         return $@"
-    Message: {this.messageContent},
-    RoomId: {this.channelId},
-    Username: {this.username}
+    UserId: {this.UserId},
+    Message: {this.MessageContent},
+    RoomId: {this.RoomId},
     ";
     }
 }

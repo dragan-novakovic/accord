@@ -2,7 +2,7 @@
 
 using Google.Cloud.Firestore;
 
-public class Firebase_MessageRepository : MessageRepository
+public class Firebase_MessageRepository : MessageRepository<FirebaseMessage>
 {
     private readonly FirestoreDb _db;
     private readonly CollectionReference _messagesCollection;
@@ -21,7 +21,7 @@ public class Firebase_MessageRepository : MessageRepository
         await _messagesCollection.AddAsync(message.convertToDictonary());
     }
 
-    public override Task<List<BaseMessage>> GetAsync()
+    public override Task<List<FirebaseMessage>> GetAsync()
     {
         throw new NotImplementedException();
     }

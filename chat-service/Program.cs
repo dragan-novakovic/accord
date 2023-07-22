@@ -13,12 +13,13 @@ IConfigurationRoot CONFIG = builder.Configuration.AddJsonFile("appsettings.json"
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddSignalR();
+builder.Services.AddMemoryCache();
 
 switch (CONFIG.GetValue<String>("useDB"))
 {
     case "MongoDb":
         {
-            builder.Services.AddSingleton<IMongoClient>(s =>
+            builder.Services.AddSingleton<IMongoClient, IMongoClient>(s =>
             {
                 try
                 {
@@ -68,7 +69,6 @@ switch (CONFIG.GetValue<String>("useDB"))
 }
 
 builder.Services.AddSingleton<IMessageService, MessageService>();
-
 
 
 WebApplication app = builder.Build();

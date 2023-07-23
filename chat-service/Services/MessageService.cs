@@ -19,7 +19,7 @@ public class MessageService : IMessageService
     //     _messageRepository = new Firebase_MessageRepository(_db_firebase);
     // }
 
-    override public async Task CreateAsync(BaseNewMessage newMessage)
+    override public async Task CreateAsync(MessageModel newMessage)
     {
 
         await _messageRepository.CreateAsync(newMessage);

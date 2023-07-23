@@ -12,7 +12,10 @@ public class Mongodb_MessageRepository : MessageRepository
         _messagesCollection = _db.GetCollection<MessageModel>("messages");
     }
 
-    public override async Task CreateAsync(BaseNewMessage newMessage) { await Task.Delay(2); }
+    public override async Task CreateAsync(MessageModel newMessage)
+    {
+        await _messagesCollection.InsertOneAsync(newMessage);
+    }
     public override async Task<List<MessageModel>> GetAsync()
     {
         List<MessageModel> messages = await _messagesCollection.Find(new BsonDocument()).ToListAsync();

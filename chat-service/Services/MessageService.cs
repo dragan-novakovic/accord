@@ -22,6 +22,7 @@ public class MessageService : IMessageService
     override public async Task CreateAsync(MessageModel newMessage)
     {
 
+        Console.WriteLine("MESSAGE SERVICE HERE");
         await _messageRepository.CreateAsync(newMessage);
 
 

@@ -14,7 +14,11 @@ public class Mongodb_MessageRepository : MessageRepository
 
     public override async Task CreateAsync(MessageModel newMessage)
     {
+        Console.WriteLine("Repository create");
         await _messagesCollection.InsertOneAsync(newMessage);
+        List<MessageModel> messages = await _messagesCollection.Find(new BsonDocument()).ToListAsync();
+        Console.WriteLine(messages.ToJson());
+
     }
     public override async Task<List<MessageModel>> GetAsync()
     {

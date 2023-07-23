@@ -59,6 +59,7 @@ namespace SignalRChat.Hubs
 
         public async Task SaveMessage(MessageModel msg)
         {
+            Console.WriteLine("Save to DB");
             await _messageService.CreateAsync(msg);
         }
     }

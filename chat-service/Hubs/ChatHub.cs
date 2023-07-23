@@ -19,26 +19,37 @@ namespace SignalRChat.Hubs
         {
             return Context.ConnectionId;
         }
-        public async Task SendMessage(string userId, string receiverId, string messageContent, string? roomId)
+
+        public async Task AddToGroup(string groupName)
+        {
+            await Groups.AddToGroupAsync(GetConnectionId(), groupName);
+        }
+
+        public async Task SendMessage(string userId, string receiverId, string messageContent, string? roomId = null)
         {
             string connectionId = this.GetConnectionId();
             // SAVE samewhere
+            Console.WriteLine("Mapping User " + userId + " " + connectionId);
             _cache.Set(userId, connectionId);
 
             if (roomId != null)
             {
+                await AddToGroup(roomId);
+
                 if (roomId == receiverId)
                 {
-                    // send message to room
+                    await Clients.Group(roomId).SendAsync(messageContent);
                 }
-
-                string? receiverConnectionId = (string?)_cache.Get(receiverId);
-                if (receiverConnectionId != null)
-                {
-                    await Clients.User(receiverConnectionId).SendAsync(messageContent);
-                }
-
             }
+
+
+            string? receiverConnectionId = (string?)_cache.Get(receiverId);
+            if (receiverConnectionId != null)
+            {
+                Console.WriteLine("Sending to " + receiverConnectionId);
+                await Clients.User(receiverConnectionId).SendAsync(messageContent);
+            }
+
 
             MessageModel msg = new(userId, receiverId, messageContent, roomId);
             await this.SaveMessage(msg);

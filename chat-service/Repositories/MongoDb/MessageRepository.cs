@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-public class Mongodb_MessageRepository : MessageRepository<MessageModel>
+public class Mongodb_MessageRepository : MessageRepository
 {
     private readonly IMongoDatabase _db;
     private readonly IMongoCollection<MessageModel> _messagesCollection;

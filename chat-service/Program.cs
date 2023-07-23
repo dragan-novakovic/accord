@@ -9,22 +9,17 @@ builder.Logging.AddConsole();
 
 IConfigurationRoot CONFIG = builder.Configuration.AddJsonFile("appsettings.json").Build();
 
-
-// Add services to the container.
-builder.Services.AddControllers();
-builder.Services.AddSignalR();
-builder.Services.AddMemoryCache();
-
+Console.WriteLine("Using" + CONFIG.GetValue<String>("useDB"));
 switch (CONFIG.GetValue<String>("useDB"))
+
 {
     case "MongoDb":
         {
-            builder.Services.AddSingleton<IMongoClient, IMongoClient>(s =>
+            builder.Services.AddSingleton<IMongoClient>(s =>
             {
                 try
                 {
-                    IMongoClient _client = new MongoClient(CONFIG.GetConnectionString("MongoDb"));
-                    return _client;
+                    return new MongoClient(CONFIG.GetConnectionString("MongoDb"));
                 }
                 catch (System.Exception e)
                 {
@@ -67,8 +62,11 @@ switch (CONFIG.GetValue<String>("useDB"))
         break;
 
 }
-
-builder.Services.AddSingleton<IMessageService, MessageService>();
+// Add services to the container.
+builder.Services.AddControllers();
+builder.Services.AddSignalR();
+builder.Services.AddMemoryCache();
+builder.Services.AddScoped<IMessageService, MessageService>(sp => new MessageService(sp.GetService<IMongoClient>()));
 
 
 WebApplication app = builder.Build();

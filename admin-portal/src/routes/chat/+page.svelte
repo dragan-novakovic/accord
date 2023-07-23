@@ -35,7 +35,7 @@ connection.start().catch((err) => console.log("Meh can't start", err));
 
 
 const sendMessage = () => {
-connection.invoke("SendMessage", '123', '222', msg)
+connection.invoke("SendMessage", '123', '123', msg, null)
 
 }
 

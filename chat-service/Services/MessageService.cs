@@ -6,12 +6,11 @@ public class MessageService : IMessageService
     //figure something better
     private readonly IMongoClient? _db_mongodb;
     private readonly FirestoreDb? _db_firebase;
-    private readonly MessageRepository<MessageModel> _messageRepository;
+    private readonly MessageRepository _messageRepository;
 
     public MessageService(IMongoClient mongoClient)
     {
-        _db_mongodb = mongoClient;
-        _messageRepository = new Mongodb_MessageRepository(_db_mongodb);
+        _messageRepository = new Mongodb_MessageRepository(mongoClient);
     }
 
     // public MessageService(FirestoreDb firebaseClient)

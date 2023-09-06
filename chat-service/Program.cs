@@ -9,8 +9,8 @@ builder.Logging.AddConsole();
 
 IConfigurationRoot CONFIG = builder.Configuration.AddJsonFile("appsettings.json").Build();
 
-Console.WriteLine("Using" + CONFIG.GetValue<String>("useDB"));
-switch (CONFIG.GetValue<String>("useDB"))
+Console.WriteLine("Using" + CONFIG.GetValue<string>("useDB"));
+switch (CONFIG.GetValue<string>("useDB"))
 
 {
     case "MongoDb":
@@ -64,7 +64,7 @@ switch (CONFIG.GetValue<String>("useDB"))
 }
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddSignalR();
+builder.Services.AddSignalR(hubOptions => { hubOptions.HandshakeTimeout = TimeSpan.FromSeconds(15); hubOptions.KeepAliveInterval = TimeSpan.FromSeconds(15); hubOptions.EnableDetailedErrors = true; });
 builder.Services.AddMemoryCache();
 builder.Services.AddScoped<IMessageService, MessageService>(sp => new MessageService(sp.GetService<IMongoClient>()));
 

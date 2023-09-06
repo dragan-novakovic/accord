@@ -5,7 +5,7 @@ namespace SignalRChat.Hubs
 {
     public class ChatHub : Hub
     {
-        private IMessageService _messageService;
+        private readonly IMessageService _messageService;
         private readonly IMemoryCache _cache;
 
         public ChatHub(IMemoryCache cache, IMessageService messageService)
@@ -15,8 +15,10 @@ namespace SignalRChat.Hubs
             _messageService = messageService;
         }
 
+        // ConnectionID that will indentify the User
         public string GetConnectionId()
         {
+
             return Context.ConnectionId;
         }
 
@@ -25,9 +27,9 @@ namespace SignalRChat.Hubs
             await Groups.AddToGroupAsync(GetConnectionId(), groupName);
         }
 
-        public async Task SendMessage(string userId, string receiverId, string messageContent, string? roomId = null)
+        public async Task SendMessage(string userId, string messageContent, string? receiverId = null, string? roomId = null)
         {
-            string connectionId = this.GetConnectionId();
+            string connectionId = GetConnectionId();
             // SAVE samewhere
             Console.WriteLine("Mapping User " + userId + " " + connectionId);
             _cache.Set(userId, connectionId);
@@ -50,9 +52,11 @@ namespace SignalRChat.Hubs
                 await Clients.User(receiverConnectionId).SendAsync(messageContent);
             }
 
+            await Clients.User(receiverId).SendAsync(messageContent);
+
 
             MessageModel msg = new(userId, receiverId, messageContent, roomId);
-            await this.SaveMessage(msg);
+            await SaveMessage(msg);
 
 
         }
@@ -60,7 +64,7 @@ namespace SignalRChat.Hubs
         public async Task SaveMessage(MessageModel msg)
         {
             Console.WriteLine("Save to DB");
-            await _messageService.CreateAsync(msg);
+            // await _messageService.CreateAsync(msg);
         }
     }
 }

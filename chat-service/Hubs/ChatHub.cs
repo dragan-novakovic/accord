@@ -51,7 +51,7 @@ namespace SignalRChat.Hubs
                 Console.WriteLine("Sending to " + receiverConnectionId);
                 await Clients.User(receiverConnectionId).SendAsync(messageContent);
             }
-
+            Console.WriteLine("Sending to RECE");
             await Clients.User(receiverId).SendAsync(messageContent);
 
 
@@ -59,6 +59,13 @@ namespace SignalRChat.Hubs
             await SaveMessage(msg);
 
 
+        }
+
+
+        public async Task BroadcastMessage(string messageContent)
+        {
+
+            await Clients.All.SendAsync(messageContent);
         }
 
         public async Task SaveMessage(MessageModel msg)

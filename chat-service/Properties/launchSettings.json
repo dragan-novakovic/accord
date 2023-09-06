@@ -12,7 +12,7 @@
     "chat_service": {
       "commandName": "Project",
       "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:5207",
+      "applicationUrl": "https://localhost:5207",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

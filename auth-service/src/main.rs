@@ -23,7 +23,7 @@ async fn main() {
         Err(err) => panic!("Failed to setup configuration. Error: {}", err),
     };
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], settings.server.port));
+    let addr = SocketAddr::from(([0, 0, 0, 0], settings.server.port));
 
     Logger::setup(&settings);
 

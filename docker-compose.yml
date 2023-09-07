@@ -2,18 +2,18 @@ version: "3.7"
 
 services:
   #AUTH
-  # auth:
-  #   container_name: auth
-  #   build:
-  #     context: ./auth-service
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - ./auth-service:/auth-service
-  #   ports:
-  #     - 3000:3000
-  #   environment:
-  #     USER: Dragan
-  #   working_dir: /auth-service
+  auth:
+    container_name: auth
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    volumes:
+      - ./auth-service:/auth-service
+    ports:
+      - 3000:3000
+    environment:
+      USER: Dragan
+    command: cargo run
   # ADMIN-PORTAL
   admin-portal:
     container_name: admin_portal

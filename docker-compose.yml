@@ -22,11 +22,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - 5173:5173
+      - 3101:3101
     environment:
       - ASPNETCORE_ENVIRONMENT=IS_IT
     volumes:
-      - ".:/app"
-      - "/app/node_modules"
+      - "./admin-portal:/app"
+    working_dir: /app
+    command: bash -c "ls && npm run dev"
   #  depends_on:
   #    - mongo
 
@@ -47,18 +49,18 @@ services:
   #   depends_on:
   #     - mongo
   #MONGO
-  mongo:
-    image: mongo:4.4
-    container_name: mongodb
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin
-      MONGO_INITDB_DATABASE: CHAT-SERVICE
-    ports:
-      - 27017:27017
-    volumes:
-      - ./mongodb/mongo-init.js:/docker-entrypoint-initdb.d/init.js:ro
+  # mongo:
+  #   image: mongo:4.4
+  #   container_name: mongodb
+  #   restart: always
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: admin
+  #     MONGO_INITDB_ROOT_PASSWORD: admin
+  #     MONGO_INITDB_DATABASE: CHAT-SERVICE
+  #   ports:
+  #     - 27017:27017
+  #   volumes:
+  #     - ./mongodb/mongo-init.js:/docker-entrypoint-initdb.d/init.js:ro
 
   # POSTGRES
   # postgres:

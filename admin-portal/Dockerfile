@@ -9,5 +9,5 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY . .
 
-
 EXPOSE 5173
+EXPOSE 3101

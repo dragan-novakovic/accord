@@ -4,8 +4,8 @@
 	const form = useForm();
 
 	const login = async () => {
-		console.log(form); // store(Observable) and Action
-		const response = await fetch('http://localhost:3000/status');
+		//console.log(form); // store(Observable) and Action
+		const response = await fetch('http://localhost:3000/login', { mode: 'no-cors' });
 		const data = await response.json();
 		console.log(data);
 	};

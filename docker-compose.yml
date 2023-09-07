@@ -14,6 +14,9 @@ services:
     environment:
       USER: Dragan
     command: cargo run
+    depends_on:
+      - mongo
+
   # ADMIN-PORTAL
   admin-portal:
     container_name: admin_portal
@@ -29,8 +32,8 @@ services:
       - "./admin-portal:/app"
     working_dir: /app
     command: bash -c "ls && npm run dev"
-  #  depends_on:
-  #    - mongo
+    depends_on:
+      - auth
 
   # chat:
   #   container_name: chat

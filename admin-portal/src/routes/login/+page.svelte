@@ -5,9 +5,13 @@
 
 	const login = async () => {
 		//console.log(form); // store(Observable) and Action
-		const response = await fetch('http://localhost:3000/login', { mode: 'no-cors' });
+		const response = await fetch('http://localhost:3000/register', {
+			mode: 'no-cors',
+			method: 'POST',
+			body: JSON.stringify({ username: 'Test1', password: '123' })
+		});
 		const data = await response.json();
-		console.log(data);
+		console.log({ data });
 	};
 </script>
 

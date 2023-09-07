@@ -16,6 +16,8 @@ services:
     command: cargo run
     depends_on:
       - mongo
+    networks:
+      - accord
 
   # ADMIN-PORTAL
   admin-portal:
@@ -34,6 +36,8 @@ services:
     command: bash -c "ls && npm run dev"
     depends_on:
       - auth
+    networks:
+      - accord
 
   # chat:
   #   container_name: chat
@@ -51,6 +55,8 @@ services:
   #     - ~/.aspnet/https:/https:ro
   #   depends_on:
   #     - mongo
+  #   networks:
+  #   - accord
   #MONGO
   mongo:
     image: mongo:4.4
@@ -64,6 +70,8 @@ services:
       - 27017:27017
     volumes:
       - ./mongodb/mongo-init.js:/docker-entrypoint-initdb.d/init.js:ro
+    networks:
+      - accord
 
   # POSTGRES
   # postgres:
@@ -76,3 +84,7 @@ services:
   #     POSTGRES_PASSWORD: docker
   #     POSTGRES_USER: docker
   #     POSTGRES_DB: ROOM-SERVICE
+
+networks:
+  accord:
+    driver: bridge

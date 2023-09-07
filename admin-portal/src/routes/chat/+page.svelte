@@ -33,7 +33,7 @@
 	connection.start().catch((err) => console.log("Meh can't start", err));
 
 	const sendMessage = () => {
-		connection.invoke('SendMessage', '123', '123', msg, null);
+		connection.invoke('SendMessage', 'test1', msg);
 	};
 </script>
 
@@ -42,7 +42,7 @@
 </svelte:head>
 
 <section>
-	<h1>Chat Tester</h1>
+	<h1>Chat Tester #1</h1>
 	<textarea value={serverData} class="big-box" disabled />
 	<input
 		placeholder="Type Message"

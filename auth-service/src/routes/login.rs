@@ -1,6 +1,6 @@
 use crate::models::{
     shared::Claims,
-    users::{InsertableUser, User},
+    users::{InsertableUser, PublicUser, User},
 };
 use bson::Bson;
 use bytes::Buf;
@@ -52,11 +52,12 @@ pub async fn login(req: Request<Body>, db: Database) -> Result<Response<Body>, h
         };
 
         let payload = user.remove_password().generate_token(token);
+        let public_payload = PublicUser::from(payload.clone());
 
         let response = Response::builder()
             .status(StatusCode::OK)
             .header(header::CONTENT_TYPE, "application/json")
-            .body(Body::from(serde_json::to_string(&payload).unwrap()))?;
+            .body(Body::from(serde_json::to_string(&public_payload).unwrap()))?;
         return Ok(response);
     }
 

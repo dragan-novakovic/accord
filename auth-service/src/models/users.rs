@@ -1,5 +1,12 @@
 use bson::oid::ObjectId;
 
+#[derive(Clone, Serialize, Deserialize)]
+pub struct PublicUser {
+    pub id: Option<String>,
+    pub username: Option<String>,
+    pub token: Option<String>,
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct User {
     #[serde(rename = "_id")]
@@ -7,6 +14,16 @@ pub struct User {
     pub username: Option<String>,
     pub password: Option<String>,
     pub token: Option<String>,
+}
+
+impl From<User> for PublicUser {
+    fn from(sub: User) -> Self {
+        PublicUser {
+            id: sub.id.map(|oid| oid.to_hex()),
+            username: sub.username,
+            token: sub.token,
+        }
+    }
 }
 
 impl User {

@@ -5,7 +5,7 @@
 
 	const login = async () => {
 		//console.log(form); // store(Observable) and Action
-		const response = await fetch('http://localhost:3000/register', {
+		const response = await fetch('http://auth:3000/register', {
 			mode: 'no-cors',
 			method: 'POST',
 			body: JSON.stringify({ username: 'Test1', password: '123' })

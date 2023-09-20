@@ -56,6 +56,9 @@ pub async fn login(req: Request<Body>, db: Database) -> Result<Response<Body>, h
 
         let response = Response::builder()
             .status(StatusCode::OK)
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Headers", "*")
+            .header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
             .header(header::CONTENT_TYPE, "application/json")
             .body(Body::from(serde_json::to_string(&public_payload).unwrap()))?;
         return Ok(response);

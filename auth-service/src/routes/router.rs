@@ -28,9 +28,15 @@ pub async fn router(req: Request<Body>, db: Database) -> Result<Response<Body>, 
         (&Method::GET, "/status") => Response::builder()
             .status(200)
             .header("Content-Type", "aplication/json")
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Headers", "*")
+            .header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
             .body(Body::from("{\"status\": \"OK\"}")),
         _ => Response::builder()
             .status(404)
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Headers", "*")
+            .header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
             .body(Body::from("Not Found")),
     }
 }

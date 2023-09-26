@@ -20,10 +20,6 @@ use utils::settings::Settings;
 
 use crate::utils::settings;
 
-type GenericError = Box<dyn std::error::Error + Send + Sync>;
-type Result<T> = std::result::Result<T, GenericError>;
-type BoxBody = http_body_util::combinators::BoxBody<Bytes, hyper::Error>;
-
 fn setup_enviroment() -> Settings {
     match Settings::new() {
         Ok(value) => value,

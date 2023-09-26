@@ -1,3 +1,5 @@
+pub type GenericError = Box<dyn std::error::Error + Send + Sync>;
+
 // use axum::http::StatusCode;
 // use axum::response::{IntoResponse, Response};
 // use axum::Json;

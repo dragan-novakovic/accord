@@ -11,3 +11,6 @@ impl Context {
         Self { settings }
     }
 }
+
+pub type Result<T> = std::result::Result<T, GenericError>;
+pub type BoxBody = http_body_util::combinators::BoxBody<Bytes, hyper::Error>;

@@ -1,3 +1,4 @@
+#![deny(warnings)]
 #[macro_use]
 extern crate serde_derive;
 use hyper::service::{make_service_fn, service_fn};

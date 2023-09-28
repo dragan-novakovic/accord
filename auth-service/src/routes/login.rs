@@ -1,10 +1,17 @@
-use crate::models::{
-    shared::Claims,
-    users::{InsertableUser, PublicUser, User},
+use crate::{
+    models::{
+        shared::Claims,
+        users::{InsertableUser, PublicUser, User},
+    },
+    utils::{
+        context::{full, BoxBody},
+        errors::GenericError,
+    },
 };
 use bson::Bson;
 use bytes::Buf;
-use hyper::{header, http, Body, Request, Response, StatusCode};
+use http_body_util::BodyExt;
+use hyper::{body::Incoming as IncomingBody, header, Request, Response, StatusCode};
 use jsonwebtoken::{encode, Algorithm, EncodingKey, Header};
 use mongodb::{
     bson::{doc, from_bson},
@@ -13,8 +20,11 @@ use mongodb::{
 
 static AUTH_SECRET: &'static [u8] = b"some_secret_key";
 
-pub async fn login(req: Request<Body>, db: Database) -> Result<Response<Body>, http::Error> {
-    let whole_body = hyper::body::aggregate(req).await.unwrap();
+pub async fn login(
+    req: Request<IncomingBody>,
+    db: Database,
+) -> Result<Response<BoxBody>, GenericError> {
+    let whole_body = req.collect().await?.aggregate();
 
     let data: InsertableUser = serde_json::from_reader(whole_body.reader()).unwrap();
     let users_collection = db.collection("users");
@@ -60,13 +70,13 @@ pub async fn login(req: Request<Body>, db: Database) -> Result<Response<Body>, h
             .header("Access-Control-Allow-Headers", "*")
             .header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
             .header(header::CONTENT_TYPE, "application/json")
-            .body(Body::from(serde_json::to_string(&public_payload).unwrap()))?;
+            .body(full(serde_json::to_string(&public_payload).unwrap()))?;
         return Ok(response);
     }
 
     let response = Response::builder()
         .status(StatusCode::UNAUTHORIZED)
         .header(header::CONTENT_TYPE, "application/json")
-        .body(Body::from("Wrong username or password"))?;
+        .body(full("Wrong username or password"))?;
     Ok(response)
 }

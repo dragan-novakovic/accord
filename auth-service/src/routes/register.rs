@@ -1,10 +1,15 @@
 use crate::{
-    models::{errors::RegisterError, users::User},
-    utils::builder_helper::res_builder,
+    models::users::User,
+    utils::{
+        builder_helper::res_builder,
+        context::{full, BoxBody},
+        errors::GenericError,
+    },
 };
 use bson::Bson;
 use bytes::Buf;
-use hyper::{header, http, Body, Request, Response, StatusCode};
+use http_body_util::BodyExt;
+use hyper::{body::Incoming as IncomingBody, header, http, Request, Response, StatusCode};
 use mongodb::{
     bson::{doc, from_bson},
     Database,
@@ -18,11 +23,12 @@ use mongodb::{
  */
 
 /// Use better pattern
-pub async fn register(req: Request<Body>, db: Database) -> Result<Response<Body>, http::Error> {
+pub async fn register(
+    req: Request<IncomingBody>,
+    db: Database,
+) -> Result<Response<BoxBody>, GenericError> {
     // Handle Error
-    let whole_body = hyper::body::aggregate(req)
-        .await
-        .expect("Error aggregating body");
+    let whole_body = req.collect().await?.aggregate();
 
     let data: serde_json::Value =
         serde_json::from_reader(whole_body.reader()).expect("Failed parsing the body");
@@ -62,7 +68,7 @@ pub async fn register(req: Request<Body>, db: Database) -> Result<Response<Body>
         .header("Access-Control-Allow-Headers", "*")
         .header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
         .header(header::LOCATION, "/login")
-        .body(Body::from(serde_json::to_string(&new_user).unwrap()))?;
+        .body(full(serde_json::to_string(&new_user).unwrap()))?;
 
     Ok(response)
 }

@@ -36,3 +36,7 @@ mongodb = { version = "2.0", default-features = true, features = [
 bson = "2.0"
 # find replacment or fork?
 jsonwebtoken = "8"
+http-body = "=1.0.0-rc.2"
+futures-util = { version = "0.3", default-features = false }
+pin-project-lite = "0.2.4"
+http-body-util = "0.1.0-rc.3"

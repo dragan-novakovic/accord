@@ -1,7 +1,15 @@
-use hyper::{http, Body, Method, Request, Response, StatusCode};
-use mongodb::Database;
+use crate::{
+    routes::{login::login, register::register},
+    utils::{
+        context::{full, BoxBody},
+        errors::GenericError,
+        settings::Database,
+    },
+};
+use http::header;
+use hyper::{body, http, Method, Request, Response, StatusCode};
 
-use crate::routes::{login::login, register::register};
+static NOTFOUND: &[u8] = b"Not Found";
 
 // implement Outh google
 // implement Oauth facebook
@@ -9,87 +17,36 @@ use crate::routes::{login::login, register::register};
 // implement 0auth Microsoft
 // implement 0auth Apple
 // implement Windows hello ?
-pub async fn preflight(req: Request<Body>) -> Result<Response<Body>, http::Error> {
-    let _whole_body = hyper::body::aggregate(req).await.unwrap();
-    let response = Response::builder()
-        .status(StatusCode::OK)
-        .header("Access-Control-Allow-Origin", "*")
-        .header("Access-Control-Allow-Headers", "*")
-        .header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
-        .body(Body::default())?;
-    Ok(response)
-}
+// pub async fn preflight(req: Request<Body>) -> Result<Response<Body>, http::Error> {
+//     let _whole_body = hyper::body::aggregate(req).await.unwrap();
+//     let response = Response::builder()
+//         .status(StatusCode::OK)
+//         .header("Access-Control-Allow-Origin", "*")
+//         .header("Access-Control-Allow-Headers", "*")
+//         .header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+//         .body(Body::default())?;
+//     Ok(response)
+//}
 
 pub async fn router(
-    req: Request<hyper::body::Incoming>,
+    req: Request<body::Incoming>,
     db: Database,
-) -> Result<Response<Body>, http::Error> {
+) -> Result<Response<BoxBody>, GenericError> {
     match (req.method(), req.uri().path()) {
-        (&Method::OPTIONS, "/") => preflight(req).await,
+        //  (&Method::OPTIONS, "/") => preflight(req).await,
         (&Method::POST, "/register") => register(req, db).await,
         (&Method::POST, "/login") => login(req, db).await,
-        (&Method::GET, "/status") => Response::builder()
-            .status(200)
-            .header("Content-Type", "aplication/json")
-            .body(Body::from("{\"status\": \"OK\"}")),
-        _ => Response::builder()
-            .status(404)
-            .body(Body::from("Not Found")),
+        (&Method::GET, "/status") => Ok(Response::builder()
+            .status(StatusCode::OK)
+            .header(header::CONTENT_TYPE, "application/json")
+            .body(full("{\"status\": \"OK\"}"))
+            .unwrap()),
+        _ => Ok(Response::builder()
+            .status(StatusCode::NOT_FOUND)
+            .body(full(NOTFOUND))
+            .unwrap()),
     }
 }
-
-// #![deny(warnings)]
-
-// use std::net::SocketAddr;
-
-// use bytes::{Buf, Bytes};
-// use http_body_util::{BodyExt, Full};
-// use hyper::server::conn::http1;
-// use hyper::service::service_fn;
-// use hyper::{body::Incoming as IncomingBody, header, Method, Request, Response, StatusCode};
-// use tokio::net::{TcpListener, TcpStream};
-
-// #[path = "../benches/support/mod.rs"]
-// mod support;
-// use support::TokioIo;
-
-// type GenericError = Box<dyn std::error::Error + Send + Sync>;
-// type Result<T> = std::result::Result<T, GenericError>;
-// type BoxBody = http_body_util::combinators::BoxBody<Bytes, hyper::Error>;
-
-// static INDEX: &[u8] = b"<a href=\"test.html\">test.html</a>";
-// static INTERNAL_SERVER_ERROR: &[u8] = b"Internal Server Error";
-// static NOTFOUND: &[u8] = b"Not Found";
-// static POST_DATA: &str = r#"{"original": "data"}"#;
-// static URL: &str = "http://127.0.0.1:1337/json_api";
-
-// async fn client_request_response() -> Result<Response<BoxBody>> {
-//     let req = Request::builder()
-//         .method(Method::POST)
-//         .uri(URL)
-//         .header(header::CONTENT_TYPE, "application/json")
-//         .body(Full::new(Bytes::from(POST_DATA)))
-//         .unwrap();
-
-//     let host = req.uri().host().expect("uri has no host");
-//     let port = req.uri().port_u16().expect("uri has no port");
-//     let stream = TcpStream::connect(format!("{}:{}", host, port)).await?;
-//     let io = TokioIo::new(stream);
-
-//     let (mut sender, conn) = hyper::client::conn::http1::handshake(io).await?;
-
-//     tokio::task::spawn(async move {
-//         if let Err(err) = conn.await {
-//             println!("Connection error: {:?}", err);
-//         }
-//     });
-
-//     let web_res = sender.send_request(req).await?;
-
-//     let res_body = web_res.into_body().boxed();
-
-//     Ok(Response::new(res_body))
-// }
 
 // async fn api_post_response(req: Request<IncomingBody>) -> Result<Response<BoxBody>> {
 //     // Aggregate the body...
@@ -136,12 +93,6 @@ pub async fn router(
 //                 .unwrap())
 //         }
 //     }
-// }
-
-// fn full<T: Into<Bytes>>(chunk: T) -> BoxBody {
-//     Full::new(chunk.into())
-//         .map_err(|never| match never {})
-//         .boxed()
 // }
 
 // #[tokio::main]

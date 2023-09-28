@@ -1,12 +1,16 @@
-#![deny(warnings)]
 #[macro_use]
 extern crate serde_derive;
-use hyper::service::{make_service_fn, service_fn};
-use hyper::Server;
+use bytes::Bytes;
+use http::{Request, Response};
+use http_body_util::Full;
+use hyper::server::conn::http1;
+use hyper::service::service_fn;
+use routes::router::router;
 use std::convert::Infallible;
-use std::env;
-use std::net::SocketAddr;
+use std::net::{Ipv4Addr, SocketAddrV4};
 use tokio::net::TcpListener;
+use utils::tokio_io::TokioIo;
+
 extern crate serde;
 extern crate serde_json;
 
@@ -19,8 +23,6 @@ use utils::database::Database;
 use utils::logger::Logger;
 use utils::settings::Settings;
 
-use crate::utils::settings;
-
 fn setup_enviroment() -> Settings {
     match Settings::new() {
         Ok(value) => value,
@@ -28,23 +30,32 @@ fn setup_enviroment() -> Settings {
     }
 }
 
-fn setup_logger(settings: Settings) {
+fn setup_logger(settings: &Settings) {
     Logger::setup(&settings);
 }
 
-fn setup_server(settings: Settings) -> TcpListener {
-    let ip: (i32, i32, i32, i32) = settings
-        .server
-        .address
-        .split(',')
-        .map(|x| x.parse::<i32>().unwrap())
-        .collect()
-        .unwrap();
+fn setup_server(settings: &Settings) -> SocketAddrV4 {
+    let ip: (u8, u8, u8, u8) =
+        settings
+            .server
+            .address
+            .split(',')
+            .enumerate()
+            .fold((0, 0, 0, 0), |mut acc, (index, x)| {
+                let x_string = x.parse::<i32>().unwrap().try_into().unwrap();
+                match index {
+                    0 => acc.0 = x_string,
+                    1 => acc.1 = x_string,
+                    2 => acc.2 = x_string,
+                    3 => acc.3 = x_string,
+                    _ => println!("Hello"),
+                }
+                acc
+            });
 
-    let addr = SocketAddr::from((ip, settings.server.port));
+    SocketAddrV4::new(Ipv4Addr::new(ip.0, ip.1, ip.2, ip.3), settings.server.port)
 
     // Bind to the port and listen for incoming TCP connections
-    TcpListener::bind(addr)
 }
 
 // An async function that consumes a request, does nothing with it and returns a
@@ -59,9 +70,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let settings = setup_enviroment();
 
     //setup logger
-    setup_logger(settings);
+    setup_logger(&settings);
 
-    let db = match Database::setup(&settings).await {
+    let db: Database = match Database::setup(&settings).await {
         Ok(value) => value,
         Err(_) => panic!("Failed to setup database connection"),
     };
@@ -77,8 +88,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     //     }
     // });
 
-    let listener_promise = setup_server(settings);
-    let listener = listener_promise.await?;
+    let address = setup_server(&settings);
+    let listener = TcpListener::bind(address).await?;
 
     loop {
         // When an incoming TCP connection is received grab a TCP stream for
@@ -101,7 +112,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             // Handle the connection from the client using HTTP1 and pass any
             // HTTP requests received on that connection to the `hello` function
             if let Err(err) = http1::Builder::new()
-                .serve_connection(io, service_fn(hello))
+                .serve_connection(
+                    io,
+                    service_fn(
+                        |req: Request<hyper::body::Incoming>| async move { router(req, db) },
+                    ),
+                )
                 .await
             {
                 println!("Error serving connection: {:?}", err);

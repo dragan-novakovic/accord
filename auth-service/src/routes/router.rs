@@ -3,7 +3,6 @@ use crate::{
     utils::{
         context::{full, BoxBody},
         errors::GenericError,
-        settings::Database,
     },
 };
 use http::header;
@@ -30,7 +29,7 @@ static NOTFOUND: &[u8] = b"Not Found";
 
 pub async fn router(
     req: Request<body::Incoming>,
-    db: Database,
+    db: mongodb::Database,
 ) -> Result<Response<BoxBody>, GenericError> {
     match (req.method(), req.uri().path()) {
         //  (&Method::OPTIONS, "/") => preflight(req).await,

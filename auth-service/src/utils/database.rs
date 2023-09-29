@@ -8,7 +8,7 @@ pub struct Database {
 }
 
 impl Database {
-    pub async fn setup(settings: &Settings) -> Result<Self, mongodb::error::Error> {
+    pub async fn setup(settings: Settings) -> Result<Self, mongodb::error::Error> {
         // let connection = mongodb::Client::with_uri_str(db_uri)
         //     .await?
         //     .database(db_name);

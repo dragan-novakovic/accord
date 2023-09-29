@@ -6,7 +6,7 @@ use crate::{
     },
 };
 use http::header;
-use hyper::{body, http, Method, Request, Response, StatusCode};
+use hyper::{body::Incoming, http, Method, Request, Response, StatusCode};
 
 static NOTFOUND: &[u8] = b"Not Found";
 
@@ -16,28 +16,29 @@ static NOTFOUND: &[u8] = b"Not Found";
 // implement 0auth Microsoft
 // implement 0auth Apple
 // implement Windows hello ?
-// pub async fn preflight(req: Request<Body>) -> Result<Response<Body>, http::Error> {
-//     let _whole_body = hyper::body::aggregate(req).await.unwrap();
+// pub async fn preflight(req: Request<Incoming>) -> Result<Response<BoxBody>, GenericError> {
 //     let response = Response::builder()
 //         .status(StatusCode::OK)
 //         .header("Access-Control-Allow-Origin", "*")
 //         .header("Access-Control-Allow-Headers", "*")
 //         .header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
-//         .body(Body::default())?;
+//         .body(Empty::<Bytes>::new().boxed())?;
 //     Ok(response)
-//}
+// }
 
 pub async fn router(
-    req: Request<body::Incoming>,
+    req: Request<Incoming>,
     db: mongodb::Database,
 ) -> Result<Response<BoxBody>, GenericError> {
     match (req.method(), req.uri().path()) {
-        //  (&Method::OPTIONS, "/") => preflight(req).await,
+        // (&Method::OPTIONS, "/") => preflight(req),
         (&Method::POST, "/register") => register(req, db).await,
         (&Method::POST, "/login") => login(req, db).await,
         (&Method::GET, "/status") => Ok(Response::builder()
             .status(StatusCode::OK)
             .header(header::CONTENT_TYPE, "application/json")
+            .header(header::ACCESS_CONTROL_ALLOW_ORIGIN, "*")
+            .header(header::ACCESS_CONTROL_ALLOW_HEADERS, "*")
             .body(full("{\"status\": \"OK\"}"))
             .unwrap()),
         _ => Ok(Response::builder()
@@ -76,22 +77,6 @@ pub async fn router(
 //             .unwrap(),
 //     };
 //     Ok(res)
-// }
-
-// async fn response_examples(req: Request<IncomingBody>) -> Result<Response<BoxBody>> {
-//     match (req.method(), req.uri().path()) {
-//         (&Method::GET, "/") | (&Method::GET, "/index.html") => Ok(Response::new(full(INDEX))),
-//         (&Method::GET, "/test.html") => client_request_response().await,
-//         (&Method::POST, "/json_api") => api_post_response(req).await,
-//         (&Method::GET, "/json_api") => api_get_response().await,
-//         _ => {
-//             // Return 404 not found response.
-//             Ok(Response::builder()
-//                 .status(StatusCode::NOT_FOUND)
-//                 .body(full(NOTFOUND))
-//                 .unwrap())
-//         }
-//     }
 // }
 
 // #[tokio::main]

@@ -35,14 +35,16 @@ fn setup_logger(settings: &Settings) {
 }
 
 fn setup_server(settings: &Settings) -> SocketAddrV4 {
+    dbg!(&settings.server.address);
+
     let ip: (u8, u8, u8, u8) =
         settings
             .server
             .address
-            .split(',')
+            .split('.')
             .enumerate()
             .fold((0, 0, 0, 0), |mut acc, (index, x)| {
-                let x_string = x.parse::<i32>().unwrap().try_into().unwrap();
+                let x_string = x.parse::<u8>().unwrap().try_into().unwrap();
                 match index {
                     0 => acc.0 = x_string,
                     1 => acc.1 = x_string,

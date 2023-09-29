@@ -1,4 +1,4 @@
-use super::errors::GenericError;
+//use super::errors::GenericError;
 use crate::utils::settings::Settings;
 use crate::Bytes;
 
@@ -16,7 +16,7 @@ impl Context {
     }
 }
 
-pub type Result<T> = std::result::Result<T, GenericError>;
+//pub type Result<T> = std::result::Result<T, GenericError>;
 pub type BoxBody = http_body_util::combinators::BoxBody<Bytes, hyper::Error>;
 
 pub fn full<T: Into<Bytes>>(chunk: T) -> BoxBody {

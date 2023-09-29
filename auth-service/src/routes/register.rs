@@ -9,7 +9,7 @@ use crate::{
 use bson::Bson;
 use bytes::Buf;
 use http_body_util::BodyExt;
-use hyper::{body::Incoming as IncomingBody, header, http, Request, Response, StatusCode};
+use hyper::{body::Incoming as IncomingBody, header, Request, Response, StatusCode};
 use mongodb::{
     bson::{doc, from_bson},
     Database,

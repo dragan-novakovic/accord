@@ -1,5 +1,5 @@
-use http::{header, Request, Response};
-use hyper::{body::Incoming, StatusCode};
+use http::{header, Response};
+use hyper::StatusCode;
 
 use super::{
     context::{full, BoxBody},

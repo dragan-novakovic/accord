@@ -13,3 +13,7 @@ Microservices for Discord-type app
 # Chat (C#)
 
 # Admin Portal (Svelte)
+
+### To-Do
+
+1. Admin Portal -> Auth (Docker)

@@ -2,7 +2,7 @@ Microservices for Discord-type app
 
 # Front (Flutter Cross-Platform)
 
-# Api-Gateway (Go)
+# Api-Gateway (Deno)
 
 # Auth (Rust)
 
@@ -16,4 +16,5 @@ Microservices for Discord-type app
 
 ### To-Do
 
-1. Admin Portal -> Auth (Docker)
+1. Admin Portal -> Auth (Docker) FIXED
+1. Gateway - hot-reloading

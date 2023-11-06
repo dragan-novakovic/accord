@@ -6,7 +6,9 @@ EXPOSE 1993
 WORKDIR /app
 
 # Prefer not to run as root.
-USER deno
+
+# Install denon
+RUN deno install -A --allow-read --allow-run --allow-write --allow-env -f --unstable https://deno.land/x/denon/denon.ts
 
 # Cache the dependencies as a layer (the following two steps are re-run only when deps.ts is modified).
 # Ideally cache deps.ts will download and compile _all_ external files used in main.ts.
@@ -16,4 +18,4 @@ COPY . .
 # Compile the main app so that it doesn't need to be compiled each startup/entry.
 RUN deno cache server.ts
 
-CMD ["run", "--allow-net", "server.ts"]
+CMD ["denon", "run", "--allow-net", "server.ts"]

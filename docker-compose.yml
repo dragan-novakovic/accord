@@ -11,15 +11,13 @@ services:
       - accord
   #GATEWAY
   gateway:
-    image: hellofreshtech/janus
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
     ports:
-      - "8080:8080"
-      - "8081:8081"
-    depends_on:
-      - nginx
-    volumes:
-      - ./janus.toml:/etc/janus/janus.toml
-      - ./apis:/etc/janus/apis
+      - 1993:1993
+    networks:
+      - accord
   #AUTH
   auth:
     container_name: auth
@@ -54,7 +52,7 @@ services:
     working_dir: /app
     command: bash -c "ls && npm run dev"
     depends_on:
-      - auth
+      - gateway
     networks:
       - accord
 

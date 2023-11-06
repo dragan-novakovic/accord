@@ -5,14 +5,14 @@
 
 	const login = async () => {
 		//console.log(form); // store(Observable) and Action
-		const x = await fetch('http://auth:3000/status');
+		const x = await fetch('http://localhost:1993/auth/status');
 		console.log(x.json());
-		const response = await fetch('http://auth:3000/register', {
-			method: 'POST',
-			body: JSON.stringify({ username: 'Test1', password: '123' })
-		});
-		const data = await response.json();
-		console.log({ data });
+		// const response = await fetch('http://auth:3000/register', {
+		// 	method: 'POST',
+		// 	body: JSON.stringify({ username: 'Test1', password: '123' })
+		// });
+		// const data = await response.json();
+		// console.log({ data });
 	};
 </script>
 

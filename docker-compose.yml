@@ -9,6 +9,17 @@ services:
       - admin-portal
     networks:
       - accord
+  #GATEWAY
+  gateway:
+    image: hellofreshtech/janus
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      - nginx
+    volumes:
+      - ./janus.toml:/etc/janus/janus.toml
+      - ./apis:/etc/janus/apis
   #AUTH
   auth:
     container_name: auth

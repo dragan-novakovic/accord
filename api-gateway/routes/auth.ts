@@ -47,14 +47,22 @@ export const AUTH = {
     }
 
     const body = context.request.body();
+    const realBody = await body.value;
 
-    const loginData = await fetch("http://auth:3000/login", {
+    const loginResponse = await fetch("http://auth:3000/login", {
       method: "POST",
-      body: JSON.stringify(body.value),
+      body: JSON.stringify(realBody),
     });
 
-    const userData = await loginData.json();
-    console.log(userData);
-    context.response.body = loginData;
+    const userData = await loginResponse.json();
+
+    const response = {
+      ...userData,
+      status: loginResponse.status,
+      statusText: loginResponse.statusText,
+    };
+
+    context.response.type = "aplication/json";
+    context.response.body = JSON.stringify(response);
   },
 };

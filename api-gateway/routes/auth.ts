@@ -5,7 +5,7 @@ export const AUTH__BASE_URL = "http://auth:3000";
 export const AUTH = {
   async getStatus(context: RouterContext<"/auth/status">) {
     const response = await fetch("http://auth:3000/status");
-
-    context.response.body = response;
+    console.log(response.json());
+    context.response.body = response.statusText;
   },
 };

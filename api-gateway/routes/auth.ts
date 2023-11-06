@@ -47,7 +47,9 @@ export const AUTH = {
     }
 
     const body = context.request.body();
-    const realBody = await body.value;
+    const realBody = JSON.parse(await body.value);
+
+    console.log(realBody);
 
     const loginResponse = await fetch("http://auth:3000/login", {
       method: "POST",

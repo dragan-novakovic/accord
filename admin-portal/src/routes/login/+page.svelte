@@ -4,15 +4,14 @@
 	const form = useForm();
 
 	const login = async () => {
-		//console.log(form); // store(Observable) and Action
-		const x = await fetch('http://localhost:1993/auth/status');
-		console.log(x.json());
-		// const response = await fetch('http://auth:3000/register', {
-		// 	method: 'POST',
-		// 	body: JSON.stringify({ username: 'Test1', password: '123' })
-		// });
-		// const data = await response.json();
-		// console.log({ data });
+		const {username, password} = $form.values;
+
+		const response = await fetch('http://localhost:1993/auth/login', {
+			method: 'POST',
+			body: JSON.stringify({ username, password })
+		});
+		const data = await response.json();
+		console.log({ data });
 	};
 </script>
 
@@ -24,25 +23,32 @@
 	<h1>Login</h1>
 </section>
 <form use:form>
-	<input type="email" name="email" use:validators={[required, email]} />
-	<HintGroup for="email">
+	<input type="username" name="username" />
+	<HintGroup for="username">
 		<Hint on="required">This is a mandatory field</Hint>
-		<Hint on="email" hideWhenRequired>Email is not valid</Hint>
+		<Hint on="username" hideWhenRequired>Email is not valid</Hint>
 	</HintGroup>
 
 	<input type="password" name="password" use:validators={[required]} />
 	<Hint for="password" on="required">This is a mandatory field</Hint>
 
-	<button disabled={!$form.valid} on:click={login}>Login</button>
+	<button on:click={login}>Login</button>
 </form>
-<pre>
-{JSON.stringify($form, null, ' ')}
-</pre>
+
 
 <style>
 	:global(.touched:invalid) {
 		border-color: red;
 		outline-color: red;
+	}
+
+
+	form {
+		padding-bottom: 20em;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
 	}
 
 	section {

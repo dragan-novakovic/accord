@@ -3,37 +3,38 @@
 
 	const form = useForm();
 
-	const login = async () => {
-		//console.log(form); // store(Observable) and Action
-		const x = await fetch('http://auth:3000/status');
-		console.log(x.json());
-		// const response = await fetch('http://auth:3000/register', {
-		// 	method: 'POST',
-		// 	body: JSON.stringify({ username: 'Test1', password: '123' })
-		// });
-		// const data = await response.json();
-		// console.log({ data });
+	const Register = async () => {
+		const {username, password} = $form.values;
+
+		console.log(email, password);
+		
+		const response = await fetch('http://localhost:1993/auth/register', {
+			method: 'POST',
+			body: JSON.stringify({ username , password })
+		});
+		
+const data = await response.json();
+		console.log({ data });
 	};
 </script>
 
 <svelte:head>
-	<title>Admin Portal | Login</title>
+	<title>Admin Portal | Register</title>
 </svelte:head>
 
 <section>
-	<h1>Login</h1>
+	<h1>Register</h1>
 </section>
 <form use:form>
-	<input type="email" name="email" use:validators={[required]} />
-	<HintGroup for="email">
+	<input type="username" name="username" />
+	<HintGroup for="username">
 		<Hint on="required">This is a mandatory field</Hint>
-		<Hint on="email" hideWhenRequired>Email is not valid</Hint>
+		<Hint on="username" hideWhenRequired>Email is not valid</Hint>
 	</HintGroup>
 
 	<input type="password" name="password" />
 	<Hint for="password" on="required">This is a mandatory field</Hint>
-    <div on:click={login}>helloooooo</div>
-	<button disabled={!$form.valid} on:click={login}>Login</button>
+	<button on:click={Register}>Register</button>
 </form>
 <pre>
 {JSON.stringify($form, null, ' ')}

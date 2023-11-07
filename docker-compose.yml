@@ -107,3 +107,18 @@ services:
 networks:
   accord:
     driver: bridge
+# services:
+#   redis:
+#     image: redis:2.8
+#     networks:
+#       frontapp:
+#         ipv4_address: 172.25.0.11
+
+# networks:
+#   frontapp:
+#     driver: bridge
+#     ipam:
+#       driver: default
+#       config:
+#         - subnet: 172.25.0.0/16
+#           gateway: 172.25.0.1

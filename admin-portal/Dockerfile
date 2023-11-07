@@ -2,7 +2,7 @@ FROM node:18-slim
 
 # install app dependencies
 COPY package.json .
-COPY package-lock.json .
+#COPY package-lock.json .
 RUN npm install --silent --force
 
 WORKDIR /app

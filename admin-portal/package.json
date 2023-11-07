@@ -27,6 +27,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@microsoft/signalr": "^7.0.10"
+		"@microsoft/signalr": "^7.0.10",
+		"flowbite-svelte": "0.44.19",
+		"flowbite-svelte-admin-dashboard": "0.0.3"
 	}
 }

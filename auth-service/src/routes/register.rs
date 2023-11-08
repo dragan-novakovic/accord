@@ -1,5 +1,5 @@
 use crate::{
-    models::users::User,
+    models::users::{PublicUser, User},
     utils::{
         builder_helper::res_builder,
         context::{full, BoxBody},
@@ -60,6 +60,7 @@ pub async fn register(
         .into();
 
     let new_user: User = from_bson(new_user_cursor).expect("Unable to parse from BSON");
+    let public_payload = PublicUser::from(new_user.clone());
 
     let response = Response::builder()
         .status(StatusCode::CREATED)
@@ -68,7 +69,7 @@ pub async fn register(
         .header("Access-Control-Allow-Headers", "*")
         .header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
         .header(header::LOCATION, "/login")
-        .body(full(serde_json::to_string(&new_user).unwrap()))?;
+        .body(full(serde_json::to_string(&public_payload).unwrap()))?;
 
     Ok(response)
 }

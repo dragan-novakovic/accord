@@ -1,20 +1,21 @@
 <script lang="ts">
-	import { useForm, validators, HintGroup, Hint, email, required } from 'svelte-use-form';
+	import { useForm, HintGroup, Hint  } from 'svelte-use-form';
 
 	const form = useForm();
 
 	const Register = async () => {
 		const {username, password} = $form.values;
 
-		console.log(email, password);
+		console.log(username, password);
 		
 		const response = await fetch('http://localhost:1993/auth/register', {
 			method: 'POST',
 			body: JSON.stringify({ username , password })
+
 		});
-		
-const data = await response.json();
-		console.log({ data });
+		const data = await response.json();
+		console.log({data})
+		//console.log({ data });
 	};
 </script>
 
@@ -37,7 +38,7 @@ const data = await response.json();
 	<button on:click={Register}>Register</button>
 </form>
 <pre>
-{JSON.stringify($form, null, ' ')}
+<!-- {JSON.stringify($form, null, ' ')} -->
 </pre>
 
 <style>

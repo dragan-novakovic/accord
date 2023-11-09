@@ -21,3 +21,4 @@ Microservices for Discord-type app
 1. Admin Portal -> Login/Register Added
 1. Persist User Data (UI)
 1. Websocket
+1. SignalR in docker + hot reload

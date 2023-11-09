@@ -68,9 +68,9 @@ services:
       - 5207:5207
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80;
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=C:\https\aspnetapp.pfx
+      - ASPNETCORE_URLS=https://+:443;http://+:80;http://+:5207;
+      # - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      # - ASPNETCORE_Kestrel__Certificates__Default__Path=C:\https\aspnetapp.pfx
     volumes:
       - ~/.aspnet/https:/https:ro
       - "./chat-service:/app"

@@ -1,7 +1,6 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
 
-COPY . .
 EXPOSE 5207
-
+WORKDIR /app
 RUN dotnet restore
-RUN dotnet watch
+CMD [ "dotnet", "watch", "--non-interactive" ]

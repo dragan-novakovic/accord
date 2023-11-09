@@ -73,6 +73,7 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Path=C:\https\aspnetapp.pfx
     volumes:
       - ~/.aspnet/https:/https:ro
+      - "./chat-service:/app"
     depends_on:
       - mongo
     networks:

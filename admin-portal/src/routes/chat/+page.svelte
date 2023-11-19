@@ -16,10 +16,19 @@
 
 	// Prebaci u state-managment
 	let serverData = null;
-	let msg = null;
+	let msg: string | null = null;
+	let userData = null;
+	let ReceiverId: string | null = null;
 
 	onMount(() => {
 		connection.start().catch((e) => console.log('On Mount Err', e));
+
+		const userDataStorage = localStorage.getItem('userData');
+		if (!userDataStorage) {
+			//alert('Login First');
+		} else {
+			userData = JSON.parse(userDataStorage);
+		}
 	});
 
 	connection.on('send', (data) => {
@@ -33,7 +42,7 @@
 	connection.start().catch((err) => console.log("Meh can't start", err));
 
 	const sendMessage = () => {
-		connection.invoke('SendMessage', 'UserId', msg, "ReceiverId", "Global");
+		connection.invoke('SendMessage', 'UserId', msg, ReceiverId, 'Global');
 	};
 </script>
 
@@ -43,12 +52,22 @@
 
 <section>
 	<h1>Chat Tester #1</h1>
-	<textarea value={serverData} class="big-box" disabled />
-	<input
-		placeholder="Type Message"
-		value={msg}
-		on:change={(event) => (msg = event.currentTarget.value)}
-	/>
+	<div class="main">
+		<div>
+			<input
+				placeholder="Receiver Id"
+				value={ReceiverId}
+				on:change={(event) => (ReceiverId = event.currentTarget.value)}
+			/>
+			<input
+				placeholder="Type Message"
+				value={msg}
+				on:change={(event) => (msg = event.currentTarget.value)}
+			/>
+		</div>
+		<textarea value={serverData} class="big-box" disabled />
+	</div>
+
 	<button on:click={sendMessage}>Send it</button>
 </section>
 
@@ -57,11 +76,15 @@
 		width: 100%;
 		min-height: 50%;
 		padding-bottom: 50px;
-		margin-bottom: 100px;
+		margin-bottom: 80px;
+	}
+
+	.main {
+		display: flex;
 	}
 
 	input {
-		width: 60%;
+		width: 70%;
 		padding-bottom: 35px;
 		margin-bottom: 30px;
 	}

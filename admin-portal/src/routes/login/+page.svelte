@@ -4,7 +4,7 @@
 	const form = useForm();
 
 	const login = async () => {
-		const {username, password} = $form.values;
+		const { username, password } = $form.values;
 
 		const response = await fetch('http://localhost:1993/auth/login', {
 			method: 'POST',
@@ -12,6 +12,8 @@
 		});
 		const data = await response.json();
 		console.log({ data });
+
+		localStorage.setItem('userData', JSON.stringify(data));
 	};
 </script>
 
@@ -35,13 +37,11 @@
 	<button on:click={login}>Login</button>
 </form>
 
-
 <style>
 	:global(.touched:invalid) {
 		border-color: red;
 		outline-color: red;
 	}
-
 
 	form {
 		padding-bottom: 20em;

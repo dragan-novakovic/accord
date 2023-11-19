@@ -33,7 +33,7 @@
 	connection.start().catch((err) => console.log("Meh can't start", err));
 
 	const sendMessage = () => {
-		connection.invoke('SendMessage', 'test1', msg);
+		connection.invoke('SendMessage', 'UserId', msg, "ReceiverId", "Global");
 	};
 </script>
 

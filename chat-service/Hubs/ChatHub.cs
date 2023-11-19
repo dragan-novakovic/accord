@@ -29,6 +29,7 @@ namespace SignalRChat.Hubs
 
         public async Task SendMessage(string userId, string messageContent, string? receiverId = null, string? roomId = null)
         {
+            Console.WriteLine("Inside SendMessage Invocation");
             string connectionId = GetConnectionId();
             // SAVE samewhere
             Console.WriteLine("Mapping User " + userId + " " + connectionId);

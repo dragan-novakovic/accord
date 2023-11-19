@@ -2,7 +2,7 @@ using SignalRChat.Hubs;
 using MongoDB.Driver;
 using Google.Cloud.Firestore;
 using System.Security.Cryptography.X509Certificates;
-using Microsoft.AspNetCore.Authentication.Certificate;
+// using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Http.Connections;
 
 

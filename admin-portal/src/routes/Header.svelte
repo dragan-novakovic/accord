@@ -30,7 +30,9 @@
 				<li aria-current={$page.url.pathname === '/login' ? 'page' : undefined}>
 					<a href="/login">Login</a>
 				</li>
-				<li aria-current={$page.url.pathname === '/register' ? 'page' : undefined}></li>
+				<li aria-current={$page.url.pathname === '/register' ? 'page' : undefined}>
+					<a href="/register">Register</a>
+				</li>
 			{/if}
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">

@@ -17,7 +17,7 @@
 	// Prebaci u state-managment
 	let serverData = null;
 	let msg: string | null = null;
-	let userData = null;
+	let userData: any = null;
 	let ReceiverId: string | null = null;
 
 	onMount(() => {
@@ -25,7 +25,7 @@
 
 		const userDataStorage = localStorage.getItem('userData');
 		if (!userDataStorage) {
-			//alert('Login First');
+			alert('Login First');
 		} else {
 			userData = JSON.parse(userDataStorage);
 		}
@@ -42,7 +42,7 @@
 	connection.start().catch((err) => console.log("Meh can't start", err));
 
 	const sendMessage = () => {
-		connection.invoke('SendMessage', 'UserId', msg, ReceiverId, 'Global');
+		connection.invoke('SendMessage', userData.id, msg, ReceiverId, 'Global');
 	};
 </script>
 
@@ -51,7 +51,7 @@
 </svelte:head>
 
 <section>
-	<h1>Chat Tester #1</h1>
+	<h1>Chat Tester #{userData.username}</h1>
 	<div class="main">
 		<div>
 			<input

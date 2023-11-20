@@ -3,6 +3,14 @@
 
 	const form = useForm();
 
+	interface LoginResponse {
+		id: string;
+		status: number;
+		statusText: string;
+		token: string;
+		username: string;
+	}
+
 	const login = async () => {
 		const { username, password } = $form.values;
 
@@ -10,8 +18,7 @@
 			method: 'POST',
 			body: JSON.stringify({ username, password })
 		});
-		const data = await response.json();
-		console.log({ data });
+		const data: LoginResponse = await response.json();
 
 		localStorage.setItem('userData', JSON.stringify(data));
 	};

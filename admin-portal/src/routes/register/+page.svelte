@@ -1,21 +1,30 @@
 <script lang="ts">
-	import { useForm, HintGroup, Hint  } from 'svelte-use-form';
+	import { useForm, HintGroup, Hint } from 'svelte-use-form';
+	import { goto } from '$app/navigation';
 
 	const form = useForm();
+	interface RegisterResponse {
+		id: string;
+		status: number;
+		statusText: string;
+		token: null;
+		username: string;
+	}
 
 	const Register = async () => {
-		const {username, password} = $form.values;
+		const { username, password } = $form.values;
 
 		console.log(username, password);
-		
+
 		const response = await fetch('http://localhost:1993/auth/register', {
 			method: 'POST',
-			body: JSON.stringify({ username , password })
-
+			body: JSON.stringify({ username, password })
 		});
-		const data = await response.json();
-		console.log({data})
-		//console.log({ data });
+		const data: RegisterResponse = await response.json();
+
+		if (data.status === 201) {
+			goto('/login');
+		}
 	};
 </script>
 

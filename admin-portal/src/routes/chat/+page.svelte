@@ -51,7 +51,8 @@
 </svelte:head>
 
 <section>
-	<h1>Chat Tester #{userData.username}</h1>
+	<h1>Chat Tester # {userData.username}</h1>
+	<h2>Id: {userData.id}</h2>
 	<div class="main">
 		<div>
 			<input

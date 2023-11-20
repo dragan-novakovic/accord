@@ -17,7 +17,7 @@
 	// Prebaci u state-managment
 	let serverData = null;
 	let msg: string | null = null;
-	let userData: any = null;
+	let userData: any = { username: 'Default' };
 	let ReceiverId: string | null = null;
 
 	onMount(() => {

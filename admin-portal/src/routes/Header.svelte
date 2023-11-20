@@ -1,6 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	let username = { username: 'Default' };
+	let username = null;
 
 	if (typeof window !== 'undefined') {
 		const userData = localStorage.getItem('userData');

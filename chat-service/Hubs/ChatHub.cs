@@ -27,33 +27,31 @@ namespace SignalRChat.Hubs
             await Groups.AddToGroupAsync(GetConnectionId(), groupName);
         }
 
-        public async Task SendMessage(string userId, string messageContent, string? receiverId = null, string? roomId = null)
+        public async Task SendMessage(string userId, string messageContent, string receiverId, string roomId = "None")
         {
             Console.WriteLine("Inside SendMessage Invocation");
             string connectionId = GetConnectionId();
             // SAVE samewhere
-            Console.WriteLine("Mapping User " + userId + " " + connectionId);
+            Console.WriteLine("Mapping User " + userId + "=>" + connectionId);
             _cache.Set(userId, connectionId);
 
-            if (roomId != null)
+            if (roomId != "None" && roomId != receiverId)
             {
                 await AddToGroup(roomId);
-
-                if (roomId == receiverId)
-                {
-                    await Clients.Group(roomId).SendAsync(messageContent);
-                }
             }
 
 
             string? receiverConnectionId = (string?)_cache.Get(receiverId);
             if (receiverConnectionId != null)
             {
-                Console.WriteLine("Sending to " + receiverConnectionId);
+                Console.WriteLine($"Sending to user: {receiverId} with connection: {receiverConnectionId}");
                 await Clients.User(receiverConnectionId).SendAsync(messageContent);
             }
-            Console.WriteLine("Sending to RECE");
-            await Clients.User(receiverId).SendAsync(messageContent);
+            else
+            {
+                Console.WriteLine($"User not Mapped in Cache - {receiverId}");
+
+            }
 
 
             MessageModel msg = new(userId, receiverId, messageContent, roomId);
@@ -71,7 +69,7 @@ namespace SignalRChat.Hubs
 
         public async Task SaveMessage(MessageModel msg)
         {
-            Console.WriteLine("Save to DB");
+            Console.WriteLine($"TODO: Save to DB");
             // await _messageService.CreateAsync(msg);
         }
     }

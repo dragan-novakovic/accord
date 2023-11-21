@@ -35,7 +35,7 @@
 <section>
 	<h1>Register</h1>
 </section>
-<form use:form>
+<form use:form data-sveltekit-preload-data="off">
 	<input type="username" name="username" />
 	<HintGroup for="username">
 		<Hint on="required">This is a mandatory field</Hint>

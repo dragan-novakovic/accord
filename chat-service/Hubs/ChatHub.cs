@@ -18,8 +18,7 @@ namespace SignalRChat.Hubs
 
         public override async Task OnConnectedAsync()
         {
-            // await Groups.AddToGroupAsync(Context.ConnectionId, "SignalR Users");
-            Console.WriteLine($"User Identifier: {Context.UserIdentifier},  User: {Context.User}, Items: {Context.Items}");
+            //   Console.WriteLine($"User Identifier: {Context.UserIdentifier},  User: {Context.User}, Items: {Context.Items}");
             await base.OnConnectedAsync();
         }
 
@@ -41,7 +40,7 @@ namespace SignalRChat.Hubs
             await Groups.AddToGroupAsync(GetConnectionId(), groupName);
         }
 
-        public void AddToCache(string userId)
+        public async Task AddToCache(string userId)
         {
             Func<ICacheEntry, List<string>> factory = entry =>
             {
@@ -109,8 +108,7 @@ namespace SignalRChat.Hubs
 
         public async Task SaveMessage(MessageModel msg)
         {
-            Console.WriteLine($"TODO: Save to DB");
-            // await _messageService.CreateAsync(msg);
+            await _messageService.CreateAsync(msg);
         }
     }
 }

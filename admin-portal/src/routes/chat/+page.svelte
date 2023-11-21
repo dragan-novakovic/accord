@@ -22,22 +22,25 @@
 	let ReceiverId: string | null = null;
 
 	onMount(() => {
-		connection.start().catch((e) => console.log('On Mount Err', e));
-		
-		const userDataStorage = localStorage.getItem('userData');
+		connection.start().then(() => {
+	const userDataStorage = localStorage.getItem('userData');
 		if (!userDataStorage) {
 			alert('Login First');
 		} else {
 			userData = JSON.parse(userDataStorage);
+			connection.send('AddToCache', userData.id);
 		}
+
+}).catch((e) => console.log('On Mount Err', e));
+		
+	
 	});
 
 	connection.on('send', (data) => {
 		console.log('Zasto zoves send?', data);
 	});
 	connection.on('ReceiveMessage', (data) => {
-		console.log("CONNECTION_ID ???", connection.connectionId)
-		console.log('Podaci sa servera', data);
+		console.log('Response', data);
 		serverData = serverData ? serverData + data : data;
 	});
 

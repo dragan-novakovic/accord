@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-	import { HubConnectionBuilder, HttpTransportType } from '@microsoft/signalr';
+	import { HubConnectionBuilder, HttpTransportType, LogLevel } from '@microsoft/signalr';
 	import { onMount } from 'svelte';
 
 	let connection = new HubConnectionBuilder()
@@ -12,6 +12,7 @@
 			skipNegotiation: true,
 			transport: HttpTransportType.WebSockets
 		})
+		.configureLogging(LogLevel.Trace)
 		.build();
 
 	// Prebaci u state-managment
@@ -22,7 +23,7 @@
 
 	onMount(() => {
 		connection.start().catch((e) => console.log('On Mount Err', e));
-
+		
 		const userDataStorage = localStorage.getItem('userData');
 		if (!userDataStorage) {
 			alert('Login First');
@@ -34,12 +35,12 @@
 	connection.on('send', (data) => {
 		console.log('Zasto zoves send?', data);
 	});
-	connection.on('receive', (data) => {
+	connection.on('ReceiveMessage', (data) => {
+		console.log("CONNECTION_ID ???", connection.connectionId)
 		console.log('Podaci sa servera', data);
 		serverData = serverData ? serverData + data : data;
 	});
 
-	connection.start().catch((err) => console.log("Meh can't start", err));
 
 	const sendMessage = () => {
 		connection.invoke('SendMessage', userData.id, msg, ReceiverId, ReceiverId);

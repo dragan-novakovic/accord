@@ -15,6 +15,20 @@ namespace SignalRChat.Hubs
             _messageService = messageService;
         }
 
+
+        public override async Task OnConnectedAsync()
+        {
+            // await Groups.AddToGroupAsync(Context.ConnectionId, "SignalR Users");
+            Console.WriteLine($"User Identifier: {Context.UserIdentifier},  User: {Context.User}, Items: {Context.Items}");
+            await base.OnConnectedAsync();
+        }
+
+
+        public override async Task OnDisconnectedAsync(Exception? exception)
+        {
+            await base.OnDisconnectedAsync(exception);
+        }
+
         // ConnectionID that will indentify the User
         public string GetConnectionId()
         {
@@ -27,30 +41,56 @@ namespace SignalRChat.Hubs
             await Groups.AddToGroupAsync(GetConnectionId(), groupName);
         }
 
-        public async Task SendMessage(string userId, string messageContent, string receiverId, string roomId = "None")
+        public void AddToCache(string userId)
         {
-            Console.WriteLine("Inside SendMessage Invocation");
-            string connectionId = GetConnectionId();
-            // SAVE samewhere
-            Console.WriteLine("Mapping User " + userId + "=>" + connectionId);
-            _cache.Set(userId, connectionId);
-
-            if (roomId != "None" && roomId != receiverId)
+            Func<ICacheEntry, List<string>> factory = entry =>
             {
-                await AddToGroup(roomId);
+                // Set some options for the cache entry, such as expiration
+                // entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
+                return [];
+            };
+
+
+            string connectionId = GetConnectionId();
+            Console.WriteLine("Mapping User " + userId + "=>" + connectionId);
+
+            List<string>? userConnections = _cache.GetOrCreate(userId, factory);
+
+            if (userConnections != null)
+            {
+                userConnections.Add(connectionId);
+                _cache.Set(userId, userConnections);
             }
 
 
-            string? receiverConnectionId = (string?)_cache.Get(receiverId);
-            if (receiverConnectionId != null)
+        }
+
+        public async Task SendMessage(string userId, string messageContent, string receiverId = "None", string roomId = "None")
+        {
+            Console.WriteLine("Inside SendMessage Invocation");
+
+            if (roomId != "None" && roomId != receiverId && receiverId == "None")
             {
-                Console.WriteLine($"Sending to user: {receiverId} with connection: {receiverConnectionId}");
-                await Clients.User(receiverConnectionId).SendAsync(messageContent);
+                await AddToGroup(roomId);
+                await Clients.Group(roomId).SendAsync("ReceiveMessage", messageContent);
+            }
+
+            // Get Receiver connections
+            List<string>? receiverConnections = _cache.Get<List<string>>(receiverId);
+            if (receiverConnections != null)
+            {
+                receiverConnections.ForEach(async connection =>
+                {
+
+                    Console.WriteLine($"Sending to user: {receiverId} with connection: {connection}");
+                    await Clients.Client(connection).SendAsync("ReceiveMessage", messageContent);
+
+                });
+
             }
             else
             {
                 Console.WriteLine($"User not Mapped in Cache - {receiverId}");
-
             }
 
 

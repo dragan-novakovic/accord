@@ -1,98 +1,98 @@
 version: "3.7"
 
 services:
-  nginx:
-    build: ./nginx
-    ports:
-      - "80:80"
-    depends_on:
-      - admin-portal
-    networks:
-      - accord
-  #GATEWAY
-  gateway:
-    build:
-      context: ./api-gateway
-      dockerfile: Dockerfile
-    ports:
-      - 1993:1993
-    volumes:
-      - "./api-gateway:/app"
-    networks:
-      - accord
-  #AUTH
-  auth:
-    container_name: auth
-    build:
-      context: ./auth-service
-      dockerfile: Dockerfile
-    volumes:
-      - ./auth-service:/user/src/auth-service
-    ports:
-      - 3000:3000
-    environment:
-      USER: Dragan
-    command: cargo run
-    depends_on:
-      - mongo
-    networks:
-      - accord
+  # nginx:
+  #   build: ./nginx
+  #   ports:
+  #     - "80:80"
+  #   depends_on:
+  #     - admin-portal
+  #   networks:
+  #     - accord
+  # #GATEWAY
+  # gateway:
+  #   build:
+  #     context: ./api-gateway
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 1993:1993
+  #   volumes:
+  #     - "./api-gateway:/app"
+  #   networks:
+  #     - accord
+  # #AUTH
+  # auth:
+  #   container_name: auth
+  #   build:
+  #     context: ./auth-service
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./auth-service:/user/src/auth-service
+  #   ports:
+  #     - 3000:3000
+  #   environment:
+  #     USER: Dragan
+  #   command: cargo run
+  #   depends_on:
+  #     - mongo
+  #   networks:
+  #     - accord
 
-  # ADMIN-PORTAL
-  admin-portal:
-    container_name: admin_portal
-    build:
-      context: ./admin-portal
-      dockerfile: Dockerfile
-    ports:
-      - 5173:5173
-      - 3101:3101
-    environment:
-      - ASPNETCORE_ENVIRONMENT=IS_IT
-    volumes:
-      - "./admin-portal:/app"
-    working_dir: /app
-    command: bash -c "ls && npm run dev"
-    depends_on:
-      - gateway
-    networks:
-      - accord
+  # # ADMIN-PORTAL
+  # admin-portal:
+  #   container_name: admin_portal
+  #   build:
+  #     context: ./admin-portal
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 5173:5173
+  #     - 3101:3101
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=IS_IT
+  #   volumes:
+  #     - "./admin-portal:/app"
+  #   working_dir: /app
+  #   command: bash -c "ls && npm run dev"
+  #   depends_on:
+  #     - gateway
+  #   networks:
+  #     - accord
 
   # CHAT:
-  chat:
-    container_name: chat
-    build:
-      context: ./chat-service
-      dockerfile: Dockerfile
-    ports:
-      - 5207:5207
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80;http://+:5207;
-      # - ASPNETCORE_Kestrel__Certificates__Default__Password=
-      # - ASPNETCORE_Kestrel__Certificates__Default__Path=C:\https\aspnetapp.pfx
-    volumes:
-      - ~/.aspnet/https:/https:ro
-      - "./chat-service:/app"
-    depends_on:
-      - mongo
-    networks:
-      - accord
+  # chat:
+  #   container_name: chat
+  #   build:
+  #     context: ./chat-service
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 5207:5207
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_URLS=https://+:443;http://+:80;http://+:5207;
+  #     # - ASPNETCORE_Kestrel__Certificates__Default__Password=
+  #     # - ASPNETCORE_Kestrel__Certificates__Default__Path=C:\https\aspnetapp.pfx
+  #   volumes:
+  #     - ~/.aspnet/https:/https:ro
+  #     - "./chat-service:/app"
+  #   depends_on:
+  #     - mongo
+  #   networks:
+  #     - accord
   #MONGO
-  mongo:
-    image: mongo:7
-    container_name: mongodb
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin
-      MONGO_INITDB_DATABASE: CHAT-SERVICE # Split dbs?
-    ports:
-      - 27017:27017
-    volumes:
-      - ./mongodb/mongo-init.js:/docker-entrypoint-initdb.d/init.js:ro
-    networks:
-      - accord
+  # mongo:
+  #   image: mongo:7
+  #   container_name: mongodb
+  #   restart: always
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: admin
+  #     MONGO_INITDB_ROOT_PASSWORD: admin
+  #     MONGO_INITDB_DATABASE: CHAT-SERVICE # Split dbs?
+  #   ports:
+  #     - 27017:27017
+  #   volumes:
+  #     - ./mongodb/mongo-init.js:/docker-entrypoint-initdb.d/init.js:ro
+  #   networks:
+  #     - accord
 
   #  POSTGRES
   postgres:

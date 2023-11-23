@@ -94,17 +94,19 @@ services:
     networks:
       - accord
 
-  # POSTGRES
-  # postgres:
-  #   container_name: postgres
-  #   restart: always
-  #   build: postgres
-  #   ports:
-  #     - 5555:5432
-  #   environment:
-  #     POSTGRES_PASSWORD: docker
-  #     POSTGRES_USER: docker
-  #     POSTGRES_DB: ROOM-SERVICE
+  #  POSTGRES
+  postgres:
+    container_name: postgres
+    restart: always
+    build: postgres
+    ports:
+      - 5555:5432
+    environment:
+      POSTGRES_PASSWORD: docker
+      POSTGRES_USER: docker
+      POSTGRES_DB: ROOM-SERVICE
+    networks:
+      - accord
 
 networks:
   accord:

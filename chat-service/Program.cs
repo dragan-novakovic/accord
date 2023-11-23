@@ -40,33 +40,6 @@ switch (CONFIG.GetValue<string>("useDB"))
             });
             break;
         }
-    // case "Firebase":
-    //     {
-    //         builder.Services.AddSingleton(s =>
-    //             {
-
-    //                 try
-    //                 {
-    //                     var firestore = new FirestoreDbBuilder
-    //                     {
-    //                         ProjectId = CONFIG.GetConnectionString("Firebase"),
-    //                         EmulatorDetection = Google.Api.Gax.EmulatorDetection.EmulatorOrProduction
-    //                     }
-    // .Build();
-    //                     return firestore;
-    //                 }
-    //                 catch (System.Exception e)
-    //                 {
-    //                     Console.WriteLine($"ERRRR, {e}");
-    //                     throw;
-    //                 }
-
-    //             }
-    //                     );
-
-    //         Console.WriteLine("To-do");
-    //         break;
-    //     };
     default:
         Console.WriteLine("No DB connection provided!");
         break;

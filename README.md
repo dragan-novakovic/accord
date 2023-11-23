@@ -17,8 +17,11 @@ Microservices for Discord-type app
 ### To-Do
 
 1. Admin Portal -> Auth (Docker) FIXED
-1. Gateway - hot-reloading ~
-1. Admin Portal -> Login/Register Added
-1. Persist User Data (UI)
-1. Websocket
-1. SignalR in docker + hot reload
+1. Gateway - hot-reloading ~ FIXED
+1. Admin Portal -> Login/Register Added FIXED
+1. Persist User Data (UI) FIXED
+1. Websocket FIXED
+1. SignalR in docker + hot reload FIXED
+1. Cuvanje Poruka u Mongo FIXED
+1. Room + Message
+1. 

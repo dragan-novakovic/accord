@@ -22,8 +22,8 @@ public class RoomController : ControllerBase
 
 
     [HttpGet]
-    public async Task<List<MessageModel>> GetAllRooms()
+    public async Task<List<RoomModel>> GetAllRooms()
     {
-        return _roomService.GetAllRoomsAsync();
+        return await _roomService.GetAllRoomsAsync();
     }
 }

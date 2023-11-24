@@ -9,14 +9,14 @@ public class RoomService : IRoomService
         _roomRepository = roomRepository;
     }
 
-    public override Task CreateRoomAsync(RoomModel newRoom)
+    public override async Task CreateRoomAsync(RoomModel newRoom)
     {
         throw new NotImplementedException();
     }
 
     public override async Task<List<RoomModel>> GetAllRoomsAsync()
     {
-        List<RoomModel> rooms = (List<RoomModel>)_roomRepository.GetRooms();
+        List<RoomModel> rooms = await _roomRepository.GetRooms();
 
         return rooms;
     }

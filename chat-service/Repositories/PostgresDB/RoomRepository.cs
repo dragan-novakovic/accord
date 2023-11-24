@@ -1,13 +1,15 @@
 
+using Microsoft.EntityFrameworkCore;
+
 public class RoomRepository : GenericRepository<RoomModel>, IRoomRepository
 {
     public RoomRepository(GenericDbContext _context) : base(_context)
     {
     }
 
-    public IEnumerable<RoomModel> GetRooms()
+    public async Task<List<RoomModel>> GetRooms()
     {
-        return _context.Rooms.ToList();
+        return await _context.Rooms.ToListAsync();
     }
     public IEnumerable<RoomModel> GetRoomsForUser(string userId)
     {

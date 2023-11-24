@@ -23,5 +23,5 @@ Microservices for Discord-type app
 1. Websocket FIXED
 1. SignalR in docker + hot reload FIXED
 1. Cuvanje Poruka u Mongo FIXED
-1. Room + Message
+1. ROOM USER PORUKE Relationship
 1. 

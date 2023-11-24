@@ -1,5 +1,5 @@
 
-public class RoomRepository : GenericRepository<RoomModel>, IRoomRepository
+public class UserRepository : GenericRepository<RoomModel>, IRoomRepository
 {
     public IEnumerable<Employee> GetEmployeesByGender(string Gender)
     {

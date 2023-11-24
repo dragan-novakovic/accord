@@ -19,7 +19,19 @@ public static class DataSeeder
         context.Rooms.Add(new RoomModel
         {
             Id = 1,
-            RoomName = "Probna Soba 1"
+            RoomName = "Probna Soba 1",
+
+        });
+        context.Rooms.Add(new RoomModel
+        {
+            Id = 2,
+            RoomName = "Probna Soba 2",
+
+        });
+        context.Rooms.Add(new RoomModel
+        {
+            Id = 3,
+            RoomName = "Probna Soba 3",
 
         });
         context.SaveChanges();

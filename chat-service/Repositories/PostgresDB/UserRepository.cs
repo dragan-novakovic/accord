@@ -1,21 +1,16 @@
 
-public class UserRepository : GenericRepository<RoomModel>, IRoomRepository
+public class UserRepository : GenericRepository<UserMetadataModel>, IUserRepository
 {
-    public IEnumerable<Employee> GetEmployeesByGender(string Gender)
+    public UserRepository(GenericDbContext _context) : base(_context)
     {
-        return _context.Employees.Where(emp => emp.Gender == Gender).ToList();
-    }
-    public IEnumerable<Employee> GetEmployeesByDepartment(string Dept)
-    {
-        return _context.Employees.Where(emp => emp.Dept == Dept).ToList();
     }
 
-    public IEnumerable<RoomModel> GetRooms()
+    public IEnumerable<UserMetadataModel> GetUserMetadata(string userId)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<RoomModel> GetRoomsForUser(string userId)
+    public IEnumerable<UserMetadataModel> GetUserMetadataModels()
     {
         throw new NotImplementedException();
     }

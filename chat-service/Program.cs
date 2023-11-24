@@ -50,7 +50,7 @@ switch (CONFIG.GetValue<string>("useDB"))
 builder.Services.AddControllers();
 builder.Services.AddSignalR(hubOptions => { hubOptions.HandshakeTimeout = TimeSpan.FromSeconds(15); hubOptions.KeepAliveInterval = TimeSpan.FromSeconds(15); hubOptions.EnableDetailedErrors = true; });
 builder.Services.AddMemoryCache();
-builder.Services.AddDbContext<RoomDataContext>(o => o.UseNpgsql(CONFIG.GetConnectionString("Postgres")));
+builder.Services.AddDbContext<GenericDbContext>(o => o.UseNpgsql(CONFIG.GetConnectionString("Postgres")));
 builder.Services.AddScoped<IMessageService, MessageService>(sp => new MessageService(sp.GetService<IMongoClient>()));
 //builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
 

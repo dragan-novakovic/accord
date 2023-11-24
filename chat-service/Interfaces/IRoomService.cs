@@ -1,6 +1,6 @@
 
 public abstract class IRoomService
 {
-    public abstract Task<List<MessageModel>> GetAsync();
-    public abstract Task CreateAsync(MessageModel newMessage);
+    public abstract Task<List<RoomModel>> GetAllRoomsAsync();
+    public abstract Task CreateRoomAsync(RoomModel newRoom);
 }

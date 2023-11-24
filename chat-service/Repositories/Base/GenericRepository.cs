@@ -3,28 +3,21 @@
 //And Here T is going to be a class
 //While Creating an Instance of the GenericRepository type, we need to specify the Class Name
 //That is we need to specify the actual class name of the type T
+using Microsoft.EntityFrameworkCore;
+
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
     //The following variable is going to hold the EmployeeDBContext instance
-    protected EmployeeDBContext _context = null;
+    protected GenericDbContext _context = null;
 
     //The following Variable is going to hold the DbSet Entity
     protected DbSet<T> table = null;
 
     //Using the Parameterless Constructor, 
     //we are initializing the context object and table variable
-    public GenericRepository()
-    {
-        this._context = new EmployeeDBContext();
-
-        //Whatever class name we specify while creating the instance of GenericRepository
-        //That class name will be stored in the table variable
-        table = _context.Set<T>();
-    }
-
     //Using the Parameterized Constructor, 
     //we are initializing the context object and table variable
-    public GenericRepository(EmployeeDBContext _context)
+    public GenericRepository(GenericDbContext _context)
     {
         this._context = _context;
         table = _context.Set<T>();

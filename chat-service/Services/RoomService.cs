@@ -1,24 +1,23 @@
-using MongoDB.Driver;
 
-public class RoomService : IMessageService
+
+public class RoomService : IRoomService
 {
-    private readonly MessageRepository _messageRepository;
+    private readonly IRoomRepository _roomRepository;
 
-    public RoomService(IMongoClient mongoClient)
+    public RoomService(IRoomRepository roomRepository)
     {
-        _messageRepository = new Mongodb_MessageRepository(mongoClient);
+        _roomRepository = roomRepository;
     }
-    override public async Task CreateAsync(MessageModel newMessage)
+
+    public override Task CreateRoomAsync(RoomModel newRoom)
     {
-
-        Console.WriteLine("MESSAGE SERVICE HERE");
-        await _messageRepository.CreateAsync(newMessage);
-
-
+        throw new NotImplementedException();
     }
-    override public async Task<List<MessageModel>> GetAsync()
+
+    public override async Task<List<RoomModel>> GetAllRoomsAsync()
     {
-        List<MessageModel> messages = await _messageRepository.GetAsync();
-        return messages;
+        List<RoomModel> rooms = (List<RoomModel>)_roomRepository.GetRooms();
+
+        return rooms;
     }
 }

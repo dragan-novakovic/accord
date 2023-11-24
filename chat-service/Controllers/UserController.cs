@@ -2,10 +2,10 @@
 public class UserController : Microsoft.AspNetCore.Mvc.Controller
 {
     private readonly IGenericRepository<RoomModel> genericRepository;
-    private readonly IRoomRepository roomRepository;
+    private readonly IUserRepository userService;
     public UserController()
     {
-        this.roomRepository = new RoomRepository();
+        this.roomRepository = new UserRepository();
         this.genericRepository = new GenericRepository<RoomModel>();
     }
     public UserController(EmployeeRepository repository)

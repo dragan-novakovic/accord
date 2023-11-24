@@ -1,8 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
-public class RoomDataContext : DbContext
+public class GenericDbContext(DbContextOptions<RoomDataContext> options) : DbContext(options)
 {
     public DbSet<RoomModel> Rooms { get; set; }
-
-    public RoomDataContext(DbContextOptions<RoomDataContext> options) : base(options) { }
+    public DbSet<UserMetadataModel> UsersMetadata { get; set; }
 }

@@ -1,20 +1,14 @@
 
 public class RoomRepository : GenericRepository<RoomModel>, IRoomRepository
 {
-    public IEnumerable<Employee> GetEmployeesByGender(string Gender)
+    public RoomRepository(GenericDbContext _context) : base(_context)
     {
-        return _context.Employees.Where(emp => emp.Gender == Gender).ToList();
-    }
-    public IEnumerable<Employee> GetEmployeesByDepartment(string Dept)
-    {
-        return _context.Employees.Where(emp => emp.Dept == Dept).ToList();
     }
 
     public IEnumerable<RoomModel> GetRooms()
     {
-        throw new NotImplementedException();
+        return _context.Rooms.ToList();
     }
-
     public IEnumerable<RoomModel> GetRoomsForUser(string userId)
     {
         throw new NotImplementedException();

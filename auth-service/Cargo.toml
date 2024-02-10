@@ -34,8 +34,7 @@ mongodb = { version = "2.7", default-features = true, features = [
     "bson-chrono-0_4",
 ] }
 bson = "2.7"
-# find replacment or fork?
-jsonwebtoken = "8"
+jsonwebtoken = "9.2"
 http-body = "=1.0.0-rc.2"
 futures-util = { version = "0.3", default-features = false }
 pin-project-lite = "0.2.4"

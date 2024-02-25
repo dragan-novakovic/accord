@@ -1,1 +1,0 @@
-export { default as POSTED_MESSAGE } from './PostedMessage'
